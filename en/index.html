@@ -1,0 +1,707 @@
+<html>
+<head>
+	<title>We ran marathon. Moscow marathon results, 15 September 2013</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="../master.css">
+	<link rel="stylesheet" type="text/css" href="../css/leaflet.css">
+	<link rel="shortcut icon" href="../i/favicon.ico">
+	<link rel="image_src" href="../i/screenshot.png" />
+    <script>var locale = 'en'</script>
+	<script data-main="../njs/loader.js" src="../njs/require-2.1.6.min.js"></script>
+	<script type="text/javascript" src="http://vk.com/js/api/openapi.js?101"></script>
+
+	<script type="text/javascript">
+  		VK && VK.init({apiId: 3887279, onlyWidgets: true});
+	</script>
+
+</head>
+<body>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "http://connect.facebook.net/en_US/all.js#xfbml=1&appId=237838789600836";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+<div class="big-wrap">
+	<div id="runs_map_compx">
+
+		
+		<div class="bmap big_block">
+			<div class="lang">
+				<div class="flag"><a href="../"><img src="../i/ru-flag.png"></a></div>
+				<div class="flag"><img src="../i/usa-flag.png"></div>
+				</div>
+			<div class="weather we_bg_sun">
+				<div class="weather_images">
+					<div
+
+						pv-class=" {{ !( time_value|compareTime: '00:00' : '0:30:00' ) && 'hidden'}}"
+						class="hidden">
+						<img src="../i/nosun.png" alt="">
+					</div>
+					<div
+
+						pv-class=" {{ !( time_value|compareTime: '0:30:00' : '3:30:00' ) && 'hidden'}}"
+						class="hidden">
+						<img src="../i/small-rain.gif" alt="">
+					</div>
+					<div
+
+						pv-class=" {{ !( time_value|compareTime: '3:30:00' : '7:00:00' ) && 'hidden'}}"
+						class="hidden">
+						<img src="../i/rain.gif" alt="">
+					</div>
+				</div>
+				<div>
+					<div class="we_temperature">+11° <span class="we_wind">← 6 m/s </span>
+					</div>
+				</div>
+			</div>
+			<div class="map-cover">
+                <img
+
+                        excesstop="8"
+                        excessright="121"
+                        excessbottom="65"
+                        excessleft="30"
+                        bigwidth="1490"
+                        bigheight="1343"
+
+
+
+                        src="../i/mapcover_42_en.png"
+                        alt=""
+                        class="hidden"
+                        pv-class="{{!(trackwidth && distance_type==42) && 'hidden'}}"
+                        pv-anchor="mapcover42"
+
+                        >
+                <!--ниже - поменять src картинки для 10км -->
+                <img
+                        excesstop="290"
+                        excessright="100"
+                        excessbottom="130"
+                        excessleft="210"
+                        bigwidth="1639"
+                        bigheight="1800"
+
+                        src="../i/mapcover_10_en.png"
+                        alt=""
+                        class="hidden"
+                        pv-class="{{!(trackwidth && distance_type==10) && 'hidden'}}"
+                        pv-anchor="mapcover10"
+
+                        >
+			</div>
+			<div class="mapoverlay">
+				<div class="main_header">
+                <h1 class="bmap_header" pv-class="bmap_header {{current_runner_data && 'hidden'}}" >
+                <div style="float:left;" >We ran </div>
+                <div class="toggle">
+                    <div class="filtrr toggle-header" pv-class="{{distance_type==42 && 'filtrr toggle-header'}}
+                                                            {{distance_type!=42 && menu_opened && 'toggle_menu_item'}}
+                                                            {{!(menu_opened||distance_type==42) && 'hidden'}}"
+                         pv-events="click::updateGeo42">
+                        <span class="marath-icon" pv-class="marath-icon {{menu_opened && distance_type==10 && 'hidden'}}"><img src="../i/marathon-logo.png"></span><span pv-anchor="mthswitch" class="mthswitch">marathon</span>
+                    </div>
+                    <div class="hidden" pv-class="{{distance_type==10 && 'filtrr toggle-header'}}
+                                                            {{distance_type!=10 && menu_opened && 'toggle_menu_item'}}
+                                                            {{!(menu_opened||distance_type==10) && 'hidden'}}"
+                         pv-events="click::updateGeo10">
+                        <span class="marath-icon" pv-class="marath-icon {{menu_opened && distance_type==42 && 'hidden'}}"><img src="../i/marathon-logo.png"></span><span>10km</span>
+                    </div>
+
+                </div>
+                </h1>
+					<div>
+						<div>
+							<!-- start -->
+							<div 
+								class="marker_c hidden"
+								pv-class="marker_c {{!start_point && 'hidden'}}"
+								pv-props="
+									style.left: {{start_point.0}}
+									style.top: {{start_point.1}}
+									
+								">
+
+								<span class="marker marker_yel"></span>
+							</div>
+
+						</div>
+						
+
+						<div>
+							<!-- finish-->
+							<div 
+								class="marker_c hidden"
+								pv-class="marker_c {{!end_point && 'hidden'}}"
+								pv-props="
+									style.left: {{end_point.0}}
+									style.top: {{end_point.1}}
+									
+								">
+
+								<span class="marker"></span>
+							</div>
+
+
+						</div>
+
+							<!-- подпись для высоты 1 -->
+
+							<!-- подпись для высоты 2 -->
+
+					</div>
+
+					
+					<div class="factoids" pv-class="factoids {{current_runner_data && 'hidden'}}">
+						<!-- Фатоиды -->
+
+						<div pv-props="
+									style.top:   {{track_top_padding +  (trackheight * 0.12)}}
+									style.left:  {{track_left_padding - (trackwidth * 0.17)}}
+									style.width: {{trackwidth * 1}}
+								"
+								pv-class="factoid {{ !( time_value|compareTime: '0:00:00' : '1:20:00' ) && 'hidden'}}" class="factoid hidden">
+							<h5 class="factoid_h">Entry fee</h5>
+							<div style="margin-left:-23px;">
+								<table class="factoid_d" >
+									<tr>
+										<td><img src="../i/usa-flag.png" width=16 height=9 /></td>
+										<td width=60>New York</td>
+										<td>377&thinsp;$</td>
+									</tr>
+									<tr>
+										<td></td>
+										<td>Boston</td>
+										<td>150…300&thinsp;$</td>
+									</tr>
+									<tr>
+										<td></td>
+										<td>Chicago</td>
+										<td>175…200&thinsp;$</td>
+									</tr>
+									<tr>
+										<td height=15><img src="../i/de-flag.png" width=16 height=9 /></td>
+										<td>Berlin</td>
+										<td style="padding-left:8px;">60…110&thinsp;€</td>
+									</tr>
+									<tr>
+										<td height=20><img src="../i/uk-flag.png" width=16 height=9 /></td>
+										<td>London</td>
+										<td>100&thinsp;£</td>
+									</tr>
+									<tr>
+										<td height=15><img src="../i/ru-flag.png" width=16 height=9 /></td>
+										<td>Moscow</td>
+										<td style="pmargin-left:-8px;">1000…2000&thinsp;&#8399;</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+
+						<div
+							pv-props="
+								style.top:   {{track_top_padding +  (trackheight * 0.45)}}
+								style.left:  {{track_left_padding + (trackwidth * 0.1)}}
+								style.width: {{trackwidth * 0.25}}
+							"
+							pv-class="factoid {{ !( time_value|compareTime: '5:00:00' : '7:00:00' ) && 'hidden'}}"
+							class="factoid hidden">
+							<h5 class="factoid_h">≈&thinsp;2000 ccal</h5>
+							<div class="factoid_d">runner burns&nbsp;during&nbsp;the&nbsp;race</div>
+						</div>
+
+							<div pv-props="
+								style.top:   {{track_top_padding +  (trackheight * 0.65)}}
+								style.left:  {{track_left_padding + (trackwidth * 0.75)}}
+								style.width: {{trackwidth * 0.25}}
+							"
+							pv-class="factoid {{ !( time_value|compareTime: '00:00' : '1:00:00' ) && 'hidden'}}"
+							class="factoid hidden">
+								<img class="factoid_img" src="../i/pasta.png" width=178 height=60 style="margin-left:-20px;"/>
+								<div class="factoid_d">2-3 days before the race sportsmen change<br>to high-carbohydrate diet:</div>
+								<h5 class="factoid_h">pasta, cereals and&nbsp;fruits</h5>
+							</div>
+
+
+						<div 
+							pv-props="
+								style.top:   {{track_top_padding +  (trackheight * 0.6)}}
+								style.left:  {{track_left_padding + (trackwidth * 0.73)}}
+								style.width: {{trackwidth * 0.25}}
+							"
+							pv-class="factoid {{ !( time_value|compareTime: '1:00:00' : '3:00:00' ) && 'hidden'}}"
+							class="factoid hidden">
+
+							<img class="factoid_img" src="../i/dinamo.png" width=81 height=81 />
+							<h5 class="factoid_h">Dinamo runs!</h5>
+							<div class="factoid_d">During the street runs it is often asked if Dinamo running. This time answer is yes!</p></div>
+						</div>
+
+						<div
+							pv-props="
+								style.top:   {{track_top_padding +  (trackheight * 0.44)}}
+								style.left:  {{track_left_padding + (trackwidth * 0.1)}}
+								style.width: {{trackwidth * 0.25}}
+							"
+							pv-class="factoid {{ !( time_value|compareTime: '2:03:38' : '5:00:00' ) && 'hidden'}}"
+							class="factoid hidden">
+							<h5 class="factoid_h">2:03:38 <span><img src="../i/record.png" width=30 height=25 /></span></h5>
+							<div class="factoid_d">is men's world record,<br>women's — 2:15:25</div>
+						</div>	
+
+						<div
+							pv-props="
+								
+								style.top:   {{track_top_padding +  (trackheight * 0.15)}}
+								style.left:  {{track_left_padding - (trackwidth * 0.17)}}
+								style.width: {{trackwidth * 0.25}}
+							"
+							pv-class="factoid {{ !( time_value|compareTime: '3:30:00' : '4:30:00' ) && 'hidden'}}"
+							class="factoid hidden">
+							<img class="factoid_img" src="../i/water.png" width=106 height=52 />
+							<h5 class="factoid_h">5000 l of water</h5>
+							<div class="factoid_d">runners drank while racing</div>
+						</div>
+
+						<div pv-props="
+								
+								style.top:   {{track_top_padding +  (trackheight * 0.15)}}
+								style.left:  {{track_left_padding - (trackwidth * 0.17)}}
+								style.width: {{trackwidth * 0.20}}
+							"
+							pv-class="factoid {{ !( time_value|compareTime: '4:30:00' : '5:30:00' ) && 'hidden'}}"
+							class="factoid hidden">
+
+							<img class="factoid_img" src="../i/winners.png" width=100 height=19/>
+							<div class="factoid_d">Medal places got sportsmen from</div>
+							<h5 class="factoid_h" style="margin-top:0px; line-height: 22px;">Ukraine, Kazakstan and&nbsp;Russia</h5>
+
+						</div>
+
+						<div pv-props="
+								
+								style.top:   {{track_top_padding +  (trackheight * 0.12)}}
+								style.left:  {{track_left_padding - (trackwidth * 0.17)}}
+								style.width: {{trackwidth * 0.20}}
+							"
+							pv-class="factoid {{ !( time_value|compareTime: '5:30:00' : '6:30:00' ) && 'hidden'}}"
+							class="factoid hidden">
+							<img class="factoid_img" src="../i/reward.png" width=91 height=102 style="margin-bottom:-5px;"/>
+							<h5 class="factoid_h">350&thinsp;000 &#8399;</h5>
+							<div class="factoid_d">is the reward&nbsp;for first place and medals for everybody who finished the race (a&nbsp;week&nbsp;later)</div>
+						</div>
+
+							<div
+							pv-props="
+								style.top:   {{track_top_padding +  (trackheight * 0.75)}}
+								style.left:  {{track_left_padding + (trackwidth * 0.76)}}
+								style.width: {{trackwidth * 0.25}}
+							"
+							pv-class="factoid {{ !( time_value|compareTime: '3:00:00' : '4:00:00' ) && 'hidden'}}"
+							class="factoid hidden">
+								<h5 class="factoid_h">Scores of volunteers</h5>
+								<div class="factoid_d">and hundreds of fans encouraged runners</div>
+							</div>
+
+						<div
+							pv-props="
+								style.top:   {{track_top_padding +  (trackheight * 0.65)}}
+								style.left:  {{track_left_padding + (trackwidth * 0.76)}}
+								style.width: {{trackwidth * 0.25}}
+							"
+							pv-class="factoid {{ !( time_value|compareTime: '4:00:00' : '7:00:00' ) && 'hidden'}}"
+							class="factoid hidden">
+								<img class="factoid_img" src="../i/photo.png" width=130 height=97/>
+								<h5 class="factoid_h">At 34th kilometer</h5>
+								<div class="factoid_d">fans from Moscow River Runners team settled</div>
+						</div>
+
+						<div pv-props="
+									style.top:   {{track_top_padding +  (trackheight * 0.5)}}
+									style.left:  {{track_left_padding - (trackwidth * 0.17)}}
+									style.width: {{trackwidth * 0.25}}
+								"
+								pv-class="factoid {{ !( time_value|compareTime: '0:00:00' : '1:50:00' ) && 'hidden'}}" class="factoid hidden">
+							<img class="factoid_img" src="../i/marathon.png" width=80 height=80 />
+							<h5 class="factoid_h">«νενικήκαμεν»</h5>
+							<div class="factoid_d">or «We won» were last words of&nbsp;Pheidippides, a greek warrior. He ran to Athens from battlefield near Marathon (about 40 km)</div>
+						</div>
+
+						<div pv-props="
+									style.top:   {{track_top_padding +  (trackheight * 0.5)}}
+									style.left:  {{track_left_padding - (trackwidth * 0.17)}}
+									style.width: {{trackwidth * 1}}
+								"
+								pv-class="factoid {{ !( time_value|compareTime: '3:30:00' : '5:30:00' ) && 'hidden'}}" class="factoid hidden">
+							<h5 class="factoid_h" style="margin-left:-10px;">+230 m</h5>
+							<div class="factoid_d">of total climb — it is&nbsp;77&nbsp;storey<br>building or height of MSU<br>main building including spire</div>
+						</div>
+
+						<img  pv-props="
+									style.top:   {{track_top_padding +  (trackheight * 0.65)}}
+									style.left:  {{track_left_padding - (trackwidth * 0.2)}}
+								"
+								pv-class="factoid {{ !( time_value|compareTime: '3:30:00' : '5:30:00' ) && 'hidden'}}" class="factoid hidden"
+
+								src="../i/msu.png" width=150 height=150 />
+
+						<div pv-props="
+									style.top:   {{track_top_padding +  (trackheight * 0.6)}}
+									style.left:  {{track_left_padding - (trackwidth * 0.17)}}
+									style.width: {{trackwidth * 0.25}}
+								"
+								pv-class="factoid {{ !( time_value|compareTime: '5:30:00' : '6:30:00' ) && 'hidden'}}" class="factoid hidden">
+							<div class="factoid_d">Moscow marathon is the last event before reconstruction of Grand Sports Arena of</div>
+							<h5 class="factoid_h" style="margin-left:0px;">Luzhniki Olympic Complex</h5>
+						</div>
+
+						<div  pv-props="
+								style.top:   {{track_top_padding +  (trackheight * 0.1)}}
+								style.left:  {{track_left_padding - (trackwidth * 0.17)}}
+								style.width: {{trackwidth * 0.25}}
+								
+								"
+								pv-class="factoid {{ !( time_value|compareTime: '1:20:00' : '3:30:00' ) && 'hidden'}}" class="factoid hidden">
+
+								<img class="factoid_img" src="../i/slope.png" width=82 height=68/>
+								<h5 class="factoid_h">5,5 m per km</h5>
+								<div class="factoid_d">was the race track incline.<br>It is more than olympic maximum&nbsp;—&nbsp;1&nbsp;m per&nbsp;km</div>
+							</div>
+
+							<div  pv-props="
+									style.top:   {{track_top_padding +  (trackheight * 0.5)}}
+									style.left:  {{track_left_padding - (trackwidth * 0.17)}}
+									style.width: {{trackwidth * 0.25}}
+								
+								"
+								pv-class="factoid {{ !( time_value|compareTime: '1:50:00' : '3:30:00' ) && 'hidden'}}" class="factoid hidden">
+									<img class="factoid_img" src="../i/small-globe.png" width=100 height=96/>
+									<div class="factoid_d">Sportsmen from all over the world took part in marathon race: <b>from Paris, London, Tokyo, italian town Castrovillari, California, Australia, Rotterdam and Bangkok</b></h5></div>
+							</div>
+
+					</div>
+					
+
+				</div>
+				<div class="bmap_etc">			
+					<div class="legend">
+						<div class="legendcount_c">
+							<div>Snake width</div>
+							<div pv-anchor="legendcount" class="svgcon graph_has_text">
+								<div class="legendcount-text graph_text_block" pv-anchor="legendcounttext">
+										
+								</div>
+								
+							</div>
+						</div>
+						<div class="legendage_c">
+							<div>Age and&nbsp;sex</div>
+							<div pv-anchor="legendage" class="svgcon graph_has_text">
+								<div class="graph_text_block" pv-anchor="legendage_textc"></div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="share">
+						<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://moscowmarathon.datalaboratory.ru/" data-lang="ru">Твитнуть</a>
+						<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+						<div class="fb-like" data-href="http://moscowmarathon.datalaboratory.ru/" data-width="450" data-layout="button_count" data-show-faces="false" data-send="false" style="margin-top:5px;"></div>
+						<div>
+
+<!--						<div id="vk_like" style="margin-top:5px;"></div>
+
+						<script type="text/javascript">
+						VK && VK.Widgets.Like("vk_like", {type: "mini", height: 20});
+						</script> -->
+							<div class="copyright_desc"><a href="http://moscowmarathon.org/">Marathon official site</a></div>
+							<div class="copyright_desc_2">Visualisation by <a href="http://datalaboratory.ru/">Data&nbsp;laboratory</a></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="map-con" pv-nest="geo_map"></div>
+		</div>
+		<div class="controlls big_block" pv-anchor="controlls">
+			<!--<div class="controlls_desc">
+				<h2 class="controlls_desc_h"> 2074 male<br/> and 276 female runners</h2>
+				<div class="controlls_desc_i" style="line-height:24px;">from 18 to 79 years old,<br>by finish times</div>
+			</div>-->
+			<div class="scroll_marker" pv-anchor="scroll_marker"><img src="../i/scroll-marker.png" alt=""></div>
+			<div class="timeline graph_has_text" pv-nest="time_graph">
+                <div class="controlls_desc">
+                    <h2 class="controlls_desc_h">
+                        <span class="hidden" pv-class="{{!male_current_number && 'hidden'}}" pv-text="{{male_current_number}}"></span>
+                        <span class="hidden" pv-class="{{!(male_current_number && female_current_number) && 'hidden'}}"><br/> and</span>
+                        <span class="hidden" pv-class="{{!female_current_number && 'hidden'}}"  pv-text="{{female_current_number}}"></span>
+                        <span class="hidden" pv-class="{{!(female_current_number||male_current_number) && 'hidden'}}"> runners</span>
+                    </h2>
+                    <div class="controlls_desc_i hidden" pv-class="controlls_desc_i {{!((male_current_number||female_current_number) && max_age) && 'hidden'}}" style="line-height:24px;">
+                        <span class="hidden" pv-class="{{!min_age && 'hidden'}}" pv-text="from {{min_age}} to "></span>
+                        <span pv-text="{{max_age}} years old,"></span><br>by finish times</div>
+                </div>
+				<div class="graph_text_block">
+					<div class="selector_box hidden" pv-class="selector_box {{!selector_matching && 'hidden'}}"
+						pv-props="
+							style.left: {{selector_matching && ((selector_matching.selector.pos_x * px_step) || '0')}}
+							style.bottom: {{selector_matching && ((selector_matching.selector.pos_y * height_factor) || '0')}}
+							style.width: {{px_step}}
+							style.height: {{height_factor}}
+						"
+					></div>
+					<div 
+						class="timeline_select_desc hidden"
+						pv-class="timeline_select_desc {{!selector_matching.runner.full_name && 'hidden'}} {{selector_matching.selector.pos_x_factor > 0.66 && 'right_stack_fix'}}"
+						pv-props="
+							style.left: {{selector_matching && ((selector_matching.selector.pos_x * px_step) || '0')}}
+							style.bottom: {{selector_matching && ((selector_matching.selector.pos_y * height_factor) || '0')}}
+						"
+
+						>
+						<div class="timeline_select_desc-text" >
+							<div pv-text="{{selector_matching.runner.full_name}}, {{selector_matching.runner.age_years}}"></div>
+							<div pv-text="{{selector_matching.runner.end_time_string}}"></div>
+
+						</div>
+					</div>					
+				</div>
+				<div class="graph_text_block" pv-anchor="timeline_textc">
+					
+				</div>
+			</div>
+			<div class="big_timemarks">
+
+				<div class="timemark" style="left:0%">
+					<div class="timemark_d">
+						Winners' results:
+					</div>
+				</div>
+
+				<div class="timemark" style="left:36.6%">
+					<div class="timemark_d">
+						<span style="color:#0f5fdb">I</span>
+					</div>
+				</div>
+
+				<div class="timemark" style="left:43.8%">
+					<div class="timemark_d">
+						<span style="color:#ff254e">I</span>
+					</div>
+				</div>
+
+				<div class="timemark" style="left:37.5%">
+					<div class="timemark_d">
+						<span style="color:#0f5fdb">I</span><span style="color:#0f5fdb; margin-left:-1px;">I</span>&#8202;<span style="color:#0f5fdb">I</span><span style="color:#0f5fdb; margin-left:-1px;">I</span><span style="color:#0f5fdb; margin-left:-1px;">I</span>
+					</div>
+				</div>
+
+				<div class="timemark" style="left:45.3%">
+					<div class="timemark_d">
+						<span style="color:#ff254e">I</span><span style="color:#ff254e; margin-left:-1px;">I</span>&#8202;<span style="color:#ff254e">I</span><span style="color:#ff254e; margin-left:-1px;">I</span><span style="color:#ff254e; margin-left:-1px;">I</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="big_timemarks" style="padding-top:20px;">
+
+				<div class="timemark" style="left:0%">
+					<div class="timemark_d">
+						<span style="color:#0f5fdb">Male</span> and <span style="color:#ff254e">female</span> senior categories:</span>
+					</div>
+				</div>
+
+				<div class="timemark" style="left:36.6%">
+					<div class="timemark_d">
+						<span style="color:#0f5fdb">MS</span>&thinsp;<span style="color:#0f5fdb">CMS</span>
+					</div>
+				</div>
+
+				<div class="timemark" style="left:44.3%">
+					<div class="timemark_d">
+						<span style="color:#ff254e">MS</span>&thinsp;<span style="color:#0f5fdb">2</span>
+					</div>
+				</div>
+
+				<div class="timemark" style="left:47.6%">
+					<div class="timemark_d">
+						<span style="color:#ff254e">CMS</span>
+					</div>
+				</div>
+
+				<div class="timemark" style="left:42.4%">
+					<div class="timemark_d">
+						<span style="color:#0f5fdb">1</span>
+					</div>
+				</div>
+
+				<div class="timemark" style="left:51%">
+					<div class="timemark_d">
+						<span style="color:#ff254e">1</span>
+					</div>
+				</div>
+
+				<div class="timemark" style="left:55.9%">
+					<div class="timemark_d">
+						<span style="color:#ff254e">2</span>
+					</div>
+				</div>
+
+				<div class="timemark" style="left:98%">
+					<div class="timemark_d">
+						<span style="color:#0f5fdb">3</span>&thinsp;<span style="color:#ff254e">3</span>
+					</div>
+				</div>
+			</div>
+
+			
+
+		</div>
+	</div>
+	<div id="screens">
+		<div 
+			id="root_level"
+			class="complex-page root_level full-page"
+			pv-class="
+				complex-page root_level
+				{{current_lev_num != $lev_num && 'inactive-page'}}
+				{{current_lev_num == $lev_num && 'full-page'}}
+				{{(current_lev_num - 1) == $lev_num && 'page-scheme'}}"
+			pv-anchor="con">
+			<div 
+				class="complex-page-scroll_con"
+				pv-anchor="scroll_con">
+				<div id="start-screen" class="runners_block big_block" pv-nest="scope">
+					<div class="runners_header" pv-anchor="runners_header">
+						<h2>Results  </h2>
+						<span class="sex_filter">
+							<div class="genbuttn_group ">
+								<div class="genbuttn" pv-nest="filter_gender" pv-class="
+									genbuttn
+									{{label == 'Men' && 'genbuttn-male'}}
+									{{label == 'Women' && 'genbuttn-female'}}
+									{{novalue && 'genbuttn-male-female'}}
+									{{active && 'active'}}
+								" pv-text="{{label}}" pv-events="click::setFilter"></div>
+							</div>
+
+						</span>
+						<div class="filters">
+							<div class="firunr_search_c">
+								<input class="firunr_search" placeholder="Name or number" type="search" pv-events="input:makeSearch keydown:makeSearch mousemove:makeSearch"/ >
+							</div>
+							<div pv-class="{{query && 'hidden'}}">
+								<div class="firunr_age_c">
+									<div class="firunr_age filterr_menu">
+										<div class="filtrr" pv-text="{{selected_filter_ages || filter_ages.0.label}}"></div>
+										<div class="flrr_menu_list" >
+											<div class="flrr_menu_item" pv-nest="filter_ages" pv-events="click::setFilter" pv-class="flrr_menu_item {{active && 'active'}} {{novalue && 'no_filtering_item'}}">
+												<span pv-text="{{label}}" class="filter_item_name"></span>
+												<span class="counter" pv-text="{{counter}}"></span>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="firunr_teem_c">
+									<div class="firunr_teem filterr_menu">
+										<div class="filtrr" pv-text="{{selected_filter_team || filter_team.0.label}}"></div>
+										<div class="flrr_menu_list" >
+											<div class="flrr_menu_item" pv-nest="filter_team" pv-events="click::setFilter" pv-class="flrr_menu_item {{active && 'active'}} {{novalue && 'no_filtering_item'}}">
+												<span pv-text="{{label}}" class="filter_item_name"></span>
+												<span class="counter" pv-text="{{!novalue && counter}}"></span>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="firunr_place_c">
+									<div class="firunr_place filterr_menu">
+										<div class="filtrr" pv-text="{{selected_filter_city || filter_city.0.label}}" >From all over the world</div>
+										<div class="flrr_menu_list" >
+											<div class="flrr_menu_item" pv-nest="filter_city" pv-events="click::setFilter" pv-class="flrr_menu_item {{active && 'active'}} {{novalue && 'no_filtering_item'}}">
+												<span pv-text="{{label}}" class="filter_item_name"></span>
+												<span class="counter" pv-text="{{!novalue && counter}}"></span>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								
+							</div>
+							
+							
+						</div>
+						
+					</div>
+                    <div class="runners_list" pv-anchor="runners_list">
+
+                        <div
+                                pv-nest="runners_filtered"
+                                pv-events="click::switchSelection"
+                                class="runrs_item"
+                                pv-class="runrs_item {{selected && 'selected_runr'}} {{gender === 0 && 'runr_female'}} {{gender === 1 && 'runr_male'}} {{gender === 2 && 'runr_off'}}">
+                            <div class="runr_selection_mark"></div>
+                            <div class="runr_pos" pv-text="{{selected_filter_gender && gender_pos}} {{!selected_filter_gender && pos}}"></div>
+                            <div class="runr_name" pv-text="{{full_name}}"></div>
+                            <div class="runr_num" pv-text="{{num}}"></div>
+                            <div class="runr_age" pv-text="{{2013 - birthyear}}"></div>
+                            <div class="runr_team" pv-text="{{team}}"></div>
+                            <div class="runr_place" pv-text="{{city || country}}"></div>
+                            <div class="runr_time" pv-text="{{full_time_string}}"></div>
+                        </div>
+                        <div class="hidden load_more_button" pv-class="load_more_button {{!has_more_button && 'hidden'}}" pv-events="click::showMore">Show more 100 results</div>
+                    </div>
+				
+					
+					
+				</div>
+			</div>
+		</div>
+	</div>
+
+	
+	
+
+	
+</div>
+<div id="dom-templates" style="display:none">
+	<div 
+		class="complex-page inactive-page"
+		pv-class="
+			complex-page 
+			{{'index-of-cp-is-' + $lev_num}}
+			{{current_lev_num != $lev_num && 'inactive-page'}}
+			{{current_lev_num == $lev_num && 'full-page'}}
+			{{(current_lev_num - 1) == $lev_num && 'page-scheme'}}"
+		pv-anchor="con">
+		<div 
+			class="complex-page-scroll_con"
+			pv-anchor="scroll_con">
+			<div 
+				class="complex-page_material"
+				pv-anchor="material">
+			</div>
+		</div>
+	</div>
+	<div class="runner_page big_block">
+		<span pv-text="{{full_name}}"></span>
+	</div>
+</div>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-41635147-2', 'datalaboratory.ru');
+  ga('send', 'pageview');
+
+</script>
+
+</body>
+</html>
