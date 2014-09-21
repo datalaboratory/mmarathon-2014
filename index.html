@@ -39,27 +39,33 @@
 				<div class="weather_images">
 					<div
 
-						pv-class=" {{ !( time_value|compareTime: '00:00' : '0:30:00' ) && 'hidden'}}"
+						pv-class=" {{ !( time_value|compareTime: '00:00' : '7:00:00' ) && 'hidden'}}"
 						class="hidden">
-						<img src="i/nosun.png" alt="">
-					</div>
-					<div
-
-						pv-class=" {{ !( time_value|compareTime: '0:30:00' : '3:30:00' ) && 'hidden'}}"
-						class="hidden">
-						<img src="i/small-rain.gif" alt="">
-					</div>
-					<div
-
-						pv-class=" {{ !( time_value|compareTime: '3:30:00' : '7:00:00' ) && 'hidden'}}"
-						class="hidden">
-						<img src="i/rain.gif" alt="">
+						<img src="../i/sun.png" alt="">
 					</div>
 				</div>
-				<div>
-					<div class="we_temperature">+11° <span class="we_wind">← 6 м/c </span>
-					</div>
+				<div pv-class=" {{ !( time_value|compareTime: '00:00' : '1:00:00' ) && 'hidden'}}" >
+					<div class="we_temperature">+11° <span class="we_wind">штиль</span></div>
 				</div>
+				<div pv-class=" {{ !( time_value|compareTime: '1:00:00' : '2:00:00' ) && 'hidden'}}" >
+					<div class="we_temperature">+14° <span class="we_wind">штиль </span></div>
+				</div>
+				<div pv-class=" {{ !( time_value|compareTime: '2:00:00' : '3:00:00' ) && 'hidden'}}" >
+					<div class="we_temperature">+16° <span class="we_wind">штиль</span></div>
+				</div>
+				<div pv-class=" {{ !( time_value|compareTime: '3:00:00' : '4:00:00' ) && 'hidden'}}" >
+					<div class="we_temperature">+17° <span class="we_wind">штиль</span></div>
+				</div>
+				<div pv-class=" {{ !( time_value|compareTime: '4:00:00' : '5:00:00' ) && 'hidden'}}" >
+					<div class="we_temperature">+19° <span class="we_wind">↗ 1 м/c </span></div>
+				</div>
+				<div pv-class=" {{ !( time_value|compareTime: '5:00:00' : '6:00:00' ) && 'hidden'}}" >
+					<div class="we_temperature">+19° <span class="we_wind">↗ 1 м/c </span></div>
+				</div>
+				<div pv-class=" {{ !( time_value|compareTime: '6:00:00' : '7:00:00' ) && 'hidden'}}" >
+					<div class="we_temperature">+18° <span class="we_wind">↑ 1 м/c </span></div>
+				</div>
+
 			</div>
 			<div class="map-cover">
                 <img
