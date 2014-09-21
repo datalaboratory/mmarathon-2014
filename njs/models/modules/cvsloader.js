@@ -18,9 +18,9 @@ v
 */
 var big_ages_group = [
 	{
-		start: 17,
+		start: 16,
 		end: 19,
-		label: '17-19'
+		label: '16-19'
 	},{
 		start: 20,
 		end: 22,
@@ -62,9 +62,9 @@ var big_ages_group = [
 
 var small_ages_group = [
 	{
-		start: 17,
+		start: 16,
 		end: 22,
-		label: '18-22'
+		label: '16-22'
 	},{
 		start: 23,
 		end: 34,

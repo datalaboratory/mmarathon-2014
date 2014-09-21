@@ -1,5 +1,5 @@
-define(['../libs/BrowseMap', 'spv', 'provoda', './Runner', './modules/cvsloader', './modules/cvsloader', 'lodash'],
-function(BrowseMap, spv, provoda, Runner, cvsloader, cvsloader10, _) {
+define(['../libs/BrowseMap', 'spv', 'provoda', './Runner', './modules/cvsloader', 'lodash'],
+function(BrowseMap, spv, provoda, Runner, cvsloader, _) {
 "use strict";
 
 
@@ -10,7 +10,10 @@ BrowseMap.Model.extendTo(FilterItem, {
 		spv.cloneObj(this.init_states, params);
 		this.init_states.type = type;
 		this.initStates();
+        var _this = this;
 		this.wch(this.map_parent, 'selected_filter_' + type, this.checkActiveState);
+        this.wch(this.map_parent, 'distance_type', function(e) {
+        })
 
 	},
 	checkActiveState: function(e) {
@@ -22,7 +25,6 @@ BrowseMap.Model.extendTo(FilterItem, {
 		}
 	},
 	setFilter: function() {
-		//this.RPCLegacy('setFilterBy', type, !item.novalue && item.label);
         this.map_parent.updateState('last_filter', this.state('type'))
 		this.map_parent.setFilterBy(this.state('type'), !this.state('novalue') && this.state('label'));
 	}
@@ -65,13 +67,13 @@ BrowseMap.Model.extendTo(StartPage, {
                 data.items[i].model = runner;
                 runners.push(runner);
             }
-            this.updateNesting('runners', runners);
-            this.getIndexes(runners, data);
-            this.makeFiltersResult();
+            _this.updateNesting('runners', runners);
+            _this.getIndexes(runners, data);
+            _this.makeFiltersResult();
         })
+
 		this.filters = {};
 		this.filters_cache = {};
-
 
 		this.wch(this, 'query', function(e) {
 			var runners = this.getNesting('runners');
@@ -103,8 +105,8 @@ BrowseMap.Model.extendTo(StartPage, {
             this.updateFilters(e)
 		});
 
-        var city_header = (locale == 'rus')? ['город', 'города', 'городов']:['city', 'cities']
-        var team_header = (locale == 'rus')? ['команда', 'команды', 'команд']:['team', 'teams']
+        var city_header = (locale == 'rus') ? ['город', 'города', 'городов'] : ['city', 'cities']
+        var team_header = (locale == 'rus') ? ['команда', 'команды', 'команд'] : ['team', 'teams']
         this.runner_state_filters = [{
             name: 'team',
             limit: 1,
@@ -194,10 +196,10 @@ BrowseMap.Model.extendTo(StartPage, {
             } else {
                 var label;
                 if (locale == 'rus'){
-                    label = (result.items.length)? selectByNum(result.items.length, no_flabel):'не указано'
+                    label = (result.items.length) ? selectByNum(result.items.length, no_flabel) : 'не указано'
                 } else {
-                    label = (result.items.length > 1)? result.items.length + ' ' + no_flabel[1] : '1 ' + no_flabel[0]
-                    label = (result.items.length)? label:'no ' + no_flabel[1]
+                    label = (result.items.length > 1) ? result.items.length + ' ' + no_flabel[1] : '1 ' + no_flabel[0]
+                    label = (result.items.length) ? label:'no ' + no_flabel[1]
                 }
                 result.items.unshift({
                     label: label,
@@ -338,7 +340,6 @@ BrowseMap.Model.extendTo(StartPage, {
 		var field = ['states', 'birthyear'];
 		var groups = cvsdata.getAgeGroups(runners, age_ranges, field);
 		var index = {};
-        var counter = 0;
 		for (var i = 0; i < age_ranges.length; i++) {
             if (groups[i].length){
                 index[age_ranges[i].label] = groups[i];
@@ -347,7 +348,6 @@ BrowseMap.Model.extendTo(StartPage, {
                     counter: groups[i].length
                 });
             }
-			//age_ranges[i]
 		}
 		return {
 			index: index,

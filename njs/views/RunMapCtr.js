@@ -47,13 +47,11 @@ provoda.View.extendTo(SelRunner, {
 	],
 
 	'compx-pos': [
-		['^geodata42', '^geodata10', '^distance_type', '^basedet', '^time_value', '^start_time', 'raw', '^finish_point'],
-		function(geodata42, geodata10, type, basedet, time_value, start_time, raw, finish_point) {
-			if ( !(geodata42 && basedet && start_time && raw && finish_point) ) {
+		['^geodata', '^basedet', '^time_value', '^start_time', 'raw', '^finish_point'],
+		function(geodata, basedet, time_value, start_time, raw, finish_point) {
+			if ( !(geodata && basedet && start_time && raw && finish_point) ) {
 				return;
 			}
-
-            var geodata = (type == 42)? geodata42 : geodata10;
             var current_distance = mh.getDistanceByRangesAndTime(raw, start_time + time_value * 1000);
 			current_distance = Math.max(0, current_distance);
 			var geo_coords = mh.getPointAtDistance(
@@ -97,11 +95,9 @@ provoda.View.extendTo(RunMapCtr, {
 		selected_runners: SelRunner
 	},
 	'compx-finish_point': [
-		['geodata42', 'geodata10', 'distance_type'],
-		function(geodata42, geodata10, type) {
-            var geodata = (type == 42)? geodata42 : geodata10
+		['geodata'],
+		function(geodata) {
 			var total_distance = d3.geo.length(geodata) * mh.earth_radius;
-
 			return mh.getPointAtDistance(geodata.geometry.coordinates, total_distance);
 		}
 	],
@@ -119,25 +115,15 @@ provoda.View.extendTo(RunMapCtr, {
 
 		this.svg = d3.select(svg);
 
-        //this.svg = d3.select(map.getPanes().overlayPane).append('svg').attr('width', 1000).attr('height',1000).style('zoom', 1/0.778).style('left',20).append('g')
+        //this.svg = d3.select(map.getPanes().overlayPane).append('svg').attr('width', 1000).attr('height',1000).style('zoom', 1/0.778).style('left',20).append('g')  //для настоящей карты
 
 
-
-/*
-		this.dot = this.svg.append('circle')
-			.attr("r", 5)
-			.style({
-				stroke: 'none',
-				"fill": 'red'
-			});*/
 
 		this.knodes = {};
 		var knodes = this.knodes;
 
 		var main_group = this.svg.append('g');
 		knodes.main_group = main_group;
-
-
 
 		knodes.base = main_group.append("path");
 
@@ -147,22 +133,6 @@ provoda.View.extendTo(RunMapCtr, {
 		knodes.debug_group = main_group.append('g');
 		knodes.single_runners = main_group.append('g');
 
-
-		//Создание графиков высот
-		// knodes.bottom_group = this.svg.append('g');
-		// knodes.bottom_group.classed("bottom_group", true);
-		// knodes.bottom_lines = knodes.bottom_group.append('g');
-		// knodes.left_group = this.svg.append('g');
-		// knodes.left_group.classed("left_group", true);
-		// knodes.left_path = knodes.left_group.append('path').style({
-		// 	stroke: '#333',
-		// 	"fill": 'none'
-		// });
-		// knodes.left_lines = knodes.left_group.append('g');
-
-
-		
-		
 		this.wch(this, 'vis_con_appended', function(e) {
 			if (e.value){
 				this.checkSizes();
@@ -301,9 +271,8 @@ provoda.View.extendTo(RunMapCtr, {
 		}
 	},
 	'compx-basepath': {
-		depends_on: ['geodata42', 'geodata10', 'distance_type'],
-		fn: function(geodata42, geodata10, type) {
-            var geodata = (type == 42)? geodata42 : geodata10;
+		depends_on: ['geodata'],
+		fn: function(geodata) {
 			var rad_distance = d3.geo.length(geodata);
 			this.total_distance = rad_distance * this.earth_radius;
 			this.knodes.base.data([geodata]);
@@ -332,23 +301,16 @@ provoda.View.extendTo(RunMapCtr, {
 		}
 	},
 	'compx-basedet': {
-		depends_on: ['geodata42','geodata10', 'bd', 'distance_type'],
-		fn: function(geodata42, geodata10, bd, type) {
-			if (geodata42 && bd){
-                var geodata = (type == 42)? geodata42 : geodata10
+		depends_on: ['geodata', 'bd'],
+		fn: function(geodata, bd, type) {
+			if (geodata && bd){
 				this.projection.scale(1).translate([0, 0]);
 				var b = this.path.bounds(geodata),
 					// в s задаётся общий масштаб пары трек-карта
                     width = this.width,
                     height = this.height;
-                    if (type == 42){
-                        var	s = 0.9 / Math.max((b[1][0] - b[0][0]) / width, (b[1][1] - b[0][1]) / height)        //положение и масштаб карты и трека, одновременно!
-                        var	t = [(width - s * (b[1][0] + b[0][0])) / 2, (height - s * (b[1][1] + b[0][1])) / 2];
-                    } else {
-                        s = 0.9 / Math.max((b[1][0] - b[0][0]) / width, (b[1][1] - b[0][1]) / height)        //положение и масштаб карты и трека, одновременно!
-                        t = [(width*0.9 - s * (b[1][0] + b[0][0])) / 2, (height - s * (b[1][1] + b[0][1])) / 2];
-                    }
-
+                    var	s = 0.9 / Math.max((b[1][0] - b[0][0]) / width, (b[1][1] - b[0][1]) / height)
+                    var	t = [(width - s * (b[1][0] + b[0][0])) / 2, (height - s * (b[1][1] + b[0][1])) / 2];
 
                 this.behavior.translate(t).scale(s);
 
@@ -403,7 +365,7 @@ provoda.View.extendTo(RunMapCtr, {
 			if (!basepathch || !cvs_data || typeof time_value == 'undefined' || !current_runners_data){
 				return;
 			}
-			var data = mh.getPoints(current_runners_data.runners_groups, this.knodes, time_value, false, cvs_data.start_time, this.total_distance);
+			var data = mh.getPoints(current_runners_data.runners_groups, this.knodes, time_value, cvs_data.start_time, this.total_distance);
 			mh.drawRunnersPoints(colors, this.parent_view.parent_view.gender_grads, data, current_runners_data.items, this.knodes.debug_group, time_value, cvs_data.start_time);
 
 			return {};
@@ -456,221 +418,8 @@ provoda.View.extendTo(RunMapCtr, {
 	'stch-translate': function(state) {
 		var translate_str =  "translate(" + state + ")";
 		this.knodes.main_group.attr("transform", translate_str);
-		/*this.dot.attr("transform", translate_str);
-		// Сдвиги для графиков высот
-		 this.knodes.bottom_group.attr("transform", "translate(" + [state[0], 0] + ")");
-		 this.knodes.left_group.attr("transform", "translate(" + [0, state[1]] + ")");*/
 		
-	}/*,
-	'compx-altit':{
-	 	depends_on: ['basepathch', 'cvs_data', 'geodata', 'scale'],
-	 	fn: function(basepathch, cvs_data, geodata) {
-	 		if (!basepathch || !geodata){
-	 			return;
-	 		}
-
-
-
-	 		//var max_alt = 0;
-	 		var min_alt = Infinity;
-	 		var coordinates = geodata.geometry.coordinates;
-
-	 		coordinates.forEach(function(el, i){
-	 			min_alt = Math.min(min_alt, el[2]);
-
-				if (coordinates[i-1]){
-	 				/*var gp = function(p){
-	 					return {
-							lat: p[0],
-							lon: p[1]
-	 					};
-					};
-					var p1 = gp(el);
-					var p2 = gp(coordinates[i-1]);*/
-					//el[3] = veon.calcDist(p1, p2) + coordinates[i-1][3];
-					//el[3] = veon.getPointsDistanceM(el, coordinates[i-1]) + coordinates[i-1][3];
-	 				/*el[3] = d3.geo.distance(el, coordinates[i-1]) + coordinates[i-1][3];
-
-	 			} else {
-	 				el[3] = 0;
-	 			}
-	 		});
-			
-	 		var _this = this;
-	 		/*
-	 		var getPB = function(el){
-	 			var pjr = _this.projection(el);
-
-				return [
-					pjr[0] + ',' + (_this.height - (el[2] - min_alt)),
-	 				(el[2] - min_alt) + ',' + pjr[1]
-	 			];
-	 		};*/
-
-
-
-	 		/*var getAltVPoints = function(el){
-	 			var pjr = _this.projection(el);
-	 			return [
-					{
-	 					x: Math.round(pjr[0]),
-	 					y: Math.round((_this.height - (el[2] - min_alt))),
-	 					z: Math.round(_this.height - pjr[1])
-					},
-					{
-						x: Math.round((el[2] - min_alt)),
-	 					y: Math.round(pjr[1]),
-	 					z: Math.round(pjr[0])
-	 				}
-				];
-	 		};
-
-	 		var getPathPartByRange = function(array, range){
-	 			var result = [];
-	 			array.forEach(function(el){
-					var distance = el[3];
-	 				var min = range[0] / _this.earth_radius;
-	 				var max = range[1] / _this.earth_radius;
-					if (distance >= min && distance < max){
-						result.push(el);
-					}
-	 			});
-				return result;
-	 		};
-
-			
-			
-
-			var formatForPath = function(p){
-				return p.x + ',' + p.y;
-	 		};
-	 		var getPathData = function(array){
-	 			var result = '';
-	 			result += 'M' + formatForPath(array[0]);
-
-	// 			array.slice(1).forEach(function(el){
-	// 				result += ' L' + formatForPath(el);
-	// 			});
-	// 			return result;
-	// 		};
-
-	// 		var getSortedPointsGroups = function(array){
-	// 			var result = [];
-	// 			result.max_dist = 0;
-	// 			result.min_dist = Infinity;
-
-	// 			//var max_dist = 0;
-	// 			for (var i = 1; i < array.length; i++) {
-	// 				var obj = {
-	// 					start: array[i-1],
-	// 					end: array[i]
-	// 				};
-	// 				var mid_dist = (obj.start.z + obj.end.z)/2;
-	// 				result.max_dist = Math.max(result.max_dist, mid_dist);
-	// 				result.min_dist = Math.min(result.min_dist, mid_dist);
-	// 				obj.mid_dist = mid_dist;
-	// 				result.push(obj);
-	// 			}
-	// 			result.sort(function( a, b ){
-	// 				return spv.sortByRules(a,b, [{
-	// 					field: ['mid_dist']
-	// 				}]);
-	// 			});
-	// 			result.reverse();
-
-	// 			return result;
-	// 		};
-
-
-
-	// 		var points_bottom = [];
-	// 		var bottom_range = [19900, 42700];
-	// 		var bottom_array = getPathPartByRange(coordinates, bottom_range);
-	// 		bottom_array.forEach(function(el){
-	// 			var point = getAltVPoints(el);
-	// 			points_bottom.push(point[0]);
-
-	// 		});
-	// 		points_bottom = simplify(points_bottom, 10, true);
-
-	// 		var complects_bo = getSortedPointsGroups(points_bottom);
-
-	// 		var grays = _this.parent_view.parent_view.grays;
-	// 		this.knodes.bottom_lines.selectAll('*').remove();
-	// 		complects_bo.forEach(function(el){
-
-	// 			_this.knodes.bottom_lines.append('path').style({
-	// 				stroke: 'none',
-	// 				fill: colors.getGradColor(el.mid_dist, complects_bo.min_dist, complects_bo.max_dist, grays),
-	// 				opacity: 0.2
-	// 			}).attr('d',
-	// 				'M' + el.start.x + ',' + _this.height +
-	// 				' L ' + formatForPath(el.start) +
-	// 				' L ' + formatForPath(el.end) +
-	// 				' L ' + el.end.x +',' + _this.height +
-	// 				'Z');
-
-	// 			_this.knodes.bottom_lines.append('line').style({
-	// 				stroke: '#888',
-	// 				fill: 'none'
-	// 			}).attr({
-	// 				x1: el.start.x,
-	// 				y1: el.start.y,
-	// 				x2: el.end.x,
-	// 				y2: el.end.y
-	// 			});
-
-
-
-	// 		});
-	// 		//_this.knodes.bottom_path.attr("d", getPathData(points_bottom));
-
-
-
-			
-
-	// 		var points_left = [];
-	// 		var left_range = [0, 17300];
-	// 		var left_array = getPathPartByRange(coordinates, left_range);
-	// 		left_array.forEach(function(el){
-	// 			var point = getAltVPoints(el);
-	// 			points_left.push(point[1]);
-
-	// 		});
-	// 		points_left = simplify(points_left, 10, true);
-
-	// 		var complects_left = getSortedPointsGroups(points_left);
-	// 		this.knodes.left_lines.selectAll('*').remove();
-	// 		complects_left.forEach(function(el){
-
-	// 			_this.knodes.left_lines.append('path').style({
-	// 				stroke: 'none',
-	// 				fill: colors.getGradColor(el.mid_dist, complects_left.min_dist, complects_left.max_dist, grays),
-	// 				opacity: 0.2
-	// 			}).attr('d',
-	// 				'M' + 0 + ',' + el.start.y +
-	// 				' L ' + formatForPath(el.start) +
-	// 				' L ' + formatForPath(el.end) +
-	// 				' L ' + 0 +',' + el.end.y +
-	// 				'Z');
-
-	// 			_this.knodes.left_lines.append('line').style({
-	// 				stroke: '#777',
-	// 				fill: 'none'
-	// 			}).attr({
-	// 				x1: el.start.x,
-	// 				y1: el.start.y,
-	// 				x2: el.end.x,
-	// 				y2: el.end.y
-	// 			});
-
-
-
-	// 		});
-
-	// 		_this.knodes.left_path.attr("d", getPathData(points_left));
-	// 	}
-	// }*/
+	}
 });
 
 return RunMapCtr;

@@ -356,7 +356,7 @@ var getBasePoints = function(base, boundrect, total_distance){
 
 		//var step = getStep(boundrect.height);
 
-		var step = 500 * px_in_m;
+		var step = 300 * px_in_m;
 		var steps = getSteps(step, px_distance, d3path_node);
 		
 
@@ -493,28 +493,21 @@ var drawRunnersPoints = function(colors, grads, data, cvs_data_items, place, sec
 };
 
 
-var getPoints = function(runners_groups, knodes, seconds, animate, start_time, total_distance) {
+var getPoints = function(runners_groups, knodes, seconds, start_time, total_distance) {
 	var i;
 
 	var boundrect = knodes.base.node().getBoundingClientRect();
-	//var max_graph_height;
+
 	if (boundrect.width <= 50 || boundrect.height <= 50) {
-		//knodes.vis.attr("d", '');
 		return;
-	} else {
-		//max_graph_height = boundrect.width/10;
 	}
 	var data = getBasePoints(knodes.base, boundrect, total_distance);
 
-	
-	
 	var complects = data.complects;
 
-
-	
 	var areas_data = {};
 	var areas = {};
-	//areas.push(getAreaPathData(getAreaByData(cvs, complects, complects), complects));
+
 	var prev;
 	runners_groups.forEach(function(el, i) {
 		var prev_districts = (i === 0) ? complects : prev;
@@ -525,68 +518,10 @@ var getPoints = function(runners_groups, knodes, seconds, animate, start_time, t
 		areas[el.key] = getAreaPathData(areas_data[el.key], complects, complects);
 	});
 	runners_groups.forEach(function(el) {
-		if (false && animate){
-			knodes.age_areas[el.key].transition()
-				.duration(100)
-				.attr("d", areas[i]);
-		} else {
 			knodes.age_areas[el.key].attr("d", areas[el.key]);
-		}
 	});
 
-	/*(function(){
-		return;
-		var connections = [];
-		var angles = [];
-		for (var i = 0; i < complects.length; i++) {
-			var cur = complects[i];
-			var next = complects[i+1];
-			if (next){
-				connections.push({
-					angle: getAngleBySegmentsPointsM(cur.p1, cur.p2, next.p1, next.p2)/(Math.PI/180),
-					pstart: cur.p1,
-					pcon: cur.p2,
-					pend: next.p2
-				});
-				//angles.push();
-			}
-		}
-		connections.sort(function(a,b){
-			return spv.sortByRules(a, b, [{
-				field: ['angle']
-			}]);
-		});
-
-		
-
-		var place = knodes.debug_group;
-		place.selectAll('*').remove();
-
-		var dfrag = document.createDocumentFragment();
-		var bindClick = function(data, circle) {
-			circle.node().onclick = function() {
-				console.log(data.angle);
-			};
-		};
-		for (var i = 0; i < connections.length; i++) {
-			var cur = connections[i];
-			var circle =  place.append('circle')
-				.attr("cy", cur.pcon.y)
-				.attr("cx", cur.pcon.x)
-				.attr("r", 5)
-				.style({
-					stroke: 'none',
-					"fill": 'red',
-					opacity: ( Math.abs(cur.angle) % 60)/60 + 0.1
-				});
-			bindClick(cur, circle);
-		}
-
-		//console.log(connections);
-	})();*/
-
 	return data;
-	//console.log(complects);
 
 };
 

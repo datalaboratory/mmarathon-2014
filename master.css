@@ -34,7 +34,7 @@ path {
     background-color: #FAFAFA;
     top: 100%;
     width: 100%;
-    height: 38px;
+    height: 36px;
     z-index: 10;
 }
 .toggle_menu_item:hover {
@@ -45,7 +45,14 @@ path {
     top: 0;
     width: 100%;
 }
-
+.toggle_item_text {
+    position: absolute;
+    margin-left: 10px;
+}
+.toggle_header_text {
+    position: absolute;
+    margin-top: -3px;
+}
 #map-con{
 	height: 400px;
 }
@@ -181,6 +188,19 @@ path {
     .flag {
         margin-left: 10px;
         float: left;
+        width: 46px;
+        height: 32px;
+        margin-top: -5px;
+    }
+    .active_flag {
+        background: #f5f5f5;
+    }
+    .inactive_flag:hover {
+        background: #f5f5f5;
+    }
+    .img_flag {
+        margin-left: 5px;
+        margin-top: 5px;
     }
 	.weather{
 		position: absolute;

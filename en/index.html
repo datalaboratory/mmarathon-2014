@@ -32,8 +32,8 @@
 		
 		<div class="bmap big_block">
 			<div class="lang">
-				<div class="flag"><a href="../"><img src="../i/ru-flag.png"></a></div>
-				<div class="flag"><img src="../i/usa-flag.png"></div>
+                <div class="flag inactive_flag"><a href="../"><img src="../i/flag_rus.png" class="img_flag"></a></div>
+                <div class="flag active_flag"><img src="../i/flag_us.png" class="img_flag"></div>
 				</div>
 			<div class="weather we_bg_sun">
 				<div class="weather_images">
@@ -106,13 +106,15 @@
                                                             {{distance_type!=42 && menu_opened && 'toggle_menu_item'}}
                                                             {{!(menu_opened||distance_type==42) && 'hidden'}}"
                          pv-events="click::updateGeo42">
-                        <span class="marath-icon" pv-class="marath-icon {{menu_opened && distance_type==10 && 'hidden'}}"><img src="../i/marathon-logo.png"></span><span pv-anchor="mthswitch" class="mthswitch">marathon</span>
+                        <span class="marath-icon" pv-class="marath-icon {{menu_opened && distance_type==10 && 'hidden'}}"><img src="../i/marathon-logo.png"></span>
+                        <span pv-anchor="mthswitch" class="mthswitch" pv-class="mthswitch {{menu_opened && distance_type==10 && 'toggle_item_text' || 'toggle_header_text'}}">marathon</span>
                     </div>
                     <div class="hidden" pv-class="{{distance_type==10 && 'filtrr toggle-header'}}
                                                             {{distance_type!=10 && menu_opened && 'toggle_menu_item'}}
                                                             {{!(menu_opened||distance_type==10) && 'hidden'}}"
                          pv-events="click::updateGeo10">
-                        <span class="marath-icon" pv-class="marath-icon {{menu_opened && distance_type==42 && 'hidden'}}"><img src="../i/marathon-logo.png"></span><span>10km</span>
+                        <span class="marath-icon" pv-class="marath-icon {{menu_opened && distance_type==42 && 'hidden'}}"><img src="../i/marathon-logo.png"></span>
+                        <span pv-class="{{menu_opened && distance_type==42 && 'toggle_item_text' || 'toggle_header_text'}}">10km</span>
                     </div>
 
                 </div>
@@ -620,7 +622,7 @@
 								</div>
 								<div class="firunr_place_c">
 									<div class="firunr_place filterr_menu">
-										<div class="filtrr" pv-text="{{selected_filter_city || filter_city.0.label}}" >From all over the world</div>
+										<div class="filtrr" pv-text="{{selected_filter_city || filter_city.0.label}}"></div>
 										<div class="flrr_menu_list" >
 											<div class="flrr_menu_item" pv-nest="filter_city" pv-events="click::setFilter" pv-class="flrr_menu_item {{active && 'active'}} {{novalue && 'no_filtering_item'}}">
 												<span pv-text="{{label}}" class="filter_item_name"></span>
@@ -648,7 +650,7 @@
                             <div class="runr_pos" pv-text="{{selected_filter_gender && gender_pos}} {{!selected_filter_gender && pos}}"></div>
                             <div class="runr_name" pv-text="{{full_name}}"></div>
                             <div class="runr_num" pv-text="{{num}}"></div>
-                            <div class="runr_age" pv-text="{{2013 - birthyear}}"></div>
+                            <div class="runr_age" pv-text="{{2014 - birthyear}}"></div>
                             <div class="runr_team" pv-text="{{team}}"></div>
                             <div class="runr_place" pv-text="{{city || country}}"></div>
                             <div class="runr_time" pv-text="{{full_time_string}}"></div>

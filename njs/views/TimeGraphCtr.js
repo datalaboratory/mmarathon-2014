@@ -51,7 +51,7 @@ provoda.View.extendTo(TimeGraphCtr, {
             min_age = (min_age != max_age)? min_age : ''
             var age_text = (locale == 'rus')? selectByNum(max_age, ['года','лет','лет']): max_age
             _this.updateState('min_age', min_age)
-            _this.updateState('max_age', max_age)
+            _this.updateState('max_age', age_text)
         })
 		this.areas_group = this.svg.append('g');
 
@@ -110,7 +110,7 @@ provoda.View.extendTo(TimeGraphCtr, {
 			if (!cvs_data){
 				return;
 			}
-			var step = 60*60;
+			var step = 60 * 60;
 
 			var items = [];
 			var cur = 0;
@@ -123,7 +123,7 @@ provoda.View.extendTo(TimeGraphCtr, {
 				cur += step;
 				//cur = Math.min(cur, cvs_data.run_gap);
 			}
-			items.pop();
+			if (items.length > 2) items.pop();  //что за хрень
 			items.push({
 				relative_to_start: cvs_data.run_gap * 1000,
 				relative_to_day: cvs_data.start_time + cvs_data.run_gap * 1000,
@@ -135,11 +135,12 @@ provoda.View.extendTo(TimeGraphCtr, {
 		}
 	},
 	'compx-hours_marks':{
-		depends_on: ['hours_steps', 'cvs_data', 'width'],
+		depends_on: ['hours_steps', 'cvs_data', 'width', 'distance_type'],
 		fn: function(hours_steps,cvs_data, width) {
 			if (!hours_steps || !cvs_data || !width){
 				return;
 			}
+
 			var node  = this.tpl.ancs['timeline_textc'];
 			node.empty();
 			var width_factor = width/cvs_data.run_gap;
@@ -247,12 +248,14 @@ provoda.View.extendTo(TimeGraphCtr, {
 				var width_factor = this.width/cvs_data.run_gap;
 				for (var i = 0; i < marks.length; i++) {
 					var val =  width_factor * timesteps[i];
-					var attrs = {
-						x1: val,
-						x2: val
-					};
-					marks[i].top.attr(attrs);
-					marks[i].bottom.attr(attrs);
+                    if (val) {
+                        var attrs = {
+                            x1: val,
+                            x2: val
+                        };
+                        marks[i].top.attr(attrs);
+                        marks[i].bottom.attr(attrs);
+                    }
 				}
 				return [];
 			}
@@ -357,7 +360,6 @@ provoda.View.extendTo(TimeGraphCtr, {
 					var cur = runners[i];
 					if (cur.end_time > range_start &&  cur.end_time <= range_end){
 						result.push(cur);
-						//cur.finish_g = result;
 					} else {
 
 					}
@@ -365,20 +367,12 @@ provoda.View.extendTo(TimeGraphCtr, {
 				return result;
 			};
 			var getRunnersByTime = function(runners) {
-				//var has_data = {};
 				var runners_by_time = [];
-				//var max_runners;
 				
 				for (var i = 0; i < steps; i++) {
 					var array = makeStep(i, runners);
 					runners_by_time.push(array);
-				//	max_runners = Math.max(max_runners, array.length);
-					if (array.length){
-					//	has_data[i] = array.length;
-					}
-
 				}
-			//	runners_by_time.max_runners = max_runners;
 				return runners_by_time;
 			};
 
@@ -403,8 +397,6 @@ provoda.View.extendTo(TimeGraphCtr, {
 				return summ;
 			};
 
-
-
 			var max_runners_in_step = 0;
 			for (var i = 0; i < steps; i++) {
 				max_runners_in_step = Math.max(max_runners_in_step, getMaxInStep(i));
@@ -412,12 +404,9 @@ provoda.View.extendTo(TimeGraphCtr, {
 			
 			this.height = Math.max(this.original_height, max_runners_in_step * this.y_scale);
 
-
-
 			var height_factor = this.height/ (max_runners_in_step * this.y_scale);
 			this.c.css('height', this.height);
 			this.svgc.css('height', this.height);
-//			this.height/();
 
 			return {
 				steps: steps,
@@ -437,7 +426,7 @@ provoda.View.extendTo(TimeGraphCtr, {
 		}
 	},
 	checkPointerMove: function(e) {
-			//this.coffset
+
 		var pos = e.pageX - this.coffset.left;
 
 
@@ -493,15 +482,6 @@ provoda.View.extendTo(TimeGraphCtr, {
 				matched = getByS(sel.pos_x, sel.pos_y - 1);
 			}
 
-
-
-			/*
-			
-			if (matched){
-				console.log(matched.full_name);
-			} else {
-				console.log(sel.pos_x, sel.pos_y);
-			}*/
 			if (!matched){
 				return;
 			} else {
@@ -529,7 +509,6 @@ provoda.View.extendTo(TimeGraphCtr, {
 				return;
 			}
 
-
 			var _this = this;
 
 			var reversed_groups = current_runners_data.runners_groups.slice();
@@ -555,6 +534,7 @@ provoda.View.extendTo(TimeGraphCtr, {
 					var x1 = i * px_step;
 					var x2 = x1 + px_step;
 					var y = _this.height - height_factor * array[i].length;
+                    if (!y && y!==0) return [[],[],[]]
 					if (prev_array){
 						var prev_v = prev_array[i *2];
 						y = y - (_this.height - prev_v.y);

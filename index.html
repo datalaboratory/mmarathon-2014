@@ -32,8 +32,8 @@
 		
 		<div class="bmap big_block">
 			<div class="lang">
-				<div class="flag"><img src="i/flag_rus.png"></div>
-				<div class="flag"><a href="en/"><img src="i/flag_us.png"></a></div>
+				<div class="flag active_flag"><img src="i/flag_rus.png" class="img_flag"></div>
+				<div class="flag inactive_flag"><a href="en/"><img src="i/flag_us.png" class="img_flag"></a></div>
 				</div>
 			<div class="weather we_bg_sun">
 				<div class="weather_images">
@@ -106,13 +106,15 @@
                                                             {{distance_type!=42 && menu_opened && 'toggle_menu_item'}}
                                                             {{!(menu_opened||distance_type==42) && 'hidden'}}"
                                     pv-events="click::updateGeo42">
-                                <span class="marath-icon" pv-class="marath-icon {{menu_opened && distance_type==10 && 'hidden'}}"><img src="i/marathon-logo.png"></span><span pv-anchor="mthswitch" class="mthswitch">марафон</span>
+                                <span class="marath-icon" pv-class="marath-icon {{menu_opened && distance_type==10 && 'hidden'}}"><img src="i/marathon-logo.png"></span>
+                                <span pv-anchor="mthswitch" class="mthswitch" pv-class="mthswitch {{menu_opened && distance_type==10 && 'toggle_item_text' || 'toggle_header_text'}}">марафон</span>
                             </div>
                             <div class="hidden" pv-class="{{distance_type==10 && 'filtrr toggle-header'}}
                                                             {{distance_type!=10 && menu_opened && 'toggle_menu_item'}}
                                                             {{!(menu_opened||distance_type==10) && 'hidden'}}"
                                     pv-events="click::updateGeo10">
-                                <span class="marath-icon" pv-class="marath-icon {{menu_opened && distance_type==42 && 'hidden'}}"><img src="i/marathon-logo.png"></span><span>10км</span>
+                                <span class="marath-icon" pv-class="marath-icon {{menu_opened && distance_type==42 && 'hidden'}}"><img src="i/marathon-logo.png"></span>
+                                <span pv-class="{{menu_opened && distance_type==42 && 'toggle_item_text' || 'toggle_header_text'}}">10км</span>
                             </div>
                         </div>
                     </h1>

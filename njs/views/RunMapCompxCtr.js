@@ -402,74 +402,27 @@ provoda.View.extendTo(RunMapCompxCtr, {
 
 		}
 	},
-	/*'compx-bigdata': {
-		depends_on: ['geodata', 'cvs_data'],
-		fn: function(geodata, cvs_data) {
-			if (geodata && cvs_data){
-				getHardMap(cvs_data, geodata, this.tpl.ancs['map-con'][0]);
-				return {
-					geodata: geodata,
-					cvs_data: cvs_data
-				};
-			}
-		}
-	},*/
 
-	/*
-	var 
-		var pjr = this.projection(pp.target);*/
-	//point_left_edge
-	//point_bottom_edge
-	//point_bottom_middle
 	getPointPxByDistance: function(geodata, distance) {
 		var pp = mh.getPointAtDistance(geodata.geometry.coordinates, distance, true);
 		var point = this.root_view.projection(pp.target);
 		point[2] = pp.target[2];
 		return point.map(Math.round);
 	},
-	'compx-point_bottom_middle':{
-		depends_on: ['d3map_dets', 'geodata42'],
-		fn: function(d3map_dets, geodata) {
-			if (d3map_dets && geodata){
-                var distance = (1)? 28700 : 28700/2;
-				return this.getPointPxByDistance(geodata, distance);
-			}
-		}
-	},
-	'compx-point_bottom_edge':{
-		depends_on: ['d3map_dets', 'geodata42'],
-		fn: function(d3map_dets, geodata) {
-			if (d3map_dets && geodata){
-                var distance = (1)? 22288 : 22288/2;
-				return this.getPointPxByDistance(geodata, distance);
-			}
-		}
-	},
-	'compx-point_left_edge':{
-		depends_on: ['d3map_dets', 'geodata42'],
-		fn: function(d3map_dets, geodata) {
-			if (d3map_dets && geodata){
-                var distance = (1)? 11116 : 11116/2;
-				return this.getPointPxByDistance(geodata, distance);
-			}
-		}
-	},
 	'compx-start_point':{
-		depends_on: ['d3map_dets', 'geodata42', 'geodata10', 'distance_type'],
-		fn: function(d3map_dets, geodata42, geodata10, type) {
-			if (d3map_dets && geodata42){
-                var geodata = (type == 42)? geodata42 : geodata10
+		depends_on: ['d3map_dets', 'geodata'],
+		fn: function(d3map_dets, geodata) {
+			if (d3map_dets && geodata){
 				return this.getPointPxByDistance(geodata, 0);
 			}
 		}
 	},
 	'compx-end_point':{
-		depends_on: ['d3map_dets', 'geodata42', 'geodata10', 'distance_type'],
-		fn: function(d3map_dets, geodata42, geodata10, type) {
-			if (d3map_dets && geodata42){
-                var geodata = (type == 42)? geodata42 : geodata10
+		depends_on: ['d3map_dets', 'geodata'],
+		fn: function(d3map_dets, geodata) {
+			if (d3map_dets && geodata){
 				var total_distance = d3.geo.length(geodata) * mh.earth_radius;
-				return this.getPointPxByDistance(geodata, total_distance);
+				return this.root_view.projection(geodata.geometry.coordinates[geodata.geometry.coordinates.length - 1]);
 			}
 		}
 	},
@@ -504,19 +457,6 @@ provoda.View.extendTo(RunMapCompxCtr, {
 			}
 
 		}
-	},
-	/*'stch-start_point': function(state) {
-		//this.start_point.toggleClass('')
-	},
-	'stch-end_point': function(state) {
-
-	},*/
-
-	tpl_events:{
-		
-	},
-	tpl_r_events:{
-		
 	}
 });
 return RunMapCompxCtr;
