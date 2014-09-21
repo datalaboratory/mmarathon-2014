@@ -421,7 +421,6 @@ provoda.View.extendTo(RunMapCompxCtr, {
 		depends_on: ['d3map_dets', 'geodata'],
 		fn: function(d3map_dets, geodata) {
 			if (d3map_dets && geodata){
-				var total_distance = d3.geo.length(geodata) * mh.earth_radius;
 				return this.root_view.projection(geodata.geometry.coordinates[geodata.geometry.coordinates.length - 1]);
 			}
 		}
