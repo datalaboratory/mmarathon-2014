@@ -26,16 +26,18 @@ path {
 .toggle {
     float: left;
     position: relative;
-    margin-left: 10px;
-    width: 260px;
+    margin-left: 7px;
+    width: 218px;
 }
 .toggle_menu_item {
+	padding: 2px 0px 0px 8px;
     position: absolute;
     background-color: #FAFAFA;
     top: 100%;
-    width: 100%;
+    width: 210px;
     height: 36px;
     z-index: 10;
+    cursor: pointer;
 }
 .toggle_menu_item:hover {
     background-color: #F5F5F5;
@@ -45,14 +47,7 @@ path {
     top: 0;
     width: 100%;
 }
-.toggle_item_text {
-    position: absolute;
-    margin-left: 10px;
-}
-.toggle_header_text {
-    position: absolute;
-    margin-top: -3px;
-}
+
 #map-con{
 	height: 400px;
 }
