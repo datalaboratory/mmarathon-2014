@@ -288,7 +288,6 @@ var getSteps = function(step, px_distance, node){
 	var steps = [],
 		pieces = [],
 		piece = 0, i;
-
 	while (piece <= px_distance){
 		pieces.push(piece);
 		if (piece == px_distance){
@@ -302,6 +301,10 @@ var getSteps = function(step, px_distance, node){
 			l: pieces[i]
 		});
 	}
+    steps.push({
+        p: node.getPointAtLength(pieces[i]),
+        l: 0
+    });
 	return steps;
 };
 var getStep = function(height){
@@ -341,7 +344,7 @@ var getStepHeight = function(knodes, distance, seconds, runners_array, start_tim
 	};
 };
 var base_points_cache = {};
-var getBasePoints = function(base, boundrect, total_distance){
+var getBasePoints = function(base, boundrect, total_distance, step_in_m){
 	var points_key = base.projection_key;
 	if (base_points_cache[points_key]){
 		return base_points_cache[points_key];
@@ -356,13 +359,9 @@ var getBasePoints = function(base, boundrect, total_distance){
 
 		//var step = getStep(boundrect.height);
 
-		var step = 300 * px_in_m;
+		var step = step_in_m * px_in_m;
 		var steps = getSteps(step, px_distance, d3path_node);
-		
 
-		
-
-		
 		for (i = 1; i < steps.length; i++) {
 			var c1 = steps[i-1],
 				c2 = steps[i],
@@ -412,13 +411,11 @@ var drawRunnersPoints = function(colors, grads, data, cvs_data_items, place, sec
 		}
 		var remainder = num % row_capacity;
 		var row = Math.ceil(num/row_capacity);
-		//var x,y;
 
 		return {
 			x: margin_collapsable + ( ( point_radius * 2 + margin_collapsable) * (remainder - 1)),
 			y: margin_collapsable + ( ( point_radius * 2 + margin_collapsable) * (row - 1))
 		};
-	//var
 
 	};
 	var getSQPoints = function(node, width, runners) {
@@ -449,7 +446,6 @@ var drawRunnersPoints = function(colors, grads, data, cvs_data_items, place, sec
 
 	};
 
-	//
 	(function(){
 		var limit = 5;
 
@@ -493,7 +489,7 @@ var drawRunnersPoints = function(colors, grads, data, cvs_data_items, place, sec
 };
 
 
-var getPoints = function(runners_groups, knodes, seconds, start_time, total_distance) {
+var getPoints = function(runners_groups, knodes, seconds, start_time, total_distance, step) {
 	var i;
 
 	var boundrect = knodes.base.node().getBoundingClientRect();
@@ -501,7 +497,7 @@ var getPoints = function(runners_groups, knodes, seconds, start_time, total_dist
 	if (boundrect.width <= 50 || boundrect.height <= 50) {
 		return;
 	}
-	var data = getBasePoints(knodes.base, boundrect, total_distance);
+	var data = getBasePoints(knodes.base, boundrect, total_distance, step);
 
 	var complects = data.complects;
 

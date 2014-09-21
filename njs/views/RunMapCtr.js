@@ -151,31 +151,9 @@ provoda.View.extendTo(RunMapCtr, {
 			}
 		});
 
-
 		this.path = d3.geo.path().projection(this.projection);
 		this.behavior = d3.behavior.zoom();
 
-		/*this.behavior.on("zoom", function() {
-			if (d3.event) {
-				var result = {};
-				var t = _this.projection.translate();
-				var t1 = t, t2 = d3.event.translate,
-					tval = [t2[0]-t1[0], t2[1]-t1[1]];
-
-				result.translate = tval;
-				result.scale = d3.event.scale;
-
-				_this.projection
-						//.translate(d3.event.translate)
-						.scale(d3.event.scale);
-
-				_this.updateManyStates(result);
-			}
-
-
-			//_this.setVisState('map_event', Date.now());
-		});*/
-		//this.svg.call(this.behavior);
 		var _this = this;
 
 		// // Костыль: Подгоняем размер после загрузки страницы
@@ -302,7 +280,7 @@ provoda.View.extendTo(RunMapCtr, {
 	},
 	'compx-basedet': {
 		depends_on: ['geodata', 'bd'],
-		fn: function(geodata, bd, type) {
+		fn: function(geodata, bd) {
 			if (geodata && bd){
 				this.projection.scale(1).translate([0, 0]);
 				var b = this.path.bounds(geodata),
@@ -315,7 +293,6 @@ provoda.View.extendTo(RunMapCtr, {
                 this.behavior.translate(t).scale(s);
 
                 this.projection.scale(s).translate(t);
-
 				this.updateManyStates({
 					scale: 0,
 					translate: [0,0]
@@ -360,12 +337,13 @@ provoda.View.extendTo(RunMapCtr, {
 		}
 	},
 	'compx-draw': {
-		depends_on: ['basepathch', 'cvs_data', 'time_value', 'current_runners_data'],
-		fn: function(basepathch, cvs_data, time_value, current_runners_data) {
+		depends_on: ['basepathch', 'cvs_data', 'time_value', 'current_runners_data', 'distance_type'],
+		fn: function(basepathch, cvs_data, time_value, current_runners_data, type) {
 			if (!basepathch || !cvs_data || typeof time_value == 'undefined' || !current_runners_data){
 				return;
 			}
-			var data = mh.getPoints(current_runners_data.runners_groups, this.knodes, time_value, cvs_data.start_time, this.total_distance);
+            var step = (type == 42) ? 500 : 200;
+			var data = mh.getPoints(current_runners_data.runners_groups, this.knodes, time_value, cvs_data.start_time, this.total_distance, step);
 			mh.drawRunnersPoints(colors, this.parent_view.parent_view.gender_grads, data, current_runners_data.items, this.knodes.debug_group, time_value, cvs_data.start_time);
 
 			return {};
