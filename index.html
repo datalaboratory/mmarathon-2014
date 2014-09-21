@@ -41,7 +41,7 @@
 
 						pv-class=" {{ !( time_value|compareTime: '00:00' : '7:00:00' ) && 'hidden'}}"
 						class="hidden">
-						<img src="../i/sun.png" alt="">
+						<img src="i/sun.png" alt="">
 					</div>
 				</div>
 				<div pv-class=" {{ !( time_value|compareTime: '00:00' : '1:00:00' ) && 'hidden'}}" class="hidden">
@@ -475,8 +475,9 @@
 
 						>
 						<div class="timeline_select_desc-text" >
-							<div pv-text="{{selector_matching.runner.full_name}}, {{selector_matching.runner.age_years}}"></div>
-							<div pv-text="{{selector_matching.runner.end_time_string}}"></div>
+							<div class="timeline_black_text" pv-text="{{selector_matching.runner.full_name}}, {{selector_matching.runner.age_years}}"></div>
+							<div class="timeline_white_text" pv-text="{{selector_matching.runner.end_time_string}}"></div>
+                            <div class="timeline_yellow_text" pv-text="номер {{selector_matching.runner.num}}"></div>
 
 						</div>
 					</div>					
@@ -639,6 +640,8 @@
 										</div>
 									</div>
 								</div>
+                                <div class="hidden clear_filters" pv-class="clear_filters {{!selected_filter_city && !selected_filter_gender && !selected_filter_team && !selected_filter_ages && 'hidden'}}" pv-events="click::clearFilters">
+                                    &times;</div>
 
 								
 							</div>

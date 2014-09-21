@@ -302,7 +302,7 @@ var getSteps = function(step, px_distance, node){
 		});
 	}
     steps.push({
-        p: node.getPointAtLength(pieces[i]),
+        p: node.getPointAtLength(px_distance),
         l: 0
     });
 	return steps;

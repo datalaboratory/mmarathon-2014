@@ -47,7 +47,21 @@ path {
     top: 0;
     width: 100%;
 }
-
+.clear_filters {
+    width: 20px;
+    height: 20px;
+    float: left;
+    margin-left: 20px;
+    text-align: center;
+    color: #ccc;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    cursor: pointer;
+}
+.clear_filters:hover {
+    color: #d11d1d;
+    border: 1px solid #d11d1d;
+}
 #map-con{
 	height: 400px;
 }
@@ -74,7 +88,7 @@ path {
 		.scroll_marker{
 			position: absolute;
 			margin-left: 2px;
-			margin-top: -10px;
+			margin-top: -9px;
 			z-index: 3;
 			top:0;
 			}
@@ -102,7 +116,21 @@ path {
 			bottom:0;
 			
 		}
-
+    .timeline_black_text {
+        background: #000;
+        color: #fff;
+        padding: 10px 10px 0px 10px;
+    }
+    .timeline_white_text {
+        background: #fff;
+        color: #000;
+        font-size: 24px;
+        padding: 10px 10px 0px 10px;
+    }
+    .timeline_yellow_text {
+        background: #f0f060;
+        padding: 10px 10px 0px 10px;
+    }
 	.big_timemarks{
 		margin-top: 20px;
 		position: relative;
@@ -726,13 +754,11 @@ path {
 	}
 .timeline_select_desc-text{
 	display: block;
-	padding: 6px 7px;
-	background: #fff;
-	opacity: 0.8;
 	width: 200px;
 	position: absolute;
-	right:5px;
+	right:0px;
 	bottom:5px;
+    z-index: 100;
 }
 .selector_box{
 	border: 1px solid white;

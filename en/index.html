@@ -63,7 +63,7 @@
 				<div pv-class=" {{ !( time_value|compareTime: '5:00:00' : '6:00:00' ) && 'hidden'}}" class="hidden">
 					<div class="we_temperature">+19° <span class="we_wind">↗ 1 m/s </span></div>
 				</div>
-				<div pv-class=" {{ !( time_value|compareTime: '6:00:00' : '7:00:00' ) && 'hidden'}}" class="hidden">
+				<div pv-class=" {{ !( time_value|compareTime: '6:00:00' : '7:00:00' ) && 'hidden'}}" >
 					<div class="we_temperature">+18° <span class="we_wind">↑ 1 m/s </span></div>
 				</div>
 			</div>
@@ -651,6 +651,8 @@
 										</div>
 									</div>
 								</div>
+                                <div class="hidden clear_filters" pv-class="clear_filters {{!selected_filter_city && !selected_filter_gender && !selected_filter_team && !selected_filter_ages && 'hidden'}}" pv-events="click::clearFilters">
+                                    &times;</div>
 
 								
 							</div>

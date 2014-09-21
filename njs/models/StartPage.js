@@ -10,10 +10,7 @@ BrowseMap.Model.extendTo(FilterItem, {
 		spv.cloneObj(this.init_states, params);
 		this.init_states.type = type;
 		this.initStates();
-        var _this = this;
 		this.wch(this.map_parent, 'selected_filter_' + type, this.checkActiveState);
-        this.wch(this.map_parent, 'distance_type', function(e) {
-        })
 
 	},
 	checkActiveState: function(e) {
@@ -70,6 +67,8 @@ BrowseMap.Model.extendTo(StartPage, {
             _this.updateNesting('runners', runners);
             _this.getIndexes(runners, data);
             _this.makeFiltersResult();
+            _this.clearFilters();
+
         })
 
 		this.filters = {};
@@ -143,6 +142,13 @@ BrowseMap.Model.extendTo(StartPage, {
 		this.updateState('query', query);
 	},
 	search_fields: [['states','num'], ['states','full_name'], ['states','gender_pos']],
+    clearFilters: function () {
+        this.updateState('last_filter', '')
+        this.setFilterBy('gender', false);
+        this.setFilterBy('ages', false);
+        this.setFilterBy('team', false);
+        this.setFilterBy('city', false);
+    },
 	getFilterData: function(runners, field, limit) {
 		var count = 0;
 		limit = limit || 0;
@@ -154,6 +160,11 @@ BrowseMap.Model.extendTo(StartPage, {
 			count++;
 			if (name == '#other' || index[name].length < limit){
 				continue;
+                result.push({
+                    label: 'не указано',
+                    counter: index[name].length
+                });
+                //continue;
 			}
 			result.push({
 				label: name,
@@ -313,8 +324,8 @@ BrowseMap.Model.extendTo(StartPage, {
 		var field = ['states', 'gender'];
 		var index = spv.makeIndexByField(runners, field, true);
 
-        var label_men = (locale == 'rus')? 'Мужчин':'Men'
-        var label_women = (locale == 'rus')? 'Женщин':'Women'
+        var label_men = (locale == 'rus') ? 'Мужчин':'Men'
+        var label_women = (locale == 'rus') ? 'Женщин':'Women'
 		result.push({
 			label: label_women,
 			counter: index[0] && index[0].length
