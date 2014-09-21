@@ -73,7 +73,7 @@ path {
 	}
 		.scroll_marker{
 			position: absolute;
-			margin-top: -33px;
+			margin-top: -10px;
 			z-index: 3;
 			top:0;
 			}
