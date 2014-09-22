@@ -458,7 +458,15 @@
 
 			<div class="scroll_marker" pv-anchor="scroll_marker"><img src="i/scroll-marker.png" alt=""></div>
 			<div class="timeline graph_has_text" pv-nest="time_graph">
+                <span class="start_text timeline_text">начало забега</span>
+                <span class="hidden" pv-class="winner_text timeline_text {{!winner && 'hidden'}}" pv-props="style.left: {{winner.pixel_pos - 5}}">финишировал победитель</span>
+                <div class="hidden" pv-class="winner_info {{!winner && 'hidden'}}" pv-props="style.left: {{winner.pixel_pos - 5}}">
+                    <span pv-text="{{winner.full_name}}"></span>
+                    <span pv-text="{{winner.result_time_string}}"></span>
+                </div>
+                <span class="finish_text timeline_text">финишировал последний бегун</span>
                 <div class="controlls_desc">
+
                     <h2 class="controlls_desc_h">
                         <span class="hidden" pv-class="{{!male_current_number && 'hidden'}}" pv-text="{{male_current_number}}"></span>
                         <span class="hidden" pv-class="{{!(male_current_number && female_current_number) && 'hidden'}}"><br/> и</span>

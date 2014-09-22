@@ -76,6 +76,7 @@ provoda.View.extendTo(TimeGraphCtr, {
 
 		this.timemarksg1 = this.svg.append('g');
 		this.timemarksg2 = this.svg.append('g');
+
 		this.c.append(svg);
 	},
 	checkSizes: function() {
@@ -104,6 +105,36 @@ provoda.View.extendTo(TimeGraphCtr, {
 			}
 		}
 	},
+    'compx-winner':{
+        depends_on: ['selected_time', 'cvs_data'],
+        fn: function(time, data) {
+            if (!data) return;
+
+            var context_width = this.c.width();
+            var context_height = Math.floor(this.c.height());
+            var winner = data.items[0];
+            var factor = +winner.result_time/data.run_gap ;
+
+            winner.pixel_pos = Math.floor(context_width * factor)
+
+            this.svg.select('.circle-line-g').remove()
+            var g = this.svg.append('g').classed('circle-line-g', true)
+            g.append('circle').attr('r', 2).attr('cx', winner.pixel_pos ).attr('cy', 125).attr('opacity',.8 )
+            g.append('line').attr('x1', winner.pixel_pos -.1).attr('y1', 125).attr('x2', winner.pixel_pos -.1).attr('y2', context_height).attr('opacity',.8 )
+
+            return winner;
+        }
+    },
+    'compx-winner-redraw':{
+        depends_on: ['time_value', 'winner'],
+        fn: function(time, winner) {
+            if (!winner) return;
+            var color = (time < winner.result_time) ? '#aaa' : '#B8E8FF'
+            this.svg.select('.circle-line-g').select('circle').attr('fill', color)
+            this.svg.select('.circle-line-g').select('line').attr('stroke', color)
+
+        }
+    },
 	'compx-hours_steps':{
 		depends_on: ['cvs_data'],
 		fn: function(cvs_data) {

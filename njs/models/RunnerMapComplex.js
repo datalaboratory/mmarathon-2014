@@ -102,52 +102,33 @@ provoda.HModel.extendTo(RunnerMapComplex, {
                 _this.updateState('menu_opened', false)
             }
         });
-        function set10toggle(){
-            $('.10menu_item').mouseover(function(e){
+        var menu_item42 = $('.42menu_item')
+        var menu_item10 = $('.10menu_item')
+
+        function setToggle(current_item, other_item){
+            current_item.mouseover(function(){
                 if (_this.state('menu_opened')) {
-                    $('.42menu_item').removeClass('current_menu_item')
-                    $(this).addClass('current_menu_item')
+                    other_item.removeClass('current_menu_item')
+                    current_item.addClass('current_menu_item')
                 }
             })
-            $('.10menu_item').mouseleave(function(e){
+            current_item.mouseleave(function(){
                 if (_this.state('menu_opened')) {
-                    $('.42menu_item').addClass('current_menu_item')
-                    $(this).removeClass('current_menu_item')
+                    other_item.addClass('current_menu_item')
+                    current_item.removeClass('current_menu_item')
                 }
             })
-            $('.10menu_item').click(function(e){
-                $(this).addClass('current_menu_item');
-                $('.42menu_item').removeClass('current_menu_item');
-                $('.10menu_item').unbind('mouseover')
-                $('.10menu_item').unbind('mouseleave')
-                set42toggle()
+            current_item.click(function(){
+                current_item
+                    .addClass('current_menu_item')
+                    .unbind('mouseover')
+                    .unbind('mouseleave')
+                other_item.removeClass('current_menu_item')
+                setToggle(other_item, current_item)
 
             })
         }
-        function set42toggle(){
-            $('.42menu_item').mouseover(function(e){
-                if (_this.state('menu_opened')) {
-                    $('.10menu_item').removeClass('current_menu_item')
-                    $(this).addClass('current_menu_item')
-                }
-            })
-            $('.42menu_item').mouseleave(function(e){
-                if (_this.state('menu_opened')) {
-                    $('.10menu_item').addClass('current_menu_item')
-                    $(this).removeClass('current_menu_item')
-                }
-            })
-            $('.42menu_item').click(function(e){
-                $(this).addClass('current_menu_item');
-                $('.10menu_item').removeClass('current_menu_item');
-                $('.42menu_item').unbind('mouseover')
-                $('.42menu_item').unbind('mouseleave')
-                set10toggle()
-
-            })
-        }
-        set10toggle()
-        console.log($('.toggle_menu_item'))
+        setToggle(menu_item42, menu_item10)
 
 	},
 	setTime: function(factor) {
