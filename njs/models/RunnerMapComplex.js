@@ -102,6 +102,52 @@ provoda.HModel.extendTo(RunnerMapComplex, {
                 _this.updateState('menu_opened', false)
             }
         });
+        function set10toggle(){
+            $('.10menu_item').mouseover(function(e){
+                if (_this.state('menu_opened')) {
+                    $('.42menu_item').removeClass('current_menu_item')
+                    $(this).addClass('current_menu_item')
+                }
+            })
+            $('.10menu_item').mouseleave(function(e){
+                if (_this.state('menu_opened')) {
+                    $('.42menu_item').addClass('current_menu_item')
+                    $(this).removeClass('current_menu_item')
+                }
+            })
+            $('.10menu_item').click(function(e){
+                $(this).addClass('current_menu_item');
+                $('.42menu_item').removeClass('current_menu_item');
+                $('.10menu_item').unbind('mouseover')
+                $('.10menu_item').unbind('mouseleave')
+                set42toggle()
+
+            })
+        }
+        function set42toggle(){
+            $('.42menu_item').mouseover(function(e){
+                if (_this.state('menu_opened')) {
+                    $('.10menu_item').removeClass('current_menu_item')
+                    $(this).addClass('current_menu_item')
+                }
+            })
+            $('.42menu_item').mouseleave(function(e){
+                if (_this.state('menu_opened')) {
+                    $('.10menu_item').addClass('current_menu_item')
+                    $(this).removeClass('current_menu_item')
+                }
+            })
+            $('.42menu_item').click(function(e){
+                $(this).addClass('current_menu_item');
+                $('.10menu_item').removeClass('current_menu_item');
+                $('.42menu_item').unbind('mouseover')
+                $('.42menu_item').unbind('mouseleave')
+                set10toggle()
+
+            })
+        }
+        set10toggle()
+        console.log($('.toggle_menu_item'))
 
 	},
 	setTime: function(factor) {

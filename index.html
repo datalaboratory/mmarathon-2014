@@ -118,20 +118,20 @@
             <h1 class="bmap_header" pv-class="bmap_header {{current_runner_data && 'hidden'}}" >
                 <div style="float:left;" >Мы бежали </div>
                 <div class="toggle">
-                    <div class="toggle-header" pv-class="{{distance_type==42 && 'toggle-header'}}
+                    <div class="toggle-header 42menu_item" pv-class="42menu_item {{distance_type==42 && 'toggle-header current_menu_item'}}
                                                             {{distance_type!=42 && menu_opened && 'toggle_menu_item'}}
                                                             {{!(menu_opened||distance_type==42) && 'hidden'}}
                                                             {{distance_type==42 && menu_opened && 'toggle-header-open'}}"
                          pv-events="click::updateGeo42">
-                        <span class="marath-icon" pv-class="marath-icon {{menu_opened && distance_type==10 && 'hidden'}}"><img src="i/marathon-logo.png"></span>
-                        <span pv-anchor="mthswitch" class="mthswitch" pv-class="mthswitch {{menu_opened && distance_type==10 && 'toggle_item_text' || 'toggle_header_text'}}">марафон</span>
+
+                        <div><span pv-anchor="mthswitch" class="mthswitch" pv-class="mthswitch toggle_item_text">марафон</span></div>
                     </div>
-                    <div class="hidden" pv-class="{{distance_type==10 && 'toggle-header'}}
+                    <div class="hidden toggle_menu_item 10menu_item" pv-class="10menu_item {{distance_type==10 && 'toggle-header current_menu_item'}}
                                                             {{distance_type!=10 && menu_opened && 'toggle_menu_item'}}
-                                                            {{!(menu_opened||distance_type==10) && 'hidden'}}"
+                                                            {{!(menu_opened||distance_type==10) && 'hidden'}}
+                                                            {{distance_type==10 && menu_opened && 'toggle-header-open'}}"
                          pv-events="click::updateGeo10">
-                        <span class="marath-icon" pv-class="marath-icon {{menu_opened && distance_type==42 && 'hidden'}}"><img src="i/marathon-logo.png"></span>
-                        <span pv-class="{{menu_opened && distance_type==42 && 'toggle_item_text' || 'toggle_header_text'}}">10км</span>
+                        <span class="toggle_item_text">10км</span>
                     </div>
                 </div>
             </h1>
