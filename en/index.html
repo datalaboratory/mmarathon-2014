@@ -45,26 +45,33 @@
 					</div>
 
 				</div>
-				<div pv-class=" {{ !( time_value|compareTime: '00:00' : '1:00:00' ) && 'hidden'}}" class="hidden" >
-					<div class="we_temperature">+11° <span class="we_wind">calm</span></div>
+				<div pv-class=" {{ !( time_value|compareTime: '00:00' : '1:00:00' ) && 'hidden'}}" class="hidden">
+					<div class="we_temperature">+11°</div>
+					<div class="we_wind">0 m/s</div>
 				</div>
-				<div pv-class=" {{ !( time_value|compareTime: '1:00:00' : '2:00:00' ) && 'hidden'}}" class="hidden" >
-					<div class="we_temperature">+14° <span class="we_wind">calm </span></div>
+				<div pv-class=" {{ !( time_value|compareTime: '1:00:00' : '2:00:00' ) && 'hidden'}}" class="hidden">
+					<div class="we_temperature">+14°</div>
+					<div class="we_wind">0 m/s</div>
 				</div>
-				<div pv-class=" {{ !( time_value|compareTime: '2:00:00' : '3:00:00' ) && 'hidden'}}" class="hidden" >
-					<div class="we_temperature">+16° <span class="we_wind">calm</span></div>
+				<div pv-class=" {{ !( time_value|compareTime: '2:00:00' : '3:00:00' ) && 'hidden'}}" class="hidden">
+					<div class="we_temperature">+16°</div>
+					<div class="we_wind">0 m/s</div>
 				</div>
-				<div pv-class=" {{ !( time_value|compareTime: '3:00:00' : '4:00:00' ) && 'hidden'}}" class="hidden" >
-					<div class="we_temperature">+17° <span class="we_wind">calm</span></div>
+				<div pv-class=" {{ !( time_value|compareTime: '3:00:00' : '4:00:00' ) && 'hidden'}}" class="hidden">
+					<div class="we_temperature">+17°</div>
+					<div class="we_wind">0 m/s</div>
 				</div>
-				<div pv-class=" {{ !( time_value|compareTime: '4:00:00' : '5:00:00' ) && 'hidden'}}" class="hidden" >
-					<div class="we_temperature">+19° <span class="we_wind">↗ 1 m/s </span></div>
+				<div pv-class=" {{ !( time_value|compareTime: '4:00:00' : '5:00:00' ) && 'hidden'}}" class="hidden">
+					<div class="we_temperature">+19°</div>
+					<div class="we_wind">↗ 1 m/s</div>
 				</div>
 				<div pv-class=" {{ !( time_value|compareTime: '5:00:00' : '6:00:00' ) && 'hidden'}}" class="hidden">
-					<div class="we_temperature">+19° <span class="we_wind">↗ 1 m/s </span></div>
+					<div class="we_temperature">+19°</div>
+					<div class="we_wind">↗ 1 m/s</div>
 				</div>
-				<div pv-class=" {{ !( time_value|compareTime: '6:00:00' : '7:00:00' ) && 'hidden'}}" >
-					<div class="we_temperature">+18° <span class="we_wind">↑ 1 m/s </span></div>
+				<div pv-class=" {{ !( time_value|compareTime: '6:00:00' : '7:00:00' ) && 'hidden'}}" class="hidden">
+					<div class="we_temperature">+18°</div>
+					<div class="we_wind">↑ 1 m/s</div>
 				</div>
 			</div>
 			<div class="map-cover">
@@ -437,13 +444,13 @@
 						<div class="fb-like" data-href="http://moscowmarathon.datalaboratory.ru/" data-width="450" data-layout="button_count" data-show-faces="false" data-send="false" style="margin-top:5px;"></div>
 						<div>
 
-<!--						<div id="vk_like" style="margin-top:5px;"></div>
+						<div id="vk_like" style="margin-top:5px;"></div>
 
 						<script type="text/javascript">
 						VK && VK.Widgets.Like("vk_like", {type: "mini", height: 20});
-						</script> -->
-							<div class="copyright_desc"><a href="http://moscowmarathon.org/">Marathon official site</a></div>
-							<div class="copyright_desc_2">Visualisation by <a href="http://datalaboratory.ru/">Data&nbsp;laboratory</a></div>
+						</script> 
+							<!-- <div class="copyright_desc"><a href="http://moscowmarathon.org/">Marathon official site</a></div> -->
+							<div class="copyright_desc_2">Visualization by <a href="http://datalaboratory.ru/">Data&nbsp;laboratory</a></div>
 						</div>
 					</div>
 				</div>
