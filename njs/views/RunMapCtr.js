@@ -52,7 +52,6 @@ provoda.View.extendTo(SelRunner, {
 			if ( !(geodata && basedet && start_time && raw && finish_point) ) {
 				return;
 			}
-            console.log(time_value, start_time, raw)
             var current_distance = mh.getDistanceByRangesAndTime(raw, start_time + time_value * 1000);
 			current_distance = Math.max(0, current_distance);
 			var geo_coords = mh.getPointAtDistance(
@@ -80,9 +79,11 @@ provoda.View.extendTo(SelRunner, {
 			}
 
 			if (px_coords) {
+                var _this = this;
 				this.d3_c
 					.attr("cx", px_coords[0])
-					.attr("cy", px_coords[1]);
+					.attr("cy", px_coords[1])
+
 			}
 			
 			//

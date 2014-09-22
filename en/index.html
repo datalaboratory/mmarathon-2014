@@ -31,10 +31,13 @@
 
 		
 		<div class="bmap big_block">
-			<div class="lang">
-                <div class="flag inactive_flag"><a href="../"><img src="../i/flag_rus.png" class="img_flag"></a></div>
-                <div class="flag active_flag"><img src="../i/flag_us.png" class="img_flag"></div>
-				</div>
+        <div class="lang">
+            <div class="flag_con">
+                <div class="inactive_flag_bw left_flag"><a href="../"><img src="../i/flag_rus_bw.png"></a></div>
+                <div class="inactive_flag_clr left_flag"><a href="../"><img src="../i/flag_rus_clr.png"></a></div>
+                <div class="right_flag"><img src="../i/flag_en_clr.png"></div>
+            </div>
+        </div>
 			<div class="weather we_bg_sun">
 				<div class="weather_images">
 					<div
@@ -113,20 +116,22 @@
 			<div class="mapoverlay">
 				<div class="main_header">
                 <h1 class="bmap_header" pv-class="bmap_header {{current_runner_data && 'hidden'}}" >
-                    <div style="float:left;" >We run <span class="marath-icon"><img src="../i/marathon-logo.png"></span></div>
+                    <div style="float:left;" >We run </div>
                     <div class="toggle">
-                        <div class="filtrr toggle-header" pv-class="{{distance_type==42 && 'filtrr toggle-header'}}
+                        <div class="toggle-header" pv-class="{{distance_type==42 && 'toggle-header'}}
                                                             {{distance_type!=42 && menu_opened && 'toggle_menu_item'}}
-                                                            {{!(menu_opened||distance_type==42) && 'hidden'}}"
+                                                            {{!(menu_opened||distance_type==42) && 'hidden'}}
+                                                            {{distance_type==42 && menu_opened && 'toggle-header-open'}}"
                              pv-events="click::updateGeo42">
-                            <span pv-anchor="mthswitch" class="mthswitch">marathon</span>
+                            <span class="marath-icon" pv-class="marath-icon {{menu_opened && distance_type==10 && 'hidden'}}"><img src="../i/marathon-logo.png"></span>
+                            <span pv-anchor="mthswitch" class="mthswitch" pv-class="mthswitch {{menu_opened && distance_type==10 && 'toggle_item_text' || 'toggle_header_text'}}">marathon</span>
                         </div>
-
-                        <div class="hidden" pv-class="{{distance_type==10 && 'filtrr toggle-header'}}
+                        <div class="hidden" pv-class="{{distance_type==10 && 'toggle-header'}}
                                                             {{distance_type!=10 && menu_opened && 'toggle_menu_item'}}
                                                             {{!(menu_opened||distance_type==10) && 'hidden'}}"
                              pv-events="click::updateGeo10">
-                            <span>10km</span>
+                            <span class="marath-icon" pv-class="marath-icon {{menu_opened && distance_type==42 && 'hidden'}}"><img src="../i/marathon-logo.png"></span>
+                            <span pv-class="{{menu_opened && distance_type==42 && 'toggle_item_text' || 'toggle_header_text'}}">10km</span>
                         </div>
                     </div>
                 </h1>
@@ -493,11 +498,12 @@
 						"
 
 						>
-						<div class="timeline_select_desc-text" >
-							<div pv-text="{{selector_matching.runner.full_name}}, {{selector_matching.runner.age_years}}"></div>
-							<div pv-text="{{selector_matching.runner.end_time_string}}"></div>
+                        <div class="timeline_select_desc-text" >
+                            <div class="timeline_black_text" pv-text="{{selector_matching.runner.full_name}}, {{selector_matching.runner.age_years}}"></div>
+                            <div class="timeline_white_text" pv-text="{{selector_matching.runner.end_time_string}}"></div>
+                            <div class="timeline_yellow_text" pv-text="{{selector_matching.runner.num}}"></div>
 
-						</div>
+                        </div>
 					</div>					
 				</div>
 				<div class="graph_text_block" pv-anchor="timeline_textc">
