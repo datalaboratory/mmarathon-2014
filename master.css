@@ -684,8 +684,8 @@ path {
 		padding: 3px 14px;
 
 		color:#000;
-		font-weight: 700;
-		text-shadow:0px 1px 0px #fff;
+		/*font-weight: 700;*/
+		/*text-shadow:0px 1px 0px #fff;*/
 		}
 		
 		.genbuttn:hover{
@@ -698,41 +698,48 @@ path {
 		.genbuttn.active{
 			z-index: 2;
 		}
-		.genbuttn:active, .genbuttn.active{
+		/*.genbuttn:active, .genbuttn.active{
 			background-image: -o-linear-gradient(#bbb, #ddd);
 			background-image: -moz-linear-gradient(100% 0% 270deg,#bbb , #ddd);
 			background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#bbb), to(#ddd));
 			background-image: linear-gradient(#bbb, #ddd);
-		}
+		}*/
 		.genbuttn_group .genbuttn:first-of-type{
 			margin-left: 0;
 		}
 		.genbuttn_group .genbuttn:first-of-type,.genbuttn-left{
-			border-radius: 1em 0 0 1em;
+			border-radius: 0.2em 0 0 0.2em;
 		}
 		.genbuttn_group .genbuttn:last-of-type,.genbuttn-right{
-			border-radius:  0 1em 1em 0;
+			border-radius:  0 0.2em 0.2em 0;
+		}
+		.genbuttn-male {
+			border: 1px solid #4285e9;
+		}
+		.genbuttn-female {
+			border: 1px solid #f14b6b;
 		}
 		.genbuttn-male:active,.genbuttn-male.active{
-
-			background-image: -o-linear-gradient(#81aeec, #a8cff2);
-			background-image: -moz-linear-gradient(100% 0% 270deg,#81aeec , #a8cff2);
-			background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#81aeec), to(#a8cff2));
-			background-image: linear-gradient(#81aeec, #a8cff2);
+			color: white;
+			background-image: -o-linear-gradient(#4285e9, #4285e9);
+			background-image: -moz-linear-gradient(100% 0% 270deg,#4285e9 , #4285e9);
+			background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#4285e9), to(#4285e9));
+			background-image: linear-gradient(#4285e9, #4285e9);
 		}
 		.genbuttn-female:active,.genbuttn-female.active{
-
-			background-image: -o-linear-gradient(#fea4b4, #ffc8d2);
-			background-image: -moz-linear-gradient(100% 0% 270deg,#fea4b4 , #ffc8d2);
-			background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fea4b4), to(#ffc8d2));
-			background-image: linear-gradient(#fea4b4, #ffc8d2);
+			color: white;
+			background-image: -o-linear-gradient(#f14b6b, #f14b6b);
+			background-image: -moz-linear-gradient(100% 0% 270deg,#f14b6b , #f14b6b);
+			background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#f14b6b), to(#f14b6b));
+			background-image: linear-gradient(#f14b6b, #f14b6b);
 		}
 		.genbuttn-male-female:active,.genbuttn-male-female.active{
-
-			background-image: -o-linear-gradient(#a6b7e5, #f9c3d0);
+			background-image: url(i/button-pattern.png);
+			background-repeat: repeat-x;
+			/*background-image: -o-linear-gradient(#a6b7e5, #f9c3d0);
 			background-image: -moz-linear-gradient(100% 0% 270deg,#a6b7e5 , #f9c3d0);
 			background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#a6b7e5), to(#f9c3d0));
-			background-image: linear-gradient(#a6b7e5, #f9c3d0);
+			background-image: linear-gradient(#a6b7e5, #f9c3d0);*/
 		}
 .marker{
 	width: 14px;
