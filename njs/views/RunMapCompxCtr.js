@@ -219,6 +219,9 @@ provoda.View.extendTo(RunMapCompxCtr, {
 				}
 				var cur = count_lines[i];
 				var count = Math.round(mh.getStepValueByHeight((  cur.x - width/2  ) * 2, runners_rate.step));
+				// округление count до сотен
+				count = (count % 100 > 50 ? count - count % 100 + 100 : count - count % 100)
+
 				var span = $('<span class="textblock"></span>');
 				// Выравнивание текстовых подписей к "Толщине змея"
 				span.css({
