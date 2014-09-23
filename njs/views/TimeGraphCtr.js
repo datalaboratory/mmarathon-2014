@@ -29,8 +29,8 @@ provoda.View.extendTo(TimeGraphCtr, {
             var male_current_number = e.value.genders_groups[1].raw.length
             var female_current_number = e.value.genders_groups[0].raw.length
 
-            var male = (locale == 'rus')? selectByNum(male_current_number, ['бегун','бегуна','бегунов']) : male_current_number + ' male'
-            var female = (locale == 'rus')? selectByNum(female_current_number, ['бегунья','бегуньи','бегуний']) : female_current_number + ' female'
+            var male = (locale == 'rus')? selectByNum(male_current_number, ['мужчина','мужчины','мужчин']) : male_current_number + ' male'
+            var female = (locale == 'rus')? selectByNum(female_current_number, ['женщина','женщины','женщин']) : female_current_number + ' female'
 
             male_current_number = (male_current_number)? male:''
             female_current_number = (female_current_number)? female:''
