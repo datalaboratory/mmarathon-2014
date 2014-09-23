@@ -71,15 +71,15 @@ provoda.View.extendTo(RunMapCompxCtr, {
 			this.promiseStateUpdate('runners_rate', e.value);
 		});
 
-
-		var mth_text = (locale == 'rus')? ['марафон', '42 км 195 м']:['marathon', '42 km 195 m'];
-		this.tpl.ancs['mthswitch']
-			.on('mouseenter', function() {
-				$(this).html(mth_text[1]);
-			})
-			.on('mouseleave', function() {
-				$(this).html(mth_text[0]);
-			});
+		// Смена марафон\42км при наведении
+		// var mth_text = (locale == 'rus')? ['марафон', '42 км 195 м']:['marathon', '42 km 195 m'];
+		// this.tpl.ancs['mthswitch']
+		// 	.on('mouseenter', function() {
+		// 		$(this).html(mth_text[1]);
+		// 	})
+		// 	.on('mouseleave', function() {
+		// 		$(this).html(mth_text[0]);
+		// 	});
 
 
 		this.wch(this.root_view, 'd3map_dets', function(e) {
