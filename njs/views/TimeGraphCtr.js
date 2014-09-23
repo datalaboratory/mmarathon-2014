@@ -521,8 +521,8 @@ provoda.View.extendTo(TimeGraphCtr, {
 				}
 				if (!matched.age_years && matched.birthyear){
 					var age = (new Date(cvs_data.start_time)).getFullYear() - matched.birthyear;
-                    var age_text = (locale == 'rus') ? this.age_words[spv.getUnitBaseNum(age)] : 'years old'
-					matched.age_years = age + ' ' + age_text;
+                    var age_text = (locale == 'rus') ? this.age_words[spv.getUnitBaseNum(age)] : 'years old'
+					matched.age_years = age + ' ' + age_text;
 	
 				}
 				return {
