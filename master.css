@@ -643,6 +643,9 @@ path {
 			.no_filtering_item .filter_item_name{
 				font-weight: 700;
 			}
+            .not_specified_item {
+                color: #ccc;
+            }
 			.flrr_menu_item  .filter_item_name{
 				float:left;
 			}

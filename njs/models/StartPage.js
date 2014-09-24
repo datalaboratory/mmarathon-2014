@@ -159,12 +159,19 @@ BrowseMap.Model.extendTo(StartPage, {
 		for (var name in index){
 			count++;
 			if (name == '#other' || index[name].length < limit){
-				continue;
-                result.push({
-                    label: 'не указано',
-                    counter: index[name].length
-                });
-                //continue;
+				//continue;
+                count--;
+                var label = 'не указано'
+                if (field == 'team')  label = 'команда не указана'
+                if (field == 'city') label = 'город не указан'
+
+                var other_item = {
+                    label: label,
+                    counter: index[name].length,
+                    not_specified: true
+                };
+                index[label] = index[name]
+                continue;
 			}
 			result.push({
 				label: name,
@@ -182,6 +189,9 @@ BrowseMap.Model.extendTo(StartPage, {
 		result.sort(function(a, b) {
 			return spv.sortByRules(a, b, filter_opts);
 		});
+        if (other_item) {
+            result.push(other_item)
+        }
 
 		return {
 			index: index,
@@ -194,7 +204,6 @@ BrowseMap.Model.extendTo(StartPage, {
         var selectByNum = function(num, array) {
             return num + ' ' + array[spv.getUnitBaseNum(num)];
         };
-
         if (!this.filters_cache[name]) this.filters_cache[name] = result.index;
         if (no_flabel){
             if (typeof no_flabel == 'string'){
@@ -206,11 +215,12 @@ BrowseMap.Model.extendTo(StartPage, {
                 });
             } else {
                 var label;
+                var count = (name == 'team') ? result.items.length - 1 : result.count
                 if (locale == 'rus'){
-                    label = (result.items.length) ? selectByNum(result.items.length, no_flabel) : 'не указано'
+                    label = (result.items.length) ? selectByNum(count, no_flabel) : 'не указано'
                 } else {
-                    label = (result.items.length > 1) ? result.items.length + ' ' + no_flabel[1] : '1 ' + no_flabel[0]
-                    label = (result.items.length) ? label:'no ' + no_flabel[1]
+                    label = (result.items.length > 1) ? count + ' ' + no_flabel[1] : '1 ' + no_flabel[0]
+                    label = (result.items.length) ? label : 'no ' + no_flabel[1]
                 }
                 result.items.unshift({
                     label: label,

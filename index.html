@@ -633,7 +633,7 @@
 									<div class="firunr_age filterr_menu">
 										<div class="filtrr" pv-text="{{selected_filter_ages || filter_ages.0.label}}"></div>
 										<div class="flrr_menu_list" >
-											<div class="flrr_menu_item" pv-nest="filter_ages" pv-events="click::setFilter" pv-class="flrr_menu_item {{active && 'active'}} {{novalue && 'no_filtering_item'}}">
+											<div class="flrr_menu_item" pv-nest="filter_ages" pv-events="click::setFilter" pv-class="flrr_menu_item {{active && 'active'}} {{novalue && 'no_filtering_item'}} {{not_specified && 'not_specified_item'}}">
 												<span pv-text="{{label}}" class="filter_item_name"></span>
 												<span class="counter" pv-text="{{counter}}"></span>
 											</div>
@@ -644,7 +644,7 @@
 									<div class="firunr_teem filterr_menu">
 										<div class="filtrr" pv-text="{{selected_filter_team || filter_team.0.label}}"></div>
 										<div class="flrr_menu_list" >
-											<div class="flrr_menu_item" pv-nest="filter_team" pv-events="click::setFilter" pv-class="flrr_menu_item {{active && 'active'}} {{novalue && 'no_filtering_item'}}">
+											<div class="flrr_menu_item" pv-nest="filter_team" pv-events="click::setFilter" pv-class="flrr_menu_item {{active && 'active'}} {{novalue && 'no_filtering_item'}} {{not_specified && 'not_specified_item'}}">
 												<span pv-text="{{label}}" class="filter_item_name"></span>
 												<span class="counter" pv-text="{{!novalue && counter}}"></span>
 											</div>
@@ -655,7 +655,7 @@
 									<div class="firunr_place filterr_menu">
 										<div class="filtrr" pv-text="{{selected_filter_city || filter_city.0.label}}" ></div>
 										<div class="flrr_menu_list" >
-											<div class="flrr_menu_item" pv-nest="filter_city" pv-events="click::setFilter" pv-class="flrr_menu_item {{active && 'active'}} {{novalue && 'no_filtering_item'}}">
+											<div class="flrr_menu_item" pv-nest="filter_city" pv-events="click::setFilter" pv-class="flrr_menu_item {{active && 'active'}} {{novalue && 'no_filtering_item'}} {{not_specified && 'not_specified_item'}}">
 												<span pv-text="{{label}}" class="filter_item_name"></span>
 												<span class="counter" pv-text="{{!novalue && counter}}"></span>
 											</div>
