@@ -235,8 +235,8 @@ provoda.Eventor.extendTo(Cvsloader, {
 var eventor = new Cvsloader();
 eventor.init();
 
-var data_path42 = (locale == 'rus')? 'data/data42km/data3.html':'../data/data42km/data3.html';
-var data_path10 = (locale == 'rus')? 'data/data10km/data3.html':'../data/data10km/data3.html';
+var data_path42 = (locale == 'rus')? 'data/data42km/data3.html':'../data/data42km_en/data3.html';
+var data_path10 = (locale == 'rus')? 'data/data10km/data3.html':'../data/data10km_en/data3.html';
 function getData(path, callback, key) {
     var frame;
     $(window).on('message', function(e) {
@@ -283,32 +283,7 @@ var callback10 =  function(d){
 }
 getData(data_path42, callback42, 42)
 getData(data_path10, callback10, 10)
-    /*var frame;
-    $(window).on('message', function(e) {
-        var message = e.originalEvent.data;
-        if (message && message.cvs_data){
-            cvs_data = message.data;
-            $(frame).remove();
-            eventor.trigger('load', checkData())
-        }
 
-    });
-
-    $(function() {
-        frame = document.createElement('iframe');
-        $(frame)
-            .css({
-                visibility: 'hidden',
-                position: 'absolute',
-                top: 0,
-                left: '-1000px'
-            })
-            .attr('src', data_path42)
-            .on('load', function() {
-                frame.contentWindow.postMessage('send_data','*');
-            })
-            .appendTo(document.body);
-    });*/
 
 return eventor;
 });

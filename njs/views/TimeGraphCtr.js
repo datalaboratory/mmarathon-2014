@@ -105,9 +105,42 @@ provoda.View.extendTo(TimeGraphCtr, {
 			}
 		}
 	},
-    'compx-winner':{
-        depends_on: ['selected_time', 'cvs_data'],
+    'compx-current_controll_value': {
+        depends_on: ['time_value', 'cvs_data', 'hours_marks'],
         fn: function(time, data) {
+            if (data && typeof time != 'undefined'){
+                var values = {}
+                var context_width = this.c.width();
+                var pixel_pos = Math.floor(context_width * time / data.run_gap)
+                var offset = $('.current_time').width()/2
+                var marks = $('.mark_bottom')
+                var left_time = pixel_pos - offset,
+                    right_time = pixel_pos + offset
+                if (marks.length) marks.each(function(i,el) {
+                    var left_el = (i == marks.length - 1) ? context_width - $(el).find('.just_text_of_mark').width() : $(el).position().left,
+                        right_el = (i == marks.length - 1) ? context_width : $(el).position().left + $(el).width()
+                    if (left_time < left_el && left_el < right_time &&  right_time < right_el  ||
+                        left_el < left_time && left_time < right_el && right_el < right_time ||
+                        left_time < left_el && right_time > right_el ||
+                        left_time > left_el && right_time < right_el){
+                        $(el).css({
+                            opacity: 0
+                        })
+                    } else {
+                        $(el).css({
+                            opacity: 1
+                        })
+                    }
+                })
+                values.pos = pixel_pos - offset
+                values.time =  moment((time - 4*3600)*1000).format('HH:mm')
+                return values;
+            }
+        }
+    },
+    'compx-winner':{
+        depends_on: ['cvs_data'],
+        fn: function(data) {
             if (!data) return;
 
             var context_width = this.c.width();
@@ -129,6 +162,8 @@ provoda.View.extendTo(TimeGraphCtr, {
         depends_on: ['time_value', 'winner'],
         fn: function(time, winner) {
             if (!winner) return;
+            //var grad = _this.parent_view.parent_view.gender_grads[winner.gender];
+            //var color = colors.getGradColor(el.num, 1, 5, grad);
             var color = (time < winner.result_time) ? '#aaa' : '#B8E8FF'
             this.svg.select('.circle-line-g').select('circle').attr('fill', color)
             this.svg.select('.circle-line-g').select('line').attr('stroke', color)
@@ -216,7 +251,7 @@ provoda.View.extendTo(TimeGraphCtr, {
 			}
 
 			$(dfrg).appendTo(node);
-
+            return Date.now()
 		}
 	},
 	'compx-timesteps': {

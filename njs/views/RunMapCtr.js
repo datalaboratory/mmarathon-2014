@@ -66,7 +66,7 @@ provoda.View.extendTo(SelRunner, {
 				
 			} else {
 				if (place_finishers_at_finish) {
-					px_coords = this.root_view.projection(finish_point.target);
+					px_coords = this.root_view.projection(geodata.geometry.coordinates[geodata.geometry.coordinates.length - 1]);
 					
 				}
 			}
@@ -100,7 +100,7 @@ provoda.View.extendTo(RunMapCtr, {
 		['geodata'],
 		function(geodata) {
 			var total_distance = d3.geo.length(geodata) * mh.earth_radius;
-			return mh.getPointAtDistance(geodata.geometry.coordinates, total_distance);
+			return  mh.getPointAtDistance(geodata.geometry.coordinates, total_distance);
 		}
 	],
 
