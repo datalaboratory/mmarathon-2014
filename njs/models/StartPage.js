@@ -151,6 +151,7 @@ BrowseMap.Model.extendTo(StartPage, {
     },
 	getFilterData: function(runners, field, limit) {
 		var count = 0;
+        var _this = this;
 		limit = limit || 0;
 		var full_field = ['states', field];
 		var index = spv.makeIndexByField(runners, full_field, true);
@@ -189,14 +190,17 @@ BrowseMap.Model.extendTo(StartPage, {
 		result.sort(function(a, b) {
 			return spv.sortByRules(a, b, filter_opts);
 		});
+        var has_other = false
         if (other_item) {
             result.push(other_item)
+            has_other = true
         }
 
 		return {
 			index: index,
 			items: result,
-			count: count
+			count: count,
+            has_other: has_other
 		};
 	},
     setFilterResult: function(result, name, no_flabel, reverse) {
@@ -215,12 +219,13 @@ BrowseMap.Model.extendTo(StartPage, {
                 });
             } else {
                 var label;
-                var count = (name == 'team') ? result.items.length - 1 : result.count
+                var count = (name == 'team') ? result.items.length : result.count
+                if (name == 'team' && result.has_other) count--
                 if (locale == 'rus'){
-                    label = (result.items.length) ? selectByNum(count, no_flabel) : 'не указано'
+                    label = (count) ? selectByNum(count, no_flabel) : 'не указано'
                 } else {
-                    label = (result.items.length > 1) ? count + ' ' + no_flabel[1] : '1 ' + no_flabel[0]
-                    label = (result.items.length) ? label : 'no ' + no_flabel[1]
+                    label = (count > 1) ? count + ' ' + no_flabel[1] : '1 ' + no_flabel[0]
+                    label = (count) ? label : 'no ' + no_flabel[1]
                 }
                 result.items.unshift({
                     label: label,
