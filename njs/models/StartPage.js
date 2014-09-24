@@ -161,9 +161,9 @@ BrowseMap.Model.extendTo(StartPage, {
 			if (name == '#other' || index[name].length < limit){
 				//continue;
                 count--;
-                var label = 'не указано'
-                if (field == 'team')  label = 'команда не указана'
-                if (field == 'city') label = 'город не указан'
+                var label = ''
+                if (field == 'team')  label = (locale == 'rus') ? 'Команда не указана' : 'Team is not specified'
+                if (field == 'city') label = (locale == 'rus') ? 'Город не указан' : 'City is not specified'
 
                 var other_item = {
                     label: label,

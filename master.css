@@ -480,7 +480,7 @@ path {
 
 	.firunr_teem_c{
 		float:left;
-		width: 18%;
+		width: 20%;
 		box-sizing: border-box;
 		padding-right: 15px;
 	}
@@ -644,7 +644,7 @@ path {
 				font-weight: 700;
 			}
             .not_specified_item {
-                color: #ccc;
+                color: #7f7f7f;
             }
 			.flrr_menu_item  .filter_item_name{
 				float:left;

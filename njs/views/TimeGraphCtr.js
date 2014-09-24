@@ -152,19 +152,21 @@ provoda.View.extendTo(TimeGraphCtr, {
 
             this.svg.select('.circle-line-g').remove()
             var g = this.svg.append('g').classed('circle-line-g', true)
-            g.append('circle').attr('r', 2).attr('cx', winner.pixel_pos ).attr('cy', 125).attr('opacity',.8 )
-            g.append('line').attr('x1', winner.pixel_pos -.1).attr('y1', 125).attr('x2', winner.pixel_pos -.1).attr('y2', context_height).attr('opacity',.8 )
+            g.append('circle').attr('r', 2).attr('cx', winner.pixel_pos ).attr('cy', 125)//.attr('opacity',.8 )
+            g.append('line').attr('x1', winner.pixel_pos ).attr('y1', 125).attr('x2', winner.pixel_pos ).attr('y2', context_height)//.attr('opacity',.8 )
 
             return winner;
         }
     },
     'compx-winner-redraw':{
-        depends_on: ['time_value', 'winner'],
-        fn: function(time, winner) {
+        depends_on: ['time_value', 'winner', 'distance_type'],
+        fn: function(time, winner, type) {
             if (!winner) return;
             //var grad = _this.parent_view.parent_view.gender_grads[winner.gender];
             //var color = colors.getGradColor(el.num, 1, 5, grad);
-            var color = (time < winner.result_time) ? '#aaa' : '#B8E8FF'
+            var color = (type == 42) ? '#8DCDFB' : '#8DCDFB'
+            var gray = (type == 42) ? '#EEEEEE ' : '#EEEEEE'
+            color = (time < winner.result_time) ? gray : color
             this.svg.select('.circle-line-g').select('circle').attr('fill', color)
             this.svg.select('.circle-line-g').select('line').attr('stroke', color)
 

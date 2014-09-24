@@ -199,6 +199,18 @@ provoda.View.extendTo(RunMapCtr, {
 			this.root_view.promiseStateUpdate('mapheight', e.value);
 		});
 
+        this.wch(this.parent_view.parent_view, 'mapcover-hor', function(e) {
+            if (e.value) {
+                console.log(e.value)
+                this.updateState('mapcover-hor', e.value)
+            }
+        })
+        this.wch(this.parent_view.parent_view, 'mapcover-vert', function(e) {
+            if (e.value) {
+                this.parent_view.parent_view.promiseStateUpdate('mapcover-vert', e.value)
+            }
+        })
+
 	},
 	earth_radius: mh.earth_radius,
 	checkSizes: function() {

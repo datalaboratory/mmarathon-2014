@@ -46,13 +46,11 @@ provoda.View.extendTo(RunMapCompxCtr, {
 			_this.RPCLegacy('setTime', factor);
 		};
 
-
 		var watchPos = function(e) {
 			var pos = e.pageX - _this.con_offset.left;
 			changeTime(pos, _this.con_offset);
 		};
 
-		
 		scroll_marker
 			.on('mousedown', function(e) {
 				e.preventDefault();
@@ -440,7 +438,7 @@ provoda.View.extendTo(RunMapCompxCtr, {
                     width: width_factor * mpd.bigwidth,
                     left: track_left_padding -  mpd.excessleft * width_factor
                 });
-
+                return true
 			}
 
 		}
@@ -456,7 +454,8 @@ provoda.View.extendTo(RunMapCompxCtr, {
                     height: height_factor * mpd.bigheight,
                     top: (track_top_padding -  mpd.excesstop * height_factor)
                 });
-			}
+                return true
+            }
 
 		}
 	}
