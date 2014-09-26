@@ -428,7 +428,7 @@ provoda.View.extendTo(RunMapCompxCtr, {
 		}
 	},
 
-	'compx-mapcover-hor': {
+	'compx-mapcover_hor': {
 		depends_on: ['trackwidth', 'track_left_padding', 'distance_type'],
 		fn: function(trackwidth, track_left_padding, type) {
 			if (trackwidth){
@@ -439,12 +439,12 @@ provoda.View.extendTo(RunMapCompxCtr, {
                     width: width_factor * mpd.bigwidth,
                     left: track_left_padding -  mpd.excessleft * width_factor
                 });
-                return true
+            return true
 			}
 
 		}
 	},
-	'compx-mapcover-vert':{
+	'compx-mapcover_vert':{
 		depends_on: ['trackheight', 'track_top_padding', 'distance_type'],
 		fn: function(trackheight, track_top_padding, type) {
 			if (trackheight){
@@ -455,7 +455,6 @@ provoda.View.extendTo(RunMapCompxCtr, {
                     height: height_factor * mpd.bigheight,
                     top: (track_top_padding -  mpd.excesstop * height_factor)
                 });
-                return true
             }
 
 		}

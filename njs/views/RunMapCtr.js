@@ -127,7 +127,7 @@ provoda.View.extendTo(RunMapCtr, {
 		var main_group = this.svg.append('g');
 		knodes.main_group = main_group;
 
-		knodes.base = main_group.append("path");
+		knodes.base = main_group.append("path").style('stroke', 'none');
 
 		knodes.areas_group = main_group.append('g');
 		knodes.areas_group.classed("areas_group", true);
@@ -317,7 +317,6 @@ provoda.View.extendTo(RunMapCtr, {
 					scale: 0,
 					translate: [0,0]
 				});
-                this.parent_view.parent_view.path = this.path
 				return  this.path.bounds(geodata);
 			}
 			
@@ -341,7 +340,7 @@ provoda.View.extendTo(RunMapCtr, {
 		depends_on: ['basedet', 'basepath', 'scale', 'distance_type'],
 		fn: function(basedet, basepath, scale, type){
 			if (basedet && basepath){
-				this.knodes.base.attr("d", this.path)    //рисуем маршрут
+				this.knodes.base.attr("d", this.path)  //рисуем маршрут
 				this.knodes.base.projection_key = Date.now() //this.projection.scale() + '_' + this.projection.translate(); // чтобы проекция пересчитывалась при изменении маршрута без изменения масштаба
 				return Date.now();
 			}
@@ -362,6 +361,7 @@ provoda.View.extendTo(RunMapCtr, {
 			if (!basepathch || !cvs_data || typeof time_value == 'undefined' || !current_runners_data){
 				return;
 			}
+            this.knodes.base.attr("d", this.path).style('stroke', '')
             var step = (type == 42) ? 500 : 200;
 			var data = mh.getPoints(current_runners_data.runners_groups, this.knodes, time_value, cvs_data.start_time, this.total_distance, step);
 			mh.drawRunnersPoints(colors, this.parent_view.parent_view.gender_grads, data, current_runners_data.items, this.knodes.debug_group, time_value, cvs_data.start_time);
@@ -456,7 +456,7 @@ provoda.View.extendTo(RunMapCtr, {
                 var point = {x: scaleX(i), y: scaleY(coord)}
                 if (point.y < max_alt.y) {
                     max_alt = point
-                    max_alt.num = i + 1
+                    max_alt.num = i
                 }
                 data.push(point)
                 data_top.push(point)
@@ -486,7 +486,7 @@ provoda.View.extendTo(RunMapCtr, {
                 .attr('opacity', '.9')
 
             var alt_text = svg.append('text')
-                .text(min_max_alt[1] - min_max_alt[0] + ' м')
+                .text(alt[max_alt.num] + ' м')
                 .attr('x', max_alt.x)
                 .attr('y', max_alt.y - 1)
                 .style('text-anchor', 'middle')
@@ -514,7 +514,7 @@ provoda.View.extendTo(RunMapCtr, {
                 .attr("width", 10)
                 .attr("height", 10)
             var _this = this
-            var point_on_map = this.knodes.altitude.append('circle').attr('r', 2)
+            var point_on_map = this.knodes.altitude.append('circle').attr('r', 2).style('opacity', 0)
             var text_alt_on_map = this.knodes.altitude.append('text').style('text-anchor', 'middle')
 
             svg.on('mousemove', function() {

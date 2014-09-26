@@ -30,7 +30,7 @@
 	<div id="runs_map_compx">
 
 		
-		<div class="bmap big_block">
+		<div class="bmap big_block hidden" pv-class="bmap big_block {{!runners_rate && 'hidden'}}">
 			<div class="lang">
                 <div class="flag_con">
 				    <div class="left_flag"><img src="i/flag_rus_clr.png"></div>
@@ -92,7 +92,7 @@
                         src="i/mapcover_42_rus.png"
                         alt=""
                         class="hidden"
-                        pv-class="{{!(trackwidth && distance_type==42) && 'hidden'}}"
+                        pv-class="{{!(runners_rate && distance_type==42) && 'hidden'}}"
                         pv-anchor="mapcover42"
 
                         >
@@ -141,7 +141,7 @@
 							<!-- start -->
 							<div 
 								class="marker_c hidden"
-								pv-class="marker_c {{!start_point && 'hidden'}}"
+								pv-class="marker_c {{!(start_point && runners_rate) && 'hidden'}}"
 								pv-props="
 									style.left: {{start_point.0}}
 									style.top: {{start_point.1}}
@@ -158,7 +158,7 @@
 							<!-- finish-->
 							<div 
 								class="marker_c hidden"
-								pv-class="marker_c {{!end_point && 'hidden'}}"
+								pv-class="marker_c {{!(end_point && runners_rate) && 'hidden'}}"
 								pv-props="
 									style.left: {{end_point.0}}
 									style.top: {{end_point.1}}
@@ -404,7 +404,7 @@
 					
 
 				</div>
-				<div class="bmap_etc">			
+				<div class="bmap_etc">
 					<div class="legend">
 						<div class="legendcount_c">
 							<div>Толщина&nbsp;змея</div>
