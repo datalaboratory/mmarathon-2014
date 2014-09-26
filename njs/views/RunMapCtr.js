@@ -135,6 +135,12 @@ provoda.View.extendTo(RunMapCtr, {
 		knodes.debug_group = main_group.append('g');
 		knodes.single_runners = main_group.append('g');
 
+        knodes.altitude = main_group.append('g');
+
+        svg = document.createElementNS(mh.SVGNS, 'svg');
+        $(svg).appendTo($('#alt_graph'));
+        this.alt_graph = d3.select(svg)
+
 		this.wch(this, 'vis_con_appended', function(e) {
 			if (e.value){
 				this.checkSizes();
@@ -311,7 +317,7 @@ provoda.View.extendTo(RunMapCtr, {
 					scale: 0,
 					translate: [0,0]
 				});
-
+                this.parent_view.parent_view.path = this.path
 				return  this.path.bounds(geodata);
 			}
 			
@@ -411,7 +417,153 @@ provoda.View.extendTo(RunMapCtr, {
 		var translate_str =  "translate(" + state + ")";
 		this.knodes.main_group.attr("transform", translate_str);
 		
-	}
+	},
+    'compx-altitudes': {
+        depends_on: ['geo_alt'],
+            fn: function(geodata) {
+            if (!geodata) return
+            return geodata.geometry.coordinates.map(function(coord) {
+                return coord[2]
+            })
+        }
+    },
+    'compx-draw_alt_graph': {
+        depends_on: ['altitudes', 'geo_alt'],
+            fn: function(alt, geo) {
+            if (!alt || !geo) return
+            var width = 120, height = 50, offset = 10;
+            var svg = this.alt_graph
+            svg = svg.attr('width', width + 2 * offset).attr('height', height + 2 * offset)
+            svg.selectAll('*').remove()
+
+            var path = svg.append('path')
+            var top = svg.append('path')
+
+            var min_max_alt = d3.extent(alt)
+
+            var scaleY = d3.scale.linear()
+                .domain(min_max_alt)
+                .range([height + offset, offset])
+            var scaleX = d3.scale.linear()
+                .domain([0, alt.length])
+                .range([offset, width + offset])
+
+            var first_point = {x: offset, y: height + offset}
+            var data = [first_point]
+            var data_top = []
+            var max_alt = first_point
+            alt.forEach(function(coord, i) {
+                var point = {x: scaleX(i), y: scaleY(coord)}
+                if (point.y < max_alt.y) {
+                    max_alt = point
+                    max_alt.num = i + 1
+                }
+                data.push(point)
+                data_top.push(point)
+            })
+            data.push({x: width + offset, y: height + offset})
+            data = mh.formatPathPoints(data) + ' Z'
+            data_top = mh.formatPathPoints(data_top)
+
+            path
+                .attr('d', data)
+                .style({
+                    fill: '#eee',
+                    stroke: 'none'
+                })
+            top
+                .attr('d', data_top)
+                .style({
+                    stroke: '#888'
+                })
+            var alt_line = svg.append('line')
+                .attr('x1', max_alt.x)
+                .attr('x2', max_alt.x)
+                .attr('y1', max_alt.y)
+                .attr('y2', height + offset)
+                .attr('stroke', '#888')
+                .attr('stroke-dasharray', 1)
+                .attr('opacity', '.9')
+
+            var alt_text = svg.append('text')
+                .text(min_max_alt[1] - min_max_alt[0] + ' м')
+                .attr('x', max_alt.x)
+                .attr('y', max_alt.y - 1)
+                .style('text-anchor', 'middle')
+
+            var top_black_point = svg.append('circle')
+                .attr('cx', max_alt.x)
+                .attr('cy', max_alt.y)
+                .attr('r', 1.5)
+            svg
+                .append("image")
+                .attr("xlink:href", function () {
+                    return (locale == 'rus') ? "i/mark-yel.png" : "../i/mark-yel.png"
+                })
+                .attr("x", scaleX(0) - 5)
+                .attr("y", scaleY(alt[0]) - 10)
+            svg
+                .append("image")
+                .attr("xlink:href", function () {
+                    return (locale == 'rus') ? "i/mark-red.png" : "../i/mark-red.png"
+                })
+                .attr("x", scaleX(alt.length) - 5)
+                .attr("y", scaleY(alt[alt.length - 1]) - 10)
+
+            svg.selectAll('image')
+                .attr("width", 10)
+                .attr("height", 10)
+            var _this = this
+            var point_on_map = this.knodes.altitude.append('circle').attr('r', 2)
+            var text_alt_on_map = this.knodes.altitude.append('text').style('text-anchor', 'middle')
+
+            svg.on('mousemove', function() {
+                var x = d3.mouse(this)[0]
+                var y = scaleY(alt[scaleX.invert(x).toFixed(0)])
+                var current_coord_number = Math.round(scaleX.invert(x)).toFixed(0)
+
+                if (current_coord_number > geo.geometry.coordinates.length - 1) {
+                    current_coord_number = geo.geometry.coordinates.length - 1
+                } else if (current_coord_number < 0) {
+                    current_coord_number = 0
+                }
+                var geo_point_px = _this.projection(geo.geometry.coordinates[current_coord_number])
+
+                point_on_map
+                    .attr('cx', geo_point_px[0])
+                    .attr('cy', geo_point_px[1])
+                text_alt_on_map
+                    .text(alt[current_coord_number] + ' м')
+                    .attr('x', geo_point_px[0])
+                    .attr('y', geo_point_px[1] - 6)
+                if (x > offset && x < width + offset) {
+                    alt_line
+                        .attr('x1', x)
+                        .attr('x2', x)
+                        .attr('y1', y)
+                    top_black_point
+                        .attr('cx', x)
+                        .attr('cy', y)
+                }
+                alt_text.style('opacity', 0)
+                point_on_map.style('opacity', 1)
+                text_alt_on_map.style('opacity', 1)
+            })
+
+            svg.on('mouseleave', function() {
+                alt_line
+                    .attr('x1', max_alt.x)
+                    .attr('x2', max_alt.x)
+                    .attr('y1', max_alt.y)
+                top_black_point
+                    .attr('cx', max_alt.x)
+                    .attr('cy', max_alt.y)
+                alt_text.style('opacity', 1)
+                point_on_map.style('opacity', 0)
+                text_alt_on_map.style('opacity', 0)
+            })
+        }
+    }
 });
 
 return RunMapCtr;

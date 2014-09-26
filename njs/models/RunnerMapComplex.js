@@ -1,4 +1,5 @@
-define(['provoda', './modules/mm2014-42km-geo','./modules/mm2014-10km-geo', './modules/cvsloader'], function(provoda, geodata42, geodata10, cvsloader) {
+define(['provoda', './modules/mm2014-42km-geo','./modules/mm2014-10km-geo','./modules/mm2014-42km-geo-accurate','./modules/mm2014-10km-geo-accurate', './modules/cvsloader'],
+    function(provoda, geodata42, geodata10, geodata_alt42, geodata_alt10, cvsloader) {
 "use strict";
 
 
@@ -31,6 +32,7 @@ provoda.HModel.extendTo(RunMap, {
 
 		this.wlch(this.map_parent.map_parent, 'selected_time');
         this.wlch(this.map_parent.map_parent, 'distance_type')
+        this.wlch(this.map_parent.map_parent, 'geo_alt')
         var _this = this;
         this.wch(this.map_parent.map_parent, 'distance_type', function(e) {
             var geodata = (e.value == 42) ? geodata42 : geodata10
@@ -72,7 +74,8 @@ provoda.HModel.extendTo(RunnerMapComplex, {
         var _this = this;
 		this._super(opts);
         this.updateState('geodata', geodata42);
-        this.updateState('distance_type', 42)
+        this.updateState('distance_type', 42);
+        this.updateState('geo_alt', geodata_alt42);
 
         cvsloader.on('load', function(data) {
             this.updateState('cvs_data42', data.data42)
@@ -142,6 +145,7 @@ provoda.HModel.extendTo(RunnerMapComplex, {
             this.updateState('menu_opened', false)
             this.updateState('distance_type', 42)
             this.updateState('geodata', geodata42)
+            this.updateState('geo_alt', geodata_alt42);
             var data42 = this.state('cvs_data42')
             this.app.updateState('cvs_data', data42)
         }
@@ -155,6 +159,7 @@ provoda.HModel.extendTo(RunnerMapComplex, {
             this.updateState('menu_opened', false)
             this.updateState('distance_type', 10)
             this.updateState('geodata', geodata10)
+            this.updateState('geo_alt', geodata_alt10);
             var data10 = this.state('cvs_data10')
             this.app.updateState('cvs_data', data10)
         }
