@@ -11,9 +11,6 @@ provoda.View.extendTo(SelRunner, {
 		this.c = con;
 		this.d3_c = d3.select(con);
         var _this = this;
-        $(_this.c.parentNode).mousemove(function(){
-            console.log('click!')
-        })
 
 		this.d3_c
 			.attr("cy", 0)
@@ -223,11 +220,6 @@ provoda.View.extendTo(RunMapCtr, {
                 this.parent_view.parent_view.promiseStateUpdate('mapcover-vert', e.value)
             }
         })
-        this.c
-            .on('mousemove', function() {
-                //_this.coffset = _this.c.offset();
-                console.log('nsw')
-            })
 
 	},
 	earth_radius: mh.earth_radius,

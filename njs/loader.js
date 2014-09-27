@@ -57,12 +57,14 @@ require(['models/AppModel', 'views/AppView', 'angbo', 'provoda'], function(AppMo
 		view.requestAll();
 	})();
 
-    window.onresize = function(){
+    $(window).on('resize', updateImgVert)
+    function updateImgVert() {
+        var link = (locale == 'rus') ? 'i/mm-logo1.png' : '../i/mm-logo1.png'
         $('.before_load').css({
-            background: 'url(i/mm-logo1.png) no-repeat 50% ' + window.innerHeight/2
+            background: 'url(' + link + ') no-repeat 50% ' + window.innerHeight/2
         })
     }
-    window.onresize()
+    updateImgVert()
 });
 
 })();
