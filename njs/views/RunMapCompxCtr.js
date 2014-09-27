@@ -24,8 +24,6 @@ provoda.View.extendTo(RunMapCompxCtr, {
 		svg = document.createElementNS(mh.SVGNS, 'svg');
 		$(svg).appendTo(this.tpl.ancs['legendcount']);
 		this.legendcount =  d3.select(svg);
-		//this.createLegendCount();
-
 
 
 		var scroll_marker = this.tpl.ancs['scroll_marker'];
@@ -131,7 +129,7 @@ provoda.View.extendTo(RunMapCompxCtr, {
             var container = this.tpl.ancs['legendcount'];
             var width = 80//container.width() ;
             var height= 25//container.height();
-            var factor = cvs_data.genders_groups[0].raw.length / cvs_data.genders_groups[1].raw.length
+            var factor = cvs_data.genders_groups[0].raw.length / cvs_data.items.length
             $(this.legendcount.node()).css({
                 width: width,
                 height: height
@@ -140,9 +138,9 @@ provoda.View.extendTo(RunMapCompxCtr, {
             function formatSnakePath(width, height, factor) {
                 return 'M0 '+ height +
                     'L' + width + ' ' + height +
-                    'L' + width + ' ' + height*(1-factor) +
-                    ' C'+ width/3 +' ' + (height*(1-factor) + height * factor/7) + ' ' +
-                    (2 * width/3) + ' ' + (height - height * factor/7) +
+                    'L' + width + ' ' + height * (1 - factor) +
+                    ' C'+ width / 3 +' ' + (height * (1 - factor) + height * factor / 7) + ' ' +
+                    (2 * width / 3) + ' ' + (height - height * factor / 7) +
                     ' 0 ' + height + ' Z'
             }
             svg.append('path')
@@ -161,7 +159,6 @@ provoda.View.extendTo(RunMapCompxCtr, {
             if (!runners_rate || !height) return
             var count = Math.round(mh.getStepValueByHeight(height, runners_rate.step));
             count = (count % 100 > 50 ? count - count % 100 + 100 : count - count % 100)
-
             this.tpl.ancs['legendcounttext'].empty();
 
             var span = $('<span class="textblock"></span>');

@@ -14,12 +14,11 @@ path {
   stroke-width: 1px;
 }
 .before_load{
-    position: absolute;
+    position: fixed;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
-    background: url(i/mm-logo1.png) no-repeat 50% 300;
     z-index: 200;
 }
 .complex-page{
@@ -31,11 +30,7 @@ path {
 	.full-page{
 		display: block;
 	}
-.toggle_con {
-    position: absolute;
-    top: -10px;
-    left: 186px;
-}
+
 .toggle {
     float: left;
     position: relative;
@@ -43,7 +38,8 @@ path {
     top: -6px;
     width: 223px;
     cursor: pointer;
-    background: url(i/icon-arrow-down.png) no-repeat 95% 50%;
+    /*background: url(i/triangle.png) no-repeat 95% 50%;
+    background-size: 10px 5px;*/
 }
 
 .toggle-header{
@@ -52,6 +48,13 @@ path {
     border-radius: 2px;;
     padding: 2px 0px;
     height: 33px;
+}
+.toggle_arrow{
+    position: absolute;
+    top: 45%;
+    right: 5%;
+    width: 10px;
+    height: 5px;
 }
 .current_menu_item {
     background: url(i/marathon-logo.png) no-repeat 3% 50%;
@@ -466,7 +469,7 @@ path {
 		height: 25.5px;
 	}
 	.filtrr{
-		height: 25px;
+		min-height: 25px;
 		color:#333;
 		position: relative;
 		display: block;
@@ -482,16 +485,15 @@ path {
 		background-image: linear-gradient(#fdfdfd,#E7E7E7);
 		cursor: pointer;
 	}
-	.filtrr:after{
-		position: absolute;
-		display: inline-block;
-		background: url(i/icon-arrow-down.png) no-repeat 50% 50%;
-		height: 6px;
-		width: 8px;
-		right:10px;
-		top:10px;
-		content: "";
-	}
+
+    .filtrr_img{
+        position: absolute;
+        right: 25px;
+        top: 45%;
+        width: 8px;
+        height: 4px;
+        z-index: 1;
+    }
 	.firunr_search_c{
 		box-sizing: border-box;
 		padding-right: 15px;
@@ -504,6 +506,7 @@ path {
 		float:left;
 		width: 16.5%;
 		padding-right: 15px;
+        position: relative;
 	}
 
 	.firunr_teem_c{
@@ -511,6 +514,7 @@ path {
 		width: 20%;
 		box-sizing: border-box;
 		padding-right: 15px;
+        position: relative;
 	}
 	.firunr_teem{
 		
@@ -518,6 +522,8 @@ path {
 	.firunr_place_c{
 		float:left;
 		width: 18%;
+        padding-right: 15px;
+        position: relative;
 	}
 	.firunr_place{
 		

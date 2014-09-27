@@ -145,14 +145,10 @@ var getRunners = function(array, d_ge, d_l, full) {
 		return getFullRunners(array, d_ge, d_l);
 	}
 	var result = 0;
-
 	for (var i = 0; i < array.length; i++) {
 		var cur = array[i];
 		if (cur >= d_ge && cur < d_l){
-			
 			result++;
-			
-			
 		}
 		
 	}

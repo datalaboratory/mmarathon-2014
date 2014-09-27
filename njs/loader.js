@@ -57,6 +57,12 @@ require(['models/AppModel', 'views/AppView', 'angbo', 'provoda'], function(AppMo
 		view.requestAll();
 	})();
 
+    window.onresize = function(){
+        $('.before_load').css({
+            background: 'url(i/mm-logo1.png) no-repeat 50% ' + window.innerHeight/2
+        })
+    }
+    window.onresize()
 });
 
 })();

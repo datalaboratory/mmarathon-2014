@@ -10,6 +10,10 @@ provoda.View.extendTo(SelRunner, {
 		var con = document.createElementNS(mh.SVGNS, 'circle');
 		this.c = con;
 		this.d3_c = d3.select(con);
+        var _this = this;
+        $(_this.c.parentNode).mousemove(function(){
+            console.log('click!')
+        })
 
 		this.d3_c
 			.attr("cy", 0)
@@ -124,18 +128,20 @@ provoda.View.extendTo(RunMapCtr, {
 		this.knodes = {};
 		var knodes = this.knodes;
 
-		var main_group = this.svg.append('g');
+		var main_group = this.svg.append('g')
 		knodes.main_group = main_group;
 
 		knodes.base = main_group.append("path").style('stroke', 'none');
 
-		knodes.areas_group = main_group.append('g');
+		knodes.areas_group = main_group.append('g').on('mousemove', function(){
+            console.log('mouse')
+        });
 		knodes.areas_group.classed("areas_group", true);
 
 		knodes.debug_group = main_group.append('g');
-		knodes.single_runners = main_group.append('g');
 
         knodes.altitude = main_group.append('g');
+        knodes.single_runners = main_group.append('g')
 
         svg = document.createElementNS(mh.SVGNS, 'svg');
         $(svg).appendTo($('#alt_graph'));
@@ -177,6 +183,7 @@ provoda.View.extendTo(RunMapCtr, {
 
 
 		this.parent_view.c.append(this.c);
+
 		this.setVisState('con_appended', true);
 
         this.wch(this, 'runners_rate', function(e) {
@@ -216,6 +223,11 @@ provoda.View.extendTo(RunMapCtr, {
                 this.parent_view.parent_view.promiseStateUpdate('mapcover-vert', e.value)
             }
         })
+        this.c
+            .on('mousemove', function() {
+                //_this.coffset = _this.c.offset();
+                console.log('nsw')
+            })
 
 	},
 	earth_radius: mh.earth_radius,
@@ -299,8 +311,8 @@ provoda.View.extendTo(RunMapCtr, {
 		}
 	},
 	'compx-basedet': {
-		depends_on: ['geodata', 'bd'],
-		fn: function(geodata, bd) {
+		depends_on: ['geodata', 'bd', 'distance_type'],
+		fn: function(geodata, bd, type) {
 			if (geodata && bd){
 				this.projection.scale(1).translate([0, 0]);
 				var b = this.path.bounds(geodata),
@@ -308,8 +320,12 @@ provoda.View.extendTo(RunMapCtr, {
                     width = this.width,
                     height = this.height;
                     var	s = 0.9 / Math.max((b[1][0] - b[0][0]) / width, (b[1][1] - b[0][1]) / height)
-                    var	t = [(width - s * (b[1][0] + b[0][0])) / 2, (height - s * (b[1][1] + b[0][1])) / 2];
 
+                    if (type == 42) {
+                        var	t = [(width - s * (b[1][0] + b[0][0])) / 2, (height - s * (b[1][1] + b[0][1])) / 2];
+                    } else {
+                        	t = [(width - s * (b[1][0] + b[0][0])) / 2, (height - s * (b[1][1] + b[0][1])) / 2];
+                    }
                 this.behavior.translate(t).scale(s);
 
                 this.projection.scale(s).translate(t);
@@ -352,7 +368,7 @@ provoda.View.extendTo(RunMapCtr, {
 			if (!basepathch || !cvs_data || !current_runners_data){
 				return;
 			}
-			return mh.getStepHeight(this.knodes, 735, 300, current_runners_data.items, cvs_data.start_time, this.total_distance, 1000);
+			return mh.getStepHeight(this.knodes, 900, 600, current_runners_data.items, cvs_data.start_time, this.total_distance, 1000);
 		}
 	},
 	'compx-draw': {

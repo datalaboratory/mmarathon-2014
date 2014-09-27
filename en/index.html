@@ -6,7 +6,11 @@
 	<link rel="stylesheet" type="text/css" href="../css/leaflet.css">
 	<link rel="shortcut icon" href="../i/favicon.ico">
 	<link rel="image_src" href="../i/screenshot.png" />
-    <script>var locale = 'en'</script>
+    <script>
+        var locale = 'en';
+        var height = window.screen.height
+
+    </script>
 	<script data-main="../njs/loader.js" src="../njs/require-2.1.6.min.js"></script>
 	<script type="text/javascript" src="http://vk.com/js/api/openapi.js?101"></script>
 
@@ -547,7 +551,7 @@
 								<input class="firunr_search" placeholder="Name or number" type="search" pv-events="input:makeSearch keydown:makeSearch mousemove:makeSearch"/ >
 							</div>
 							<div pv-class="{{query && 'hidden'}}">
-								<div class="firunr_age_c">
+								<div class="firunr_age_c"><img class="filtrr_img" src="i/triangle.png">
 									<div class="firunr_age filterr_menu">
 										<div class="filtrr" pv-text="{{selected_filter_ages || filter_ages.0.label}}"></div>
 										<div class="flrr_menu_list" >
@@ -558,7 +562,7 @@
 										</div>
 									</div>
 								</div>
-								<div class="firunr_teem_c">
+								<div class="firunr_teem_c"><img class="filtrr_img" src="i/triangle.png">
 									<div class="firunr_teem filterr_menu">
 										<div class="filtrr" pv-text="{{selected_filter_team || filter_team.0.label}}"></div>
 										<div class="flrr_menu_list" >
@@ -569,7 +573,7 @@
 										</div>
 									</div>
 								</div>
-								<div class="firunr_place_c">
+								<div class="firunr_place_c"><img class="filtrr_img" src="i/triangle.png">
 									<div class="firunr_place filterr_menu">
 										<div class="filtrr" pv-text="{{selected_filter_city || filter_city.0.label}}"></div>
 										<div class="flrr_menu_list" >
