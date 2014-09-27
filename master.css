@@ -218,7 +218,8 @@ path {
 		position: absolute;
 	}
 	.hidden{
-		display: none;
+		/*display: none;*/
+        opacity: 0;
 	}
 	.factoid{
 
@@ -353,6 +354,13 @@ path {
 		.legend .graph_text_block{
 			font-weight: 400;
 		}
+        .legend .legend_alt {
+            position: relative;
+        }
+        .legend .alt_graph {
+            right: 20px;
+            cursor: pointer;
+        }
 		.legendcount_c{
 			padding-right: 25px;
 		}
@@ -371,7 +379,7 @@ path {
 		}
 		.legendage_c .svgcon{
 /*          border: 1px #000000 solid;*/
-			height: 180px;
+			height: 160px;
 			float: right;
 			width: 180px;
 			margin-right: -63px;
@@ -382,8 +390,9 @@ path {
 		}
 	.share{
 		width: 135px;
-		float: right;
-        margin-right: -15px;
+		position: absolute;
+        top: 80%;
+        left: 65%;
 		font-size: 12px;
 		clear: both;
 		overflow: hidden;
@@ -801,6 +810,7 @@ path {
 
 .marker, .marker_c{
 	position: absolute;
+    z-index: -1;
 	}
 .marker_c .marker{
 	bottom:0;

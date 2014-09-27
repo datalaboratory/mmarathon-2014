@@ -29,11 +29,11 @@ provoda.View.extendTo(TimeGraphCtr, {
             var male_current_number = e.value.genders_groups[1].raw.length
             var female_current_number = e.value.genders_groups[0].raw.length
 
-            var male = (locale == 'rus')? selectByNum(male_current_number, ['мужчина','мужчины','мужчин']) : selectByNum(male_current_number, ['man','men','men']);
-            var female = (locale == 'rus')? selectByNum(female_current_number, ['женщина','женщины','женщин']) : selectByNum(female_current_number, ['woman','women','women']);
+            var male = (locale == 'rus') ? selectByNum(male_current_number, ['мужчина','мужчины','мужчин']) : selectByNum(male_current_number, ['man','men','men']);
+            var female = (locale == 'rus') ? selectByNum(female_current_number, ['женщина','женщины','женщин']) : selectByNum(female_current_number, ['woman','women','women']);
 
-            male_current_number = (male_current_number)? male:''
-            female_current_number = (female_current_number)? female:''
+            male_current_number = (male_current_number) ? male : ''
+            female_current_number = (female_current_number) ? female : ''
 
             _this.updateState('male_current_number', male_current_number)
             _this.updateState('female_current_number', female_current_number)
@@ -48,8 +48,8 @@ provoda.View.extendTo(TimeGraphCtr, {
                 max_age = Math.max((new Date(_this.states.cvs_data.start_time)).getFullYear() - runners[i].birthyear, max_age);
                 min_age = Math.min((new Date(_this.states.cvs_data.start_time)).getFullYear() - runners[i].birthyear, min_age);
             }
-            min_age = (min_age != max_age)? min_age : ''
-            var age_text = (locale == 'rus')? selectByNum(max_age, ['года','лет','лет']): max_age
+            min_age = (min_age != max_age) ? min_age : ''
+            var age_text = (locale == 'rus') ? selectByNum(max_age, ['года','лет','лет']) : max_age
             _this.updateState('min_age', min_age)
             _this.updateState('max_age', age_text)
         })
@@ -76,6 +76,14 @@ provoda.View.extendTo(TimeGraphCtr, {
 
 		this.timemarksg1 = this.svg.append('g');
 		this.timemarksg2 = this.svg.append('g');
+        this.select_line = this.svg.append('g')
+            .append('line')
+            .attr('x1', 0)
+            .attr('y1', 0)
+            .attr('y2', 0)
+            .classed('select_line', true)
+            .attr('stroke', '#888')
+            .attr('stroke-width', 4)
 
 		this.c.append(svg);
 	},
@@ -325,11 +333,19 @@ provoda.View.extendTo(TimeGraphCtr, {
                         marks[i].bottom.attr(attrs);
                     }
 				}
-				return [];
+				return width_factor;
 			}
 			
 		}
 	},
+    'compx-select_line': {
+        depends_on: ['marks_done', 'cvs_data', 'selected_time'],
+        fn: function(width_factor, cvs_data, time) {
+            if (!width_factor || !cvs_data || !time) return
+            var _this = this
+            this.select_line.attr('x2', _this.width * time)
+        }
+    },
 	'compx-bd': {
 		depends_on: ['width', 'vis_ready'],
 		fn: function(width, vis_ready) {

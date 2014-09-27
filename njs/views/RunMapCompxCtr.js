@@ -27,9 +27,10 @@ provoda.View.extendTo(RunMapCompxCtr, {
 		this.createLegendCount();
 
 
+
 		var scroll_marker = this.tpl.ancs['scroll_marker'];
 		this.marker_width = scroll_marker.width();
-		this.half_width = this.marker_width/2;
+		this.half_width = this.marker_width / 2;
 
 		var relative_con = this.tpl.ancs['controlls'];
 
@@ -427,7 +428,7 @@ provoda.View.extendTo(RunMapCompxCtr, {
 		}
 	},
 
-	'compx-mapcover-hor': {
+	'compx-mapcover_hor': {
 		depends_on: ['trackwidth', 'track_left_padding', 'distance_type'],
 		fn: function(trackwidth, track_left_padding, type) {
 			if (trackwidth){
@@ -438,12 +439,12 @@ provoda.View.extendTo(RunMapCompxCtr, {
                     width: width_factor * mpd.bigwidth,
                     left: track_left_padding -  mpd.excessleft * width_factor
                 });
-                return true
+            return true
 			}
 
 		}
 	},
-	'compx-mapcover-vert':{
+	'compx-mapcover_vert':{
 		depends_on: ['trackheight', 'track_top_padding', 'distance_type'],
 		fn: function(trackheight, track_top_padding, type) {
 			if (trackheight){
@@ -454,43 +455,10 @@ provoda.View.extendTo(RunMapCompxCtr, {
                     height: height_factor * mpd.bigheight,
                     top: (track_top_padding -  mpd.excesstop * height_factor)
                 });
-                return true
             }
 
 		}
-	},
-    'compx-altitudes': {
-        depends_on: ['geodata'],
-        fn: function(geodata) {
-            if (!geodata) return
-            var alt = geodata.geometry.coordinates.map(function(coord) {
-                return coord[2]
-            })
-            return alt
-        }
-    },
-    'compx-draw_alt_graph': {
-        depends_on: ['altitudes'],
-        fn: function(alt) {
-            if (!alt) return
-            /*var width = 200, height = 100;
-            var svg = document.createElementNS(mh.SVGNS, 'svg');
-            $(svg).appendTo(this.tpl.ancs['alt_graph']);
-            svg = d3.select(svg).attr('width', 200).attr('height', 100)
-
-            var min_max_alt = d3.extent(alt)
-            var scaleY = d3.scale.linear()
-                .domain(min_max_alt)
-                .range[0, height]
-            var scaleX = d3.scale.linear()
-                .domain([0, alt.length])
-                .range([0, width])
-
-            console.log(min_max_alt)*/
-            //var data = mh.formatPathPoints([p1, p2, p3]) + ' Z';
-
-        }
-    }
+	}
 });
 return RunMapCompxCtr;
 });
