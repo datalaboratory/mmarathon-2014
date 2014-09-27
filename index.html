@@ -29,8 +29,8 @@
 <div class="big-wrap">
 	<div id="runs_map_compx">
 
-		
-		<div class="bmap big_block hidden" pv-class="bmap big_block {{!runners_rate && 'hidden'}}">
+    <div class="before_load"   pv-class="before_load {{runners_rate && trackwidth && 'hidden'}}"></div>
+		<div class="bmap big_block hidden_opacity" pv-class="bmap big_block {{!runners_rate && 'hidden_opacity'}}">
 			<div class="lang">
                 <div class="flag_con">
 				    <div class="left_flag"><img src="i/flag_rus_clr.png"></div>
@@ -408,11 +408,8 @@
 					<div class="legend">
 						<div class="legendcount_c">
 							<div>Толщина&nbsp;змея</div>
-							<div pv-anchor="legendcount" class="svgcon graph_has_text">
-								<div class="legendcount-text graph_text_block" pv-anchor="legendcounttext">
-										
-								</div>
-								
+							<div pv-anchor="legendcount" class="svgcon legendcount_svg">
+								<div class="legendcount-text" pv-anchor="legendcounttext"></div>
 							</div>
 						</div>
 						<div class="legendage_c">
@@ -427,6 +424,7 @@
 
                             </div>
                         </div>
+                        <div class="copyright_desc_2">Визуализация <a href="http://datalaboratory.ru/">Лаборатории&nbsp;данных</a></div>
 					</div>
 					
 					<div class="share">
@@ -441,14 +439,14 @@
 						VK && VK.Widgets.Like("vk_like", {type: "mini", height: 20});
 						</script> 
 							<!-- <div class="copyright_desc"><a href="http://moscowmarathon.org/">Сайт марафона</a></div> -->
-							<div class="copyright_desc_2">Визуализация <a href="http://datalaboratory.ru/">Лаборатории&nbsp;данных</a></div>
+
 						</div>
 					</div>
 				</div>
 			</div>
 			<div id="map-con" pv-nest="geo_map"></div>
 		</div>
-		<div class="controlls big_block" pv-anchor="controlls">
+		<div class="controlls big_block hidden_opacity" pv-class="controlls big_block {{!runners_rate && 'hidden_opacity'}}" pv-anchor="controlls">
 
 			<div class="scroll_marker" pv-anchor="scroll_marker"><img src="i/scroll-marker.png" alt=""></div>
 
@@ -505,15 +503,7 @@
 
 	</div>
 	<div id="screens">
-		<div 
-			id="root_level"
-			class="complex-page root_level full-page"
-			pv-class="
-				complex-page root_level
-				{{current_lev_num != $lev_num && 'inactive-page'}}
-				{{current_lev_num == $lev_num && 'full-page'}}
-				{{(current_lev_num - 1) == $lev_num && 'page-scheme'}}"
-			pv-anchor="con">
+		<div class="hidden" pv-class="{{!runners_rate && 'hidden'}}">
 			<div 
 				class="complex-page-scroll_con"
 				pv-anchor="scroll_con">
@@ -609,29 +599,6 @@
 	
 
 	
-</div>
-<div id="dom-templates" style="display:none">
-	<div 
-		class="complex-page inactive-page"
-		pv-class="
-			complex-page 
-			{{'index-of-cp-is-' + $lev_num}}
-			{{current_lev_num != $lev_num && 'inactive-page'}}
-			{{current_lev_num == $lev_num && 'full-page'}}
-			{{(current_lev_num - 1) == $lev_num && 'page-scheme'}}"
-		pv-anchor="con">
-		<div 
-			class="complex-page-scroll_con"
-			pv-anchor="scroll_con">
-			<div 
-				class="complex-page_material"
-				pv-anchor="material">
-			</div>
-		</div>
-	</div>
-	<div class="runner_page big_block">
-		<span pv-text="{{full_name}}"></span>
-	</div>
 </div>
 
 <script>

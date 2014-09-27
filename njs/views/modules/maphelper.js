@@ -312,10 +312,7 @@ var getStep = function(height){
 };
 //var step_height_cache = {};
 var getStepHeight = function(knodes, distance, seconds, runners_array, start_time, total_distance, step_distance){
-	/*var cache_key = base.projection_key;
-	if (step_height_cache[cache_key]){
-		return step_height_cache[cache_key];
-	}*/
+
 	var base = knodes.base;
 	var d3path_node = base.node(),
 		px_distance = d3path_node.getTotalLength(),
@@ -336,6 +333,7 @@ var getStepHeight = function(knodes, distance, seconds, runners_array, start_tim
 	var distances = getDistances(runners_array, start_time +  seconds * 1000);
 	var runners = getRunners(distances, step_start, step_end);
 	var value = getHeightByRunners(runners, step);
+    //console.log(step, value, runners, step_distance, step/px_in_m)
 	return {
 		step: step,
 		height: value,

@@ -82,8 +82,13 @@ provoda.View.extendTo(TimeGraphCtr, {
             .attr('y1', 0)
             .attr('y2', 0)
             .classed('select_line', true)
-            .attr('stroke', '#888')
-            .attr('stroke-width', 4)
+
+        this.no_select_line = this.svg.append('g')
+            .append('line')
+            .attr('x1', _this.c.width())
+            .attr('y1', 0)
+            .attr('y2', 0)
+            .classed('no_select_line', true)
 
 		this.c.append(svg);
 	},
@@ -344,6 +349,7 @@ provoda.View.extendTo(TimeGraphCtr, {
             if (!width_factor || !cvs_data || !time) return
             var _this = this
             this.select_line.attr('x2', _this.width * time)
+            this.no_select_line.attr('x2', _this.width * time)
         }
     },
 	'compx-bd': {
