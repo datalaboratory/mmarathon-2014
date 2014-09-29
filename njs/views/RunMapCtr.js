@@ -90,9 +90,6 @@ provoda.View.extendTo(SelRunner, {
 				this.d3_c
 					.attr("cx", px_coords[0])
 					.attr("cy", px_coords[1])
-
-                this.info_text.css({left: px_coords[0] + 25, top: px_coords[1] + 5})
-
 			}
 
             this.d3_c.on('mouseover', function(){
@@ -156,9 +153,9 @@ provoda.View.extendTo(RunMapCtr, {
 		knodes.areas_group.classed("areas_group", true);
 
 		knodes.debug_group = main_group.append('g');
+        knodes.single_runners = main_group.append('g')
 
         knodes.altitude = main_group.append('g');
-        knodes.single_runners = main_group.append('g')
 
         svg = document.createElementNS(mh.SVGNS, 'svg');
         $(svg).appendTo($('#alt_graph'));
@@ -459,7 +456,7 @@ provoda.View.extendTo(RunMapCtr, {
         depends_on: ['altitudes', 'geo_alt'],
             fn: function(alt, geo) {
             if (!alt || !geo) return
-            var width = 120, height = 50, offset_ver = 15, offset_hor = 5;
+            var width = 110, height = 50, offset_ver = 15, offset_hor = 5;
             var svg = this.alt_graph
             svg = svg.attr('width', width + 2 * offset_hor).attr('height', height + 2 * offset_ver)
             svg.selectAll('*').remove()

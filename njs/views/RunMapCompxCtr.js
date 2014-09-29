@@ -139,7 +139,7 @@ provoda.View.extendTo(RunMapCompxCtr, {
                 return 'M0 '+ height +
                     'L' + width + ' ' + height +
                     'L' + width + ' ' + height * (1 - factor) +
-                    ' C'+ width / 3 +' ' + (height * (1 - factor) +  height * factor / 5) + ' ' +
+                    ' C'+ width / 2 +' ' + (height * (1 - factor) +  height * factor / 5) + ' ' +
                     ( width / 2) + ' ' + (height - 1 * height * factor / 20) +
                     ' 0 ' + height + ' Z'
             }

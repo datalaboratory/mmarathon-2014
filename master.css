@@ -296,7 +296,7 @@ path {
         margin-right: 20px;
         z-index:100;
         top: 20px;
-        right: 0px;
+        right: 1px;
 
     }
     .flag_con {
@@ -332,18 +332,17 @@ path {
 		position: absolute;
 		z-index: 1;
 		right:10px;
-		top: 40px;
+		top: 44px;
 		text-align: center;
-		width: 130px;
+		width: 121px;
 		background: no-repeat 50% 50%;
-        zoom: 0.9;
 		}
 		.we_temperature{
-			font-size: 24px;
+			font-size: 22px;
 			font-weight: 700;
 			margin-top: -40px;
 			text-align: left;
-			margin-left: 10px;
+			margin-left: 15px;
 		}
 		.we_wind{
 			font-size: 13px;
@@ -372,7 +371,7 @@ path {
             position: relative;
         }
         .legend .alt_graph {
-            right: 15px;
+            right: 4px;
             cursor: pointer;
         }
 		.legendcount_c{
@@ -381,14 +380,14 @@ path {
 		.legendcount_c .textblock{
 			font-size: 9px;
 			margin-top:0px;
-			margin-left: 25px;
+			margin-left: 22px;
 			}
 			.legendcount_c .svgcon{
 				position: relative;
 			}
         .legendcount_svg{
             position: absolute;
-            left: -7px;
+            left: -2px;
             top: 4px;
         }
         .legendcount-text{
@@ -401,16 +400,12 @@ path {
 
 		}
 		.legendage_c .svgcon{
-/*          border: 1px #000000 solid;*/
 			height: 160px;
 			float: right;
-			width: 180px;
-			margin-right: -63px;
+			width: 160px;
+			margin-right: -49px;
 		}
-		.svgcon svg {
-/*          max-width:  100%;*/
-/*          max-height: 150%;*/
-		}
+
 	.share_h {
 		font-size: 14px;
 		padding-bottom: 16px;
@@ -904,6 +899,8 @@ path {
     right:0px;
     bottom:5px;
     z-index: 100;
+    position: absolute;
+    opacity: 0;
     border: 1px solid rgba(0,0,0,0.2);
 }
 .selector_box{
@@ -913,11 +910,11 @@ path {
 	position: absolute;
 }
 .weather_images{
-	height: 130px;
+	height: 112px;
 }
 .weather_images img{
-	max-width: 100%;
-	max-height: 100%;
+	max-width: 90%;
+	max-height: 90%;
 }
 
 .copyright_desc{
