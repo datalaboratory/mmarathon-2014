@@ -119,6 +119,7 @@ path {
 	left:0;
 	right:0;
 	margin-left: 20px;
+    height: 0;
 }
 .controlls{
 	height: 295px;
