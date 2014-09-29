@@ -412,6 +412,7 @@ path {
 	.share_h {
 		font-size: 14px;
 		padding-bottom: 16px;
+        overflow: hidden;
 	}
 	#vk_like {
 		padding-top: 18px;
