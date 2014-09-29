@@ -431,9 +431,9 @@ provoda.View.extendTo(RunMapCtr, {
         depends_on: ['altitudes', 'geo_alt'],
             fn: function(alt, geo) {
             if (!alt || !geo) return
-            var width = 120, height = 50, offset = 10;
+            var width = 120, height = 50, offset_ver = 15, offset_hor = 5;
             var svg = this.alt_graph
-            svg = svg.attr('width', width + 2 * offset).attr('height', height + 2 * offset)
+            svg = svg.attr('width', width + 2 * offset_hor).attr('height', height + 2 * offset_ver)
             svg.selectAll('*').remove()
 
             var path = svg.append('path')
@@ -443,57 +443,72 @@ provoda.View.extendTo(RunMapCtr, {
 
             var scaleY = d3.scale.linear()
                 .domain(min_max_alt)
-                .range([height + offset, offset])
+                .range([height + offset_ver, offset_ver])
             var scaleX = d3.scale.linear()
                 .domain([0, alt.length])
-                .range([offset, width + offset])
+                .range([offset_hor, width + offset_hor])
 
-            var first_point = {x: offset, y: height + offset}
+            var first_point = {x: offset_hor, y: height + offset_ver}
             var data = [first_point]
             var data_top = []
             var max_alt = first_point
+            var min_alt = {x: offset_hor, y: 0}
             alt.forEach(function(coord, i) {
                 var point = {x: scaleX(i), y: scaleY(coord)}
                 if (point.y < max_alt.y) {
                     max_alt = point
                     max_alt.num = i
                 }
+                if (point.y > min_alt.y) {
+                    min_alt = point
+                    min_alt.num = i
+                }
                 data.push(point)
                 data_top.push(point)
             })
-            data.push({x: width + offset, y: height + offset})
+            data.push({x: width + offset_hor, y: height + offset_ver})
             data = mh.formatPathPoints(data) + ' Z'
             data_top = mh.formatPathPoints(data_top)
 
             path
                 .attr('d', data)
                 .style({
-                    fill: '#eee',
+                    fill: '#E6E6E6',
                     stroke: 'none'
                 })
             top
                 .attr('d', data_top)
-                .style({
-                    stroke: '#888'
-                })
+                .style('stroke', '#949494')
+
             var alt_line = svg.append('line')
                 .attr('x1', max_alt.x)
                 .attr('x2', max_alt.x)
                 .attr('y1', max_alt.y)
-                .attr('y2', height + offset)
-                .attr('stroke', '#888')
+                .attr('y2', height + offset_ver)
+                .attr('stroke', '#949494')
                 .attr('stroke-dasharray', 1)
                 .attr('opacity', '.9')
 
-            var alt_text = svg.append('text')
-                .text(alt[max_alt.num] + ' м')
+            var meter = (locale == 'rus') ? ' м' : ' m'
+
+            var top_text = svg.append('text')
+                .text(alt[max_alt.num] + meter)
                 .attr('x', max_alt.x)
-                .attr('y', max_alt.y - 1)
-                .style('text-anchor', 'middle')
+                .attr('y', max_alt.y - 5)
+            var bottom_text = svg.append('text')
+                .text(alt[min_alt.num] + meter)
+                .attr('x', min_alt.x)
+                .attr('y', min_alt.y + 12)
+
+            svg.selectAll('text').style('text-anchor', 'middle')
 
             var top_black_point = svg.append('circle')
                 .attr('cx', max_alt.x)
                 .attr('cy', max_alt.y)
+                .attr('r', 1.5)
+            var bottom_black_point = svg.append('circle')
+                .attr('cx', min_alt.x)
+                .attr('cy', min_alt.y)
                 .attr('r', 1.5)
             svg
                 .append("image")
@@ -536,7 +551,7 @@ provoda.View.extendTo(RunMapCtr, {
                     .text(alt[current_coord_number] + ' м')
                     .attr('x', geo_point_px[0])
                     .attr('y', geo_point_px[1] - 6)
-                if (x > offset && x < width + offset) {
+                if (x > offset_hor && x < width + offset_hor) {
                     alt_line
                         .attr('x1', x)
                         .attr('x2', x)
@@ -545,7 +560,8 @@ provoda.View.extendTo(RunMapCtr, {
                         .attr('cx', x)
                         .attr('cy', y)
                 }
-                alt_text.style('opacity', 0)
+                svg.selectAll('text').style('opacity', 0)
+                bottom_black_point.style('opacity', 0)
                 point_on_map.style('opacity', 1)
                 text_alt_on_map.style('opacity', 1)
             })
@@ -558,7 +574,8 @@ provoda.View.extendTo(RunMapCtr, {
                 top_black_point
                     .attr('cx', max_alt.x)
                     .attr('cy', max_alt.y)
-                alt_text.style('opacity', 1)
+                svg.selectAll('text').style('opacity', 1)
+                bottom_black_point.style('opacity', 1)
                 point_on_map.style('opacity', 0)
                 text_alt_on_map.style('opacity', 0)
             })

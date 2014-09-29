@@ -13,7 +13,15 @@ path {
   stroke: #999;
   stroke-width: 1px;
 }
-
+.before_load{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: url(i/mm-logo1.png) no-repeat 50% 300;
+    z-index: 200;
+}
 .complex-page{
 
 	}
@@ -36,9 +44,6 @@ path {
     width: 223px;
     cursor: pointer;
     background: url(i/icon-arrow-down.png) no-repeat 95% 50%;
-}
-.toggle:after{
-
 }
 
 .toggle-header{
@@ -120,9 +125,17 @@ path {
 	.timeline{
 		margin-top: 45px;
 		height: 205px;
-		border: 1px solid #ccc;
+		border-bottom: 1px solid #ccc;
 		border-width: 1px 0;
 	}
+    .select_line{
+        stroke: #5F5F5F;
+        stroke-width: 4;
+    }
+    .no_select_line{
+        stroke: #CCCCCC;
+        stroke-width: 4;
+    }
 		.scroll_marker{
 			position: absolute;
 			margin-top: -9px;
@@ -218,9 +231,11 @@ path {
 		position: absolute;
 	}
 	.hidden{
-		/*display: none;*/
-        opacity: 0;
+		display: none;
 	}
+    .hidden_opacity{
+        opacity: 0;
+    }
 	.factoid{
 
 		}
@@ -313,23 +328,19 @@ path {
 	.weather{
 		position: absolute;
 		z-index: 1;
-		right:0;
-		top:40px;
-        right: -15px;
+		right:10px;
+		top: 40px;
 		text-align: center;
-		width: 160px;
-		padding-top: 10px;
+		width: 130px;
 		background: no-repeat 50% 50%;
+        zoom: 0.9;
 		}
-		.weather{
-			margin-bottom: 30px;
-			}
 		.we_temperature{
 			font-size: 24px;
 			font-weight: 700;
 			margin-top: -40px;
 			text-align: left;
-			margin-left: 29px;
+			margin-left: 10px;
 		}
 		.we_wind{
 			font-size: 13px;
@@ -348,7 +359,7 @@ path {
 		float: right;
 		font-size: 12px;
 		font-weight: 700;
-		margin-top: 50px;
+		margin-top: 20px;
 		margin-right: 15px;
 		}
 		.legend .graph_text_block{
@@ -358,7 +369,7 @@ path {
             position: relative;
         }
         .legend .alt_graph {
-            right: 20px;
+            right: 15px;
             cursor: pointer;
         }
 		.legendcount_c{
@@ -370,10 +381,18 @@ path {
 			margin-left: 5px;
 			}
 			.legendcount_c .svgcon{
-				height: 50px;
 				position: relative;
 			}
-
+        .legendcount_svg{
+            position: absolute;
+            left: -12px;
+        }
+        .legendcount-text{
+            position:absolute;
+            right: -45px;
+            width: 30px;
+            font-weight: 100;
+        }
 		.legendcount_c {
 
 		}
@@ -891,8 +910,10 @@ path {
 	font-size: 12px;
 	}
 .copyright_desc_2{
+    position: absolute;
 	margin-top: 10px;
 	font-size: 12px;
+    font-weight: 100;
 	}
 .altt_desc{
 	font-size: 10px;

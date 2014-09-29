@@ -24,7 +24,7 @@ provoda.View.extendTo(RunMapCompxCtr, {
 		svg = document.createElementNS(mh.SVGNS, 'svg');
 		$(svg).appendTo(this.tpl.ancs['legendcount']);
 		this.legendcount =  d3.select(svg);
-		this.createLegendCount();
+		//this.createLegendCount();
 
 
 
@@ -69,17 +69,6 @@ provoda.View.extendTo(RunMapCompxCtr, {
 		this.wch(this.root_view, 'runners_rate', function(e) {
 			this.promiseStateUpdate('runners_rate', e.value);
 		});
-
-		// Смена марафон\42км при наведении
-		// var mth_text = (locale == 'rus')? ['марафон', '42 км 195 м']:['marathon', '42 km 195 m'];
-		// this.tpl.ancs['mthswitch']
-		// 	.on('mouseenter', function() {
-		// 		$(this).html(mth_text[1]);
-		// 	})
-		// 	.on('mouseleave', function() {
-		// 		$(this).html(mth_text[0]);
-		// 	});
-
 
 		this.wch(this.root_view, 'd3map_dets', function(e) {
 			this.promiseStateUpdate('d3map_dets', e.value);
@@ -135,119 +124,57 @@ provoda.View.extendTo(RunMapCompxCtr, {
 			}
 		}
 	},
-	createLegendCount: function() {
-		var container = this.tpl.ancs['legendcount'];
-		var width = container.width();
-		var height= container.height();
-
-		$(this.legendcount.node()).css('width', width);
-
-		//Форма легенды для «Толщины змея»
-		var
-			p1 = {x:0, y:0},
-			p2 = {x: width, y:0},
-			p3 = {x: 0, y: height};
-
-
-		var part_num = 6;
-
-		var part_height = height/part_num;
-		var lines = [];
-
-		for (var i = 1; i < part_num; i++) {
-			lines.push({
-				y: Math.round(i * part_height) + 0.5
-			});
-		}
-
-		var data = mh.formatPathPoints([p1, p2, p3]) + ' Z';
-
-		var style = {
-			fill: '#7FBFFF',
-			stroke: 'none'
-		};
-		this.legendcount.append('path')
-			.attr('d', data)
-			.style(style);
-
-		for (var i = 0; i < lines.length; i++) {
-			var cur = lines[i];
-			cur.x = mh.getDistance(0, width,  height, width/2, cur.y);
-			this.legendcount.append('line')
-				.attr({
-					x1: 0,
-					y1: cur.y,
-					x2: width,
-					y2: cur.y
-				})
-				.style({
-					stroke: '#fff',
-					'stroke-width': 0.5
-				});
-		}
-		lines.unshift({
-			x: width,
-			y: 0
-		});
-		lines.push({
-			x: width/2,
-			y: height
-		});
-		this.promiseStateUpdate('count_lines', lines);
-		this.countlines = lines;
-
-	},
-	'compx-legend_count':{
-		depends_on: ['runners_rate', 'count_lines'],
-		fn: function(runners_rate, count_lines) {
-			if (!runners_rate || !count_lines){
-				return;
-			}
+    'compx-legendcount': {
+        depends_on: ['cvs_data'],
+        fn: function(cvs_data) {
+            if (!cvs_data)return
             var container = this.tpl.ancs['legendcount'];
+            var width = 80//container.width() ;
+            var height= 25//container.height();
+            var factor = cvs_data.genders_groups[0].raw.length / cvs_data.genders_groups[1].raw.length
+            $(this.legendcount.node()).css({
+                width: width,
+                height: height
+            });
+            var svg = this.legendcount
+            function formatSnakePath(width, height, factor) {
+                return 'M0 '+ height +
+                    'L' + width + ' ' + height +
+                    'L' + width + ' ' + height*(1-factor) +
+                    ' C'+ width/3 +' ' + (height*(1-factor) + height * factor/7) + ' ' +
+                    (2 * width/3) + ' ' + (height - height * factor/7) +
+                    ' 0 ' + height + ' Z'
+            }
+            svg.append('path')
+                .attr('d', formatSnakePath(width, height, 1))
+                .style('fill', '#82c0fd')
+            svg.append('path')
+                .attr('d', formatSnakePath(width, height, factor))
+                .style('fill', '#f492a2')
+            svg.selectAll('path').style('stroke', 'none')
+            return height
+        }
+    },
+    'compx-legendcount_text': {
+        depends_on: ['runners_rate', 'legendcount'],
+        fn: function(runners_rate, height) {
+            if (!runners_rate || !height) return
+            var count = Math.round(mh.getStepValueByHeight(height, runners_rate.step));
+            count = (count % 100 > 50 ? count - count % 100 + 100 : count - count % 100)
 
-			var width = container.width();
+            this.tpl.ancs['legendcounttext'].empty();
 
-			//var count = mh.getStepValueByHeight(width, runners_rate.step);
+            var span = $('<span class="textblock"></span>');
+            var text = (locale == 'rus')? " бегунов на км":' runners per&nbsp;1&nbsp;km'
+            span.html(count + text);
+            span.css({
+                right: 0,
+                top: 0
 
-			this.tpl.ancs['legendcounttext'].empty();
-
-			var dfrg = document.createDocumentFragment();
-			for (var i = 0; i < count_lines.length; i++) {
-				if ((i + 1) % 2 != 1){
-					continue;
-				}
-				var cur = count_lines[i];
-				var count = Math.round(mh.getStepValueByHeight((  cur.x - width/2  ) * 2, runners_rate.step));
-				// округление count до сотен
-				count = (count % 100 > 50 ? count - count % 100 + 100 : count - count % 100)
-
-				var span = $('<span class="textblock"></span>');
-				// Выравнивание текстовых подписей к "Толщине змея"
-				span.css({
-					left: Math.round(cur.x) - i*6,
-					top: Math.round(cur.y) + 5
-
-				});
-				var text = (locale == 'rus')? " бегунов на км":' runners per&nbsp;1&nbsp;km'
-
-				if (i === 0){
-					span.html(count + text);
-				} else {
-					span.text(count);
-				}
-
-				$(dfrg).append(span);
-
-
-			}
-
-			this.tpl.ancs['legendcounttext'].append(dfrg);
-			
-			//this.tpl.ancs['legendcounttext'].text(Math.round(count));
-			//console.log(maxcount)
-
-		}
-	},
+            });
+            this.tpl.ancs['legendcounttext'].append(span);
+        }
+    },
 	'compx-legend_age':{
 		depends_on: ['cvs_data'],
 		fn: function(cvs_data) {
