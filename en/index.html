@@ -235,17 +235,17 @@
 							<div class="factoid_d">runner burns&nbsp;during&nbsp;the&nbsp;race</div>
 						</div>
 
-							<div pv-props="
-								style.top:   {{track_top_padding +  (trackheight * 0.65)}}
-								style.left:  {{track_left_padding + (trackwidth * 0.75)}}
-								style.width: {{trackwidth * 0.25}}
-							"
-							pv-class="factoid {{ !( time_value|compareTime: '00:00' : '1:00:00' ) && 'hidden'}}"
-							class="factoid hidden">
-								<img class="factoid_img" src="../i/pasta.png" width=178 height=60 style="margin-left:-20px;"/>
-								<div class="factoid_d">2-3 days before the race sportsmen change<br>to high-carbohydrate diet:</div>
-								<h5 class="factoid_h">pasta, cereals and&nbsp;fruits</h5>
-							</div>
+						<!-- <div pv-props="
+							style.top:   {{track_top_padding +  (trackheight * 0.65)}}
+							style.left:  {{track_left_padding + (trackwidth * 0.75)}}
+							style.width: {{trackwidth * 0.25}}
+						"
+						pv-class="factoid {{ !( time_value|compareTime: '00:00' : '1:00:00' ) && 'hidden'}}"
+						class="factoid hidden">
+							<img class="factoid_img" src="../i/pasta.png" width=178 height=60 style="margin-left:-20px;"/>
+							<div class="factoid_d">2-3 days before the race sportsmen change<br>to high-carbohydrate diet:</div>
+							<h5 class="factoid_h">pasta, cereals and&nbsp;fruits</h5>
+						</div> -->
 
 
 						<div 
@@ -419,12 +419,11 @@
 									<img class="factoid_img" src="../i/small-globe.png" width=100 height=96/>
 									<div class="factoid_d">Sportsmen from all over the world took part in marathon race: <b>from Paris, London, Tokyo, italian town Castrovillari, California, Australia, Rotterdam and Bangkok</b></h5></div>
 							</div>
-
 							<div pv-props="
-									style.top:   {{track_top_padding +  (trackheight * 0.76)}}
-									style.left:  {{track_left_padding + (trackwidth * 0.64)}}
-									style.width: {{trackwidth * 0.25}}
-								
+									style.top:   {{distance_type==42 && (track_top_padding +  (trackheight * 0.76)) || distance_type==10 && (track_top_padding +  (trackheight * 0.8))  }}
+
+									style.left:  {{distance_type==42 && (track_left_padding + (trackwidth * 0.64)) || distance_type==10 && (track_left_padding + (trackwidth * 0.7))  }}
+									style.width: {{trackwidth * 0.4}}
 								"
 								pv-class="factoid" class="factoid" style = "display:block">
 								<h5 class="share_h">You did it! Share your awesomeness:</h5>
