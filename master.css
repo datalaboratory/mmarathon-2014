@@ -38,8 +38,7 @@ path {
     top: -6px;
     width: 223px;
     cursor: pointer;
-    /*background: url(i/triangle.png) no-repeat 95% 50%;
-    background-size: 10px 5px;*/
+    background: #fff;
 }
 
 .toggle-header{
@@ -895,6 +894,14 @@ path {
 	position: absolute;
 	right:0px;
 	bottom:5px;
+    z-index: 100;
+    border: 1px solid rgba(0,0,0,0.2);
+}
+.desc_text_on_map{
+    display: block;
+    width: 200px;
+    right:0px;
+    bottom:5px;
     z-index: 100;
     border: 1px solid rgba(0,0,0,0.2);
 }
