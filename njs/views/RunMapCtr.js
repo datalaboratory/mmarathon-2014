@@ -10,8 +10,8 @@ provoda.View.extendTo(SelRunner, {
 		var con = document.createElementNS(mh.SVGNS, 'g');
 		this.c = con;
 		this.d3_c = d3.select(con).append('circle');
-        this.info = d3.select(con).append('foreignObject').attr('width', 300).attr('height', 300).style('display', 'none')
-        this.info_text = this.info.append('xhtml:body')
+        //this.info = d3.select(con).append('foreignObject').attr('width', 300).attr('height', 300).style('display', 'none')
+        //this.info_text = this.info.append('xhtml:body')
         var _this = this;
 
 		this.d3_c
@@ -35,17 +35,12 @@ provoda.View.extendTo(SelRunner, {
 			if (!raw) {
 				return;
 			}
-            /*<div class="timeline_select_desc-text" >
-                <div class="timeline_black_text" pv-text="{{selector_matching.runner.full_name}}, {{selector_matching.runner.age_years}}"></div>
-                <div class="timeline_white_text" pv-text="{{selector_matching.runner.end_time_string}}"></div>
-                <div class="timeline_yellow_text" pv-text="{{selector_matching.runner.num}}"></div>
 
-            </div>*/
-            this.info_text = this.info_text.append('div').classed('desc_text_on_map', true)
-            this.info_text.append('div').classed('timeline_black_text', true).text(raw.full_name)
-            this.info_text.append('div').classed('timeline_white_text', true).text(raw.result_time_string)
-            this.info_text.append('div').classed('timeline_yellow_text', true).text(raw.num)
-			//this.d3_title.text(raw.full_name);
+            this.info_text = $('#desc_text_on_map')
+            var black = this.info_text.find('.timeline_black_text').text(raw.full_name)
+            var white = this.info_text.find('.timeline_white_text').text(raw.result_time_string)
+            var yellow = this.info_text.find('.timeline_yellow_text').text(raw.num)
+            this.info_text.css({height: black.innerHeight() + white.innerHeight() + yellow.innerHeight(), opacity: 0})
 		}
 	],
 	'compx-fcolor': [
@@ -64,7 +59,6 @@ provoda.View.extendTo(SelRunner, {
 			if ( !(geodata && basedet && start_time && raw && finish_point) ) {
 				return;
 			}
-            console.log(raw)
             var current_distance = mh.getDistanceByRangesAndTime(raw, start_time + time_value * 1000);
 			current_distance = Math.max(0, current_distance);
 			var geo_coords = mh.getPointAtDistance(
@@ -97,16 +91,25 @@ provoda.View.extendTo(SelRunner, {
 					.attr("cx", px_coords[0])
 					.attr("cy", px_coords[1])
 
-                this.info.attr('x', px_coords[0]).attr('y', px_coords[1])
+                this.info_text.css({left: px_coords[0] + 25, top: px_coords[1] + 5})
 
 			}
+
             this.d3_c.on('mouseover', function(){
-                _this.info.style('display', 'block')
+                var black = _this.info_text.find('.timeline_black_text').text(raw.full_name)
+                var white = _this.info_text.find('.timeline_white_text').text(raw.result_time_string)
+                var yellow = _this.info_text.find('.timeline_yellow_text').text(raw.num)
+                if (px_coords) {
+                    _this.info_text.css({left: px_coords[0] + 25, top: px_coords[1] + 5})
+                }
+                _this.info_text.css({height: black.innerHeight() + white.innerHeight() + yellow.innerHeight(), opacity: 1, 'z-index': 1})
             })
+
+
             this.d3_c.on('mouseleave', function(){
-                _this.info.style('display', 'none')
+                _this.info_text.css({opacity: 0, 'z-index': -10})
             })
-			//
+
 		}
 	]
 });

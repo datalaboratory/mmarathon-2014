@@ -380,20 +380,21 @@ path {
 		}
 		.legendcount_c .textblock{
 			font-size: 9px;
-			margin-top:-7px;
-			margin-left: 5px;
+			margin-top:0px;
+			margin-left: 25px;
 			}
 			.legendcount_c .svgcon{
 				position: relative;
 			}
         .legendcount_svg{
             position: absolute;
-            left: -12px;
+            left: -7px;
+            top: 4px;
         }
         .legendcount-text{
             position:absolute;
             right: -45px;
-            width: 30px;
+            width: 58px;
             font-weight: 100;
         }
 		.legendcount_c {

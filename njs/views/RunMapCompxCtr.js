@@ -127,8 +127,8 @@ provoda.View.extendTo(RunMapCompxCtr, {
         fn: function(cvs_data) {
             if (!cvs_data)return
             var container = this.tpl.ancs['legendcount'];
-            var width = 80//container.width() ;
-            var height= 25//container.height();
+            var width = 60
+            var height= 20//container.height();
             var factor = cvs_data.genders_groups[0].raw.length / cvs_data.items.length
             $(this.legendcount.node()).css({
                 width: width,
@@ -139,8 +139,8 @@ provoda.View.extendTo(RunMapCompxCtr, {
                 return 'M0 '+ height +
                     'L' + width + ' ' + height +
                     'L' + width + ' ' + height * (1 - factor) +
-                    ' C'+ width / 3 +' ' + (height * (1 - factor) + height * factor / 7) + ' ' +
-                    (2 * width / 3) + ' ' + (height - height * factor / 7) +
+                    ' C'+ width / 3 +' ' + (height * (1 - factor) +  height * factor / 5) + ' ' +
+                    ( width / 2) + ' ' + (height - 1 * height * factor / 20) +
                     ' 0 ' + height + ' Z'
             }
             svg.append('path')
@@ -160,15 +160,12 @@ provoda.View.extendTo(RunMapCompxCtr, {
             var count = Math.round(mh.getStepValueByHeight(height, runners_rate.step));
             count = (count % 100 > 50 ? count - count % 100 + 100 : count - count % 100)
             this.tpl.ancs['legendcounttext'].empty();
-
-            var span = $('<span class="textblock"></span>');
+            var num_span = $('<div>' + count + '</div>').css({width: 20, float: 'left'});
+            var span = $('<div class="textblock"></div>');
             var text = (locale == 'rus')? " бегунов на км":' runners per&nbsp;1&nbsp;km'
-            span.html(count + text);
-            span.css({
-                right: 0,
-                top: 0
+            span.html(text);
 
-            });
+            this.tpl.ancs['legendcounttext'].append(num_span);
             this.tpl.ancs['legendcounttext'].append(span);
         }
     },
