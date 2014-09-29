@@ -136,7 +136,7 @@ provoda.View.extendTo(RunMapCompxCtr, {
         fn: function(cvs_data) {
             if (!cvs_data)return
             var container = this.tpl.ancs['legendcount'];
-            var width = 60
+            var width = 80
             var height= 20//container.height();
             var factor = cvs_data.genders_groups[0].raw.length / cvs_data.items.length
             $(this.legendcount.node()).css({

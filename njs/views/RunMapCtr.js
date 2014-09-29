@@ -456,7 +456,7 @@ provoda.View.extendTo(RunMapCtr, {
         depends_on: ['altitudes', 'geo_alt'],
             fn: function(alt, geo) {
             if (!alt || !geo) return
-            var width = 110, height = 50, offset_ver = 15, offset_hor = 5;
+            var width = 140, height = 50, offset_ver = 15, offset_hor = 5;
             var svg = this.alt_graph
             svg = svg.attr('width', width + 2 * offset_hor).attr('height', height + 2 * offset_ver)
             svg.selectAll('*').remove()
@@ -604,6 +604,7 @@ provoda.View.extendTo(RunMapCtr, {
                 point_on_map.style('opacity', 0)
                 text_alt_on_map.style('opacity', 0)
             })
+                
         }
     }
 });
