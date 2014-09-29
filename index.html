@@ -21,7 +21,7 @@
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
   js = d.createElement(s); js.id = id;
-  js.src = "http://connect.facebook.net/en_US/all.js#xfbml=1&appId=237838789600836";
+  js.src = "//connect.facebook.net/ru_RU/sdk.js#xfbml=1&appId=1501547416745518&version=v2.0";
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 
@@ -245,7 +245,7 @@
 
 						<div 
 							pv-props="
-								style.top:   {{track_top_padding +  (trackheight * 0.6)}}
+								style.top:   {{track_top_padding +  (trackheight * 0.4)}}
 								style.left:  {{track_left_padding + (trackwidth * 0.73)}}
 								style.width: {{trackwidth * 0.25}}
 							"
@@ -400,6 +400,25 @@
 									<div class="factoid_d">В марафоне участвовали спортсмены со всего мира: <b>из Парижа, Лондона, Токио, итальянского городка Кастровиллари, Калифорнии, Австралии, Роттердама и Бангкока.</b></h5></div>
 							</div>
 
+							<div pv-props="
+									style.top:   {{track_top_padding +  (trackheight * 0.76)}}
+									style.left:  {{track_left_padding + (trackwidth * 0.64)}}
+									style.width: {{trackwidth * 0.25}}
+								
+								"
+								pv-class="factoid" class="factoid" style = "display:block">
+								<h5 class="share_h">Поделитесь успехом:</h5>
+								<div class="fb-like" data-href="http://mm2014.datalaboratory.ru/" data-layout="standard" data-action="like" data-show-faces="true" data-share="false"></div>
+
+								<div>
+								<div id="vk_like"></div>
+								<script type="text/javascript">
+								VK.Widgets.Like("vk_like", {type: "full"});
+								</script>
+								
+								</div>
+							</div>
+
 					</div>
 					
 
@@ -427,22 +446,7 @@
 
                             </div>
                         </div>
-					</div>
-					
-					<div class="share">
-						<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://moscowmarathon.datalaboratory.ru/" data-lang="ru">Твитнуть</a>
-						<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-						<div class="fb-like" data-href="http://moscowmarathon.datalaboratory.ru/" data-width="450" data-layout="button_count" data-show-faces="false" data-send="false" style="margin-top:5px;"></div>
-						<div>
-
-						<div id="vk_like" style="margin-top:5px;"></div>
-
-						<script type="text/javascript">
-						VK && VK.Widgets.Like("vk_like", {type: "mini", height: 20});
-						</script> 
-							<!-- <div class="copyright_desc"><a href="http://moscowmarathon.org/">Сайт марафона</a></div> -->
-							<div class="copyright_desc_2">Визуализация <a href="http://datalaboratory.ru/">Лаборатории&nbsp;данных</a></div>
-						</div>
+                        <div class="copyright_desc">Визуализация <a href="http://datalaboratory.ru/">Лаборатории&nbsp;данных</a></div>
 					</div>
 				</div>
 			</div>

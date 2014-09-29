@@ -212,7 +212,7 @@ path {
 		position: absolute;
 		top:0;
 		left:0;
-		display: none;
+		/*display: none;*/
 	}
 	.factoid{
 		position: absolute;
@@ -388,14 +388,13 @@ path {
 /*          max-width:  100%;*/
 /*          max-height: 150%;*/
 		}
-	.share{
-		width: 135px;
-		position: absolute;
-        top: 80%;
-        left: 65%;
-		font-size: 12px;
-		clear: both;
-		overflow: hidden;
+	.share_h {
+		font-size: 14px;
+		padding-bottom: 16px;
+		width: 250px;
+	}
+	#vk_like {
+		padding-top: 18px;
 	}
 
 .marath-icon{
