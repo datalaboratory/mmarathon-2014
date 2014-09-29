@@ -296,7 +296,7 @@ path {
         margin-right: 20px;
         z-index:100;
         top: 20px;
-        right: 1px;
+        right: 8px;
 
     }
     .flag_con {
@@ -331,7 +331,7 @@ path {
 	.weather{
 		position: absolute;
 		z-index: 1;
-		right:10px;
+		right:17px;
 		top: 44px;
 		text-align: center;
 		width: 121px;
@@ -362,7 +362,7 @@ path {
 		font-size: 12px;
 		font-weight: 700;
 		margin-top: 20px;
-		margin-right: 15px;
+		margin-right: 22px;
 		}
 		.legend .graph_text_block{
 			font-weight: 400;
@@ -371,7 +371,7 @@ path {
             position: relative;
         }
         .legend .alt_graph {
-            right: 4px;
+            right: 0px;
             cursor: pointer;
         }
 		.legendcount_c{
@@ -380,7 +380,7 @@ path {
 		.legendcount_c .textblock{
 			font-size: 9px;
 			margin-top:0px;
-			margin-left: 22px;
+			margin-left: 23px;
 			}
 			.legendcount_c .svgcon{
 				position: relative;
@@ -392,7 +392,7 @@ path {
         }
         .legendcount-text{
             position:absolute;
-            right: -45px;
+            right: -48px;
             width: 58px;
             font-weight: 100;
         }
