@@ -97,7 +97,7 @@ provoda.View.extendTo(SelRunner, {
                 var white = _this.info_text.find('.timeline_white_text').text(raw.result_time_string)
                 var yellow = _this.info_text.find('.timeline_yellow_text').text(raw.num)
                 if (px_coords) {
-                    _this.info_text.css({left: px_coords[0] + 25, top: px_coords[1] + 5})
+                    _this.info_text.css({left: px_coords[0] + 30, top: px_coords[1] + 15})
                 }
                 _this.info_text.css({height: black.innerHeight() + white.innerHeight() + yellow.innerHeight(), opacity: 1, 'z-index': 1})
             })
@@ -153,9 +153,9 @@ provoda.View.extendTo(RunMapCtr, {
 		knodes.areas_group.classed("areas_group", true);
 
 		knodes.debug_group = main_group.append('g');
-        knodes.single_runners = main_group.append('g')
 
         knodes.altitude = main_group.append('g');
+        knodes.single_runners = main_group.append('g')
 
         svg = document.createElementNS(mh.SVGNS, 'svg');
         $(svg).appendTo($('#alt_graph'));

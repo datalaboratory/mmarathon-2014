@@ -13,7 +13,7 @@ provoda.View.extendTo(StartPageCtr, {
 		
 		this.c.find('.filterr_menu').each(function(i, el) {
 			var root = $(el);
-			$(el).find('.filtrr').click(function(e) {
+            root.find('.filtrr').click(function(e) {
 				e.stopPropagation();
 				root.toggleClass('menu_opened');
 			});
@@ -24,6 +24,18 @@ provoda.View.extendTo(StartPageCtr, {
 			$(document).click(function() {
 				root.removeClass('menu_opened');
 			});
+
+            root.find('.filtrr').on('touch',function(e) {
+                e.stopPropagation();
+                root.toggleClass('menu_opened');
+            });
+            root.on('touch', function(e) {
+                e.stopPropagation();
+                root.removeClass('menu_opened');
+            });
+            $(document).on('touch', function() {
+                root.removeClass('menu_opened');
+            });
 			
 		});
 		this.header = this.tpl.ancs['runners_header'];

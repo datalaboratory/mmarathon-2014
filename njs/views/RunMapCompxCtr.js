@@ -59,6 +59,15 @@ provoda.View.extendTo(RunMapCompxCtr, {
 					$(document).off('mousemove', watchPos);
 				});
 			});
+        scroll_marker
+            .on('touchstart', function(e) {
+                e.preventDefault();
+                _this.con_offset = relative_con.offset();
+                $(document).on('touchmove', watchPos);
+                $(document).on('touchend', function() {
+                    $(document).off('touchmove', watchPos);
+                });
+            });
 		this.wch(this.root_view, 'maxwdith', spv.debounce(function() {
 			this.con_offset = null;
 			this.checkSizes();
