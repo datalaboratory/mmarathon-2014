@@ -578,7 +578,7 @@ provoda.View.extendTo(RunMapCtr, {
                     .attr('cx', geo_point_px[0])
                     .attr('cy', geo_point_px[1])
                 text_alt_on_map
-                    .text(alt[current_coord_number] + ' м')
+                    .text(alt[current_coord_number] + meter)
                     .attr('x', geo_point_px[0])
                     .attr('y', geo_point_px[1] - 6)
                 if (x > offset_hor && x < width + offset_hor) {
