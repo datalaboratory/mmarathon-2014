@@ -391,7 +391,7 @@ path {
             width: 130px;
         }
         .legend .alt_graph {
-            right: 0px;
+            right: 2px;
             cursor: pointer;
         }
 		.legendcount_c{

@@ -59,9 +59,13 @@ provoda.View.extendTo(RunMapCompxCtr, {
 					$(document).off('mousemove', watchPos);
 				});
 			});
-        scroll_marker
-            .on('touchstart', function(e) {
+        $(document).on('touch', function(){
+            console.log('touch')
+        })
+
+        scroll_marker.on('touch', function(e) {
                 e.preventDefault();
+                console.log('touch!')
                 _this.con_offset = relative_con.offset();
                 $(document).on('touchmove', watchPos);
                 $(document).on('touchend', function() {
