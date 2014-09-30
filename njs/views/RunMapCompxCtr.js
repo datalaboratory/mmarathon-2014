@@ -59,9 +59,13 @@ provoda.View.extendTo(RunMapCompxCtr, {
 					$(document).off('mousemove', watchPos);
 				});
 			});
-        scroll_marker
-            .on('touchstart', function(e) {
+        $(document).on('touch', function(){
+            console.log('touch')
+        })
+
+        scroll_marker.on('touch', function(e) {
                 e.preventDefault();
+                console.log('touch!')
                 _this.con_offset = relative_con.offset();
                 $(document).on('touchmove', watchPos);
                 $(document).on('touchend', function() {
@@ -136,7 +140,7 @@ provoda.View.extendTo(RunMapCompxCtr, {
         fn: function(cvs_data) {
             if (!cvs_data)return
             var container = this.tpl.ancs['legendcount'];
-            var width = 60
+            var width = 80
             var height= 20//container.height();
             var factor = cvs_data.genders_groups[0].raw.length / cvs_data.items.length
             $(this.legendcount.node()).css({

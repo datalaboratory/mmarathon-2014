@@ -60,8 +60,9 @@ require(['models/AppModel', 'views/AppView', 'angbo', 'provoda'], function(AppMo
     $(window).on('resize', updateImgVert)
     function updateImgVert() {
         var link = (locale == 'rus') ? 'i/mm-logo1.png' : '../i/mm-logo1.png'
+        var style = 'url(' + link + ') no-repeat 50% ' + window.innerHeight/2 + 'px'
         $('.before_load').css({
-            background: 'url(' + link + ') no-repeat 50% ' + window.innerHeight/2
+            background: style
         })
     }
     updateImgVert()

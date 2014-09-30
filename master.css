@@ -8,7 +8,6 @@ body{
 }
 
 path {
-
   fill: none;
   stroke: #999;
   stroke-width: 1px;
@@ -27,17 +26,17 @@ path {
 }
 
 @-moz-keyframes spin { 
-  50% { -moz-transform: scaleX(-1); };
+  50% { -moz-transform: scaleX(-1); }
   100% { -moz-transform: scaleX(1); } 
 }
 @-webkit-keyframes spin { 
-  50% { -webkit-transform: scaleX(-1); };
+  50% { -webkit-transform: scaleX(-1); }
   100% { -webkit-transform: scaleX(1); } 
 }
 @keyframes spin { 
-  50% { -webkit-transform: scaleX(-1); transform:scaleX(-1); };
+  50% { -webkit-transform: scaleX(-1); transform:scaleX(-1); }
   100% { -webkit-transform: scaleX(1); transform:scaleX(1); } 
-};
+}
 
 
 .complex-page{
@@ -387,13 +386,16 @@ path {
 			font-weight: 400;
 		}
         .legend .legend_alt {
-            position: relative;
+            position: absolute;
+            top:400px;
+            width: 130px;
         }
         .legend .alt_graph {
-            right: 0px;
+            right: 2px;
             cursor: pointer;
         }
 		.legendcount_c{
+            position:absolute;
 			padding-right: 25px;
 		}
 		.legendcount_c .textblock{
@@ -411,7 +413,7 @@ path {
         }
         .legendcount-text{
             position:absolute;
-            right: -48px;
+            right: -58px;
             width: 58px;
             font-weight: 100;
         }
@@ -421,13 +423,14 @@ path {
 		.legendage_c .svgcon{
 			height: 160px;
 			float: right;
-			width: 160px;
-			margin-right: -49px;
+			width: 180px;
+			margin-right: -68px;
 		}
 
 	.share_h {
 		font-size: 14px;
 		padding-bottom: 16px;
+        overflow: hidden;
 	}
 	#vk_like {
 		padding-top: 18px;
@@ -755,7 +758,7 @@ path {
 	cursor: pointer;
 }
 .legendage_c{
-	margin-top:20px;
+	margin-top:56px;
 }
 .genbuttn_group{
 	display: inline-block;
@@ -938,7 +941,7 @@ path {
 
 .copyright_desc{
     position: absolute;
-	margin-top: 12px;
+	margin-top: 276px;
 	font-size: 12px;
     font-weight: 100;
 	}
