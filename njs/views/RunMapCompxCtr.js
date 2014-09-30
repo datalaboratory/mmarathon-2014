@@ -49,7 +49,6 @@ provoda.View.extendTo(RunMapCompxCtr, {
 
 		var watchPos = function(e) {
 			var pos = e.pageX - _this.con_offset.left;
-			console.log("LOG:",pos);
 			changeTime(pos, _this.con_offset);
 		};
 
@@ -62,8 +61,6 @@ provoda.View.extendTo(RunMapCompxCtr, {
 		scroll_marker
 			.on('mousedown', function(e) {
 				e.preventDefault();
-				console.log(e,e.type)
-				console.log('mousedown!')
 				_this.con_offset = relative_con.offset();
 				$(document).on('mousemove', watchPos);
 				$(document).on('mouseup', function() {

@@ -314,13 +314,13 @@ path {
         margin-right: 20px;
         z-index:100;
         top: 20px;
-        right: 8px;
+        right: 4px;
 
     }
     .flag_con {
         position: relative;
         float: left;
-        width: 93px;
+        width: 98px;
         margin-top: 10px;
     }
 
@@ -349,10 +349,10 @@ path {
 	.weather{
 		position: absolute;
 		z-index: 1;
-		right:17px;
+		right:1px;
 		top: 44px;
 		text-align: center;
-		width: 121px;
+		width: 137px;
 		background: no-repeat 50% 50%;
 		}
 		.we_temperature{
@@ -391,7 +391,7 @@ path {
             width: 130px;
         }
         .legend .alt_graph {
-            right: 2px;
+            right: 4px;
             cursor: pointer;
         }
 		.legendcount_c{
@@ -920,7 +920,6 @@ path {
     width: 200px;
     right:0px;
     bottom:5px;
-    z-index: 100;
     position: absolute;
     opacity: 0;
     border: 1px solid rgba(0,0,0,0.2);
