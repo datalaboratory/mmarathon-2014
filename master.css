@@ -789,7 +789,7 @@ path {
 			}
 		.genbuttn.active{
 			z-index: 2;
-			box-shadow: 0 1px 3px #585858 inset;
+			box-shadow: 0 1px 3px rgba(88, 88, 88, 0.5) inset;
 		}
 		/*.genbuttn:active, .genbuttn.active{
 			background-image: -o-linear-gradient(#bbb, #ddd);
