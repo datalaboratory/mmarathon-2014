@@ -27,6 +27,8 @@ provoda.View.extendTo(RunMapCompxCtr, {
 
 
 		var scroll_marker = this.tpl.ancs['scroll_marker'];
+		var controlls = this.tpl.ancs['controlls'];
+
 		this.marker_width = scroll_marker.width();
 		this.half_width = this.marker_width / 2;
 
@@ -47,31 +49,41 @@ provoda.View.extendTo(RunMapCompxCtr, {
 
 		var watchPos = function(e) {
 			var pos = e.pageX - _this.con_offset.left;
+			console.log("LOG:",pos);
+			changeTime(pos, _this.con_offset);
+		};
+
+		var watchTouchPos = function(e) {
+			var pos = e.changedTouches[0].pageX - _this.con_offset.left;
+			console.log("LOG:",pos);
 			changeTime(pos, _this.con_offset);
 		};
 
 		scroll_marker
 			.on('mousedown', function(e) {
 				e.preventDefault();
+				console.log(e,e.type)
+				console.log('mousedown!')
 				_this.con_offset = relative_con.offset();
 				$(document).on('mousemove', watchPos);
 				$(document).on('mouseup', function() {
 					$(document).off('mousemove', watchPos);
 				});
 			});
-        $(document).on('touch', function(){
-            console.log('touch')
-        })
 
-        scroll_marker.on('touch', function(e) {
+		//Оригинальные тач-события упакованы в x.Event. Слушаем их на "div.controlls.big_block"
+        controlls.on('touchstart', function(e) {
                 e.preventDefault();
-                console.log('touch!')
+                // console.log(e,e.type, e.originalEvent)
                 _this.con_offset = relative_con.offset();
-                $(document).on('touchmove', watchPos);
-                $(document).on('touchend', function() {
-                    $(document).off('touchmove', watchPos);
+                controlls.on('touchmove', function(e) {
+                	watchTouchPos(e.originalEvent);
+                });
+                controlls.on('touchend', function(e) {
+                	watchTouchPos(e.originalEvent);
                 });
             });
+
 		this.wch(this.root_view, 'maxwdith', spv.debounce(function() {
 			this.con_offset = null;
 			this.checkSizes();
