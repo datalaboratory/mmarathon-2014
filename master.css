@@ -8,7 +8,6 @@ body{
 }
 
 path {
-
   fill: none;
   stroke: #999;
   stroke-width: 1px;
@@ -27,17 +26,17 @@ path {
 }
 
 @-moz-keyframes spin { 
-  50% { -moz-transform: scaleX(-1); };
+  50% { -moz-transform: scaleX(-1); }
   100% { -moz-transform: scaleX(1); } 
 }
 @-webkit-keyframes spin { 
-  50% { -webkit-transform: scaleX(-1); };
+  50% { -webkit-transform: scaleX(-1); }
   100% { -webkit-transform: scaleX(1); } 
 }
 @keyframes spin { 
-  50% { -webkit-transform: scaleX(-1); transform:scaleX(-1); };
+  50% { -webkit-transform: scaleX(-1); transform:scaleX(-1); }
   100% { -webkit-transform: scaleX(1); transform:scaleX(1); } 
-};
+}
 
 
 .complex-page{
