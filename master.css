@@ -56,7 +56,6 @@ path {
     top: -6px;
     width: 223px;
     cursor: pointer;
-    background: #fff;
 }
 
 .toggle-header{
@@ -77,7 +76,7 @@ path {
     background: url(i/marathon-logo.png) no-repeat 3% 50%;
 }
 .other_menu_item {
-    background: 0;
+    background: none;
 }
 .toggle-header-open {
     border-bottom-left-radius: 0px;
@@ -272,14 +271,19 @@ path {
 		.factoid_h{
 			font-family: Arial Black;
 			font-size: 16px;
-			font-weight: 700;
+			font-weight: 100;
 			}
 		.factoid_d{
-			font-size: 12px;
+			font-size: 13px;
 			}
 		.factoid_img{
 			margin-bottom:5px;
+
 		}
+        .factoid_img_left{
+            margin-right: 5px;
+            float: left;
+        }
 
 .timemark{
 	margin-top: 5px;

@@ -248,9 +248,8 @@ provoda.View.extendTo(RunMapCtr, {
 	checkSizes: function() {
 		var result = {};
 		var container = this.c.parent();
-
 		if (container[0]){
-			result.width = container.width();
+			result.width = Math.min(container.width(), 960);
 		}
 		result.height = Math.max(window.innerHeight - 80, 580);
 		this.updateManyStates(result);

@@ -15,6 +15,12 @@ BrowseMap.Model.extendTo(FilterItem, {
 	},
 	checkActiveState: function(e) {
 		var novalue = this.state('novalue');
+        var _this = this
+        if (this.state('type') =='gender') {
+            this.updateState('no_men', _this.map_parent.no_men)
+            this.updateState('no_women', _this.map_parent.no_women)
+            console.log(this.states)
+        }
 		if (novalue){
 			this.updateState('active', !e.value);
 		} else {
@@ -22,8 +28,13 @@ BrowseMap.Model.extendTo(FilterItem, {
 		}
 	},
 	setFilter: function() {
-        this.map_parent.updateState('last_filter', this.state('type'))
-		this.map_parent.setFilterBy(this.state('type'), !this.state('novalue') && this.state('label'));
+        var _this = this
+       // if (!(this.state('type') == 'gender' &&
+          //   (this.state('no_men') || this.state('no_women')))) {
+            this.map_parent.updateState('last_filter', this.state('type'))
+            this.map_parent.setFilterBy(this.state('type'), !this.state('novalue') && this.state('label'));
+        //}
+
 	}
 });
 
@@ -115,7 +126,8 @@ BrowseMap.Model.extendTo(StartPage, {
             limit: 1,
             no_flabel: city_header
         }]
-		
+		this.no_men = false
+        this.no_women = false
 		return this;
 	},
 	page_limit: 100,
@@ -322,15 +334,16 @@ BrowseMap.Model.extendTo(StartPage, {
             });
         current_runners = (this.filtered_for_filter['ages'] || e.value)
         var ages = this.getMinMaxAge(current_runners, cvsdata)
+
         var ages_text_rus = (ages.min_age == ages.max_age) ? ('Все ' + ages.max_age) : ('Все от ' + ages.min_age + ' до ' + ages.max_age)
         var ages_text_en = (ages.min_age == ages.max_age) ? ('All ' + ages.max_age) : ('All from ' + ages.min_age + ' to ' + ages.max_age)
         var ages_header = (locale == 'rus') ? ages_text_rus : ages_text_en
+
         var result = this.getAgesGroups(current_runners, cvsdata.big_ages_ranges, cvsdata)
         if (this.state('last_filter') != 'ages') {
             if (!result.items.length) ages_header = (locale == 'rus') ? 'никого нет' : 'nobody'
             this.setFilterResult(result, 'ages', ages_header);
         }
-
 
     },
 	getGenderGroups: function(runners) {
@@ -341,12 +354,16 @@ BrowseMap.Model.extendTo(StartPage, {
 
         var label_men = (locale == 'rus') ? 'Мужчин':'Men'
         var label_women = (locale == 'rus') ? 'Женщин':'Women'
+        var counter_men = index[0] && index[0].length
+        var counter_women = index[1] && index[1].length
+        this.no_men = (counter_men) ? false : true
+        this.no_women = (counter_women) ? false : true
 		result.push({
 			label: label_women,
-			counter: index[0] && index[0].length
+			counter: counter_women
 		},{
 			label: label_men,
-			counter: index[1] && index[1].length
+			counter: counter_men
 		});
 
 		index = (locale == 'rus')? {
@@ -386,6 +403,7 @@ BrowseMap.Model.extendTo(StartPage, {
 		} else {
 			this.filters[type] = name;
 		}
+
         this.updateState('selected_filter_' + type, this.filters[type]);
 		this.checkFilters();
 	},
@@ -419,6 +437,8 @@ BrowseMap.Model.extendTo(StartPage, {
 		});
 
 		result.forEach(function(el) {
+            var type = el.type;
+            var value = _this.filters_cache[el.type][el.value]
 			caches.push({type: el.type, value: _this.filters_cache[el.type][el.value]});
 		});
 
@@ -427,13 +447,13 @@ BrowseMap.Model.extendTo(StartPage, {
 	},
 	makeFiltersResult: function(filters, caches) {
 		var result;
-
-        var cachesCity = [], cachesTeam = [], cachesAges = []
+        var cachesCity = [], cachesTeam = [], cachesAges = [], cachesGender = []
         if (caches) {
             caches.forEach(function(cache) {
                 if (cache.type!='city') cachesCity.push(cache.value)
                 if (cache.type!='team') cachesTeam.push(cache.value)
                 if (cache.type!='ages') cachesAges.push(cache.value)
+                if (cache.type!='gender') cachesGender.push(cache.value)
             })
             caches = caches.map(function(cache){
                 return cache.value
@@ -456,12 +476,13 @@ BrowseMap.Model.extendTo(StartPage, {
             }
             this.filtered_for_filter = ''
 		}
+
 		var rules = [{field: ['states', 'result_time']}, {field: ['states', 'pos']}, {field: ['states', 'num']}];
 		result.sort(function(a, b) {
 			return spv.sortByRules(a, b, rules);
 		});
-		this.filtered_r = result;
 
+        this.filtered_r = result;
 		this.checkRunners(true);
 
 	},
