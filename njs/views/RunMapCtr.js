@@ -56,24 +56,18 @@ provoda.View.extendTo(SelRunner, {
 			if ( !(geodata && basedet && start_time && raw && finish_point) ) {
 				return;
 			}
+            var path_node = this.parent_view.knodes.base.node()
             var current_distance = mh.getDistanceByRangesAndTime(raw, start_time + time_value * 1000);
-			current_distance = Math.max(0, current_distance);
-			var geo_coords = mh.getPointAtDistance(
-				geodata.geometry.coordinates,
-				current_distance
-			);
+            current_distance = Math.max(0, current_distance);
 
-			var px_coords;
+            var px_total_length = path_node.getTotalLength()
+            var px_current_length = current_distance * px_total_length / this.parent_view.total_distance
+			var cur_coord = path_node.getPointAtLength(px_current_length)
 
-			if (geo_coords && !geo_coords.out) {
-				px_coords = this.root_view.projection(geo_coords.target);
-				
-			} else {
-				if (place_finishers_at_finish) {
-					px_coords = this.root_view.projection(geodata.geometry.coordinates[geodata.geometry.coordinates.length - 1]);
-					
-				}
-			}
+
+			var px_coords = [cur_coord.x, cur_coord.y];
+
+
 			if (!place_finishers_at_finish) {
 				if (px_coords) {
 					this.d3_c.style('display', 'block');
@@ -125,6 +119,7 @@ provoda.View.extendTo(RunMapCtr, {
 		['geodata'],
 		function(geodata) {
 			var total_distance = d3.geo.length(geodata) * mh.earth_radius;
+            this.total_distance = total_distance
 			return  mh.getPointAtDistance(geodata.geometry.coordinates, total_distance);
 		}
 	],

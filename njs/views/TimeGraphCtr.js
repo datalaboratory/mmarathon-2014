@@ -366,7 +366,6 @@ provoda.View.extendTo(TimeGraphCtr, {
         fn: function(width_factor, cvs_data, time) {
             if (!width_factor || !cvs_data || !time) return
             var _this = this
-        	console.log("LOG:",_this.width);
             this.select_line.attr('x2', _this.width * time)
             this.no_select_line.attr('x2', _this.width * time)
         }
