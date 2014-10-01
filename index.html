@@ -328,18 +328,18 @@
                         <div
                                 pv-props="
 								style.top:   {{track_top_padding +  (trackheight * 0.05)}}
-								style.left:  {{track_left_padding + (trackwidth * 0.8 )}}
+								style.left:  {{track_left_padding + (trackwidth * 0.9 )}}
 							"
                                 pv-class="factoid {{(distance_type==42 || !( time_value|compareTime: '1:00:00' : '3:00:00' )) && 'hidden'}}"
                                 class="factoid hidden"
-                                style="width: 223px;">
+                                style="width: 160px;">
                             <h5 class="factoid_h">≈&thinsp;500 ккал</h5>
-                            <div class="factoid_d">сжигает спортсмен за&nbsp;время&nbsp;забега</div>
+                            <div class="factoid_d">сжигает спортсмен за&nbsp;время 10&nbsp;км забега</div>
                         </div>
 
 
 
-                        
+
 
 							<div pv-props="
 									style.top:   {{distance_type==42 && (track_top_padding +  (trackheight * 0.76)) || distance_type==10 && (track_top_padding +  (trackheight * 0.8))  }}
