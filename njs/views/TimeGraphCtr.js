@@ -85,7 +85,6 @@ provoda.View.extendTo(TimeGraphCtr, {
 
         this.no_select_line = this.svg.append('g')
             .append('line')
-            .attr('x1', _this.c.width())
             .attr('y1', 0)
             .attr('y2', 0)
             .classed('no_select_line', true)
@@ -98,6 +97,7 @@ provoda.View.extendTo(TimeGraphCtr, {
 		
 		if (container[0]){
 			result.width = container.width();
+            this.no_select_line.attr('x1', result.width)
 		}
 		this.original_height = container.height();
 //		result.height = ;
@@ -158,17 +158,28 @@ provoda.View.extendTo(TimeGraphCtr, {
 
             var context_width = this.c.width();
             var context_height = Math.floor(this.c.height());
-            var winner = data.items[0];
-            var factor = +winner.result_time/data.run_gap ;
-
-            winner.pixel_pos = Math.floor(context_width * factor)
+            var winner_man = data.items[0];
+            var i=0
+            while (data.items[i].gender != 0) {
+                i++
+            }
+            var winner_woman = data.items[i]
+            var factor_man = +winner_man.result_time/data.run_gap ;
+            var factor_woman = +winner_woman.result_time/data.run_gap ;
+            winner_man.pixel_pos = Math.floor(context_width * factor_man)
+            winner_woman.pixel_pos = Math.floor(context_width * factor_woman)
 
             this.svg.select('.circle-line-g').remove()
             var g = this.svg.append('g').classed('circle-line-g', true)
-            g.append('circle').attr('r', 2).attr('cx', winner.pixel_pos ).attr('cy', 125)//.attr('opacity',.8 )
-            g.append('line').attr('x1', winner.pixel_pos ).attr('y1', 125).attr('x2', winner.pixel_pos ).attr('y2', context_height)//.attr('opacity',.8 )
+            g.append('circle').classed('man_circle', true).attr('r', 2).attr('cx', winner_man.pixel_pos ).attr('cy', 165)
+            g.append('line').classed('man_line', true).attr('x1', winner_man.pixel_pos ).attr('y1', 165).attr('x2', winner_man.pixel_pos ).attr('y2', context_height)
 
-            return winner;
+            g.append('circle').classed('woman_circle', true).attr('r', 2).attr('cx', winner_woman.pixel_pos ).attr('cy', 89)
+            g.append('line').classed('woman_line', true).attr('x1', winner_woman.pixel_pos ).attr('y1', 89).attr('x2', winner_woman.pixel_pos ).attr('y2', context_height)
+            return {
+                winner_man: winner_man,
+                winner_woman: winner_woman
+            };
         }
     },
     'compx-winner-redraw':{
@@ -177,11 +188,16 @@ provoda.View.extendTo(TimeGraphCtr, {
             if (!winner) return;
             //var grad = _this.parent_view.parent_view.gender_grads[winner.gender];
             //var color = colors.getGradColor(el.num, 1, 5, grad);
-            var color = (type == 42) ? '#8DCDFB' : '#8DCDFB'
+            var color_man = (type == 42) ? '#8DCDFB' : '#8DCDFB'
+            var color_woman = (type == 42) ? '#FBA1B3' : '#FBA1B3'
             var gray = (type == 42) ? '#EEEEEE ' : '#EEEEEE'
-            color = (time < winner.result_time) ? gray : color
-            this.svg.select('.circle-line-g').select('circle').attr('fill', color)
-            this.svg.select('.circle-line-g').select('line').attr('stroke', color)
+            color_man = (time < winner.winner_man.result_time) ? gray : color_man
+            color_woman = (time < winner.winner_woman.result_time) ? gray : color_woman
+            this.svg.select('.man_circle').attr('fill', color_man)
+            this.svg.select('.man_line').attr('stroke', color_man)
+
+            this.svg.select('.woman_circle').attr('fill', color_woman)
+            this.svg.select('.woman_line').attr('stroke', color_woman)
 
         }
     },
