@@ -19,7 +19,6 @@ BrowseMap.Model.extendTo(FilterItem, {
         if (this.state('type') =='gender') {
             this.updateState('no_men', _this.map_parent.no_men)
             this.updateState('no_women', _this.map_parent.no_women)
-            console.log(this.states)
         }
 		if (novalue){
 			this.updateState('active', !e.value);

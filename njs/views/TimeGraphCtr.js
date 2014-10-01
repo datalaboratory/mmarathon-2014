@@ -89,8 +89,6 @@ provoda.View.extendTo(TimeGraphCtr, {
             .attr('y2', 0)
             .classed('no_select_line', true);
 
-        console.log("LOG:",_this.c.width(),_this.c["scrollWidth"]);
-
 		this.c.append(svg);
 	},
 	checkSizes: function() {
@@ -154,11 +152,11 @@ provoda.View.extendTo(TimeGraphCtr, {
         }
     },
     'compx-winner':{
-        depends_on: ['cvs_data'],
-        fn: function(data) {
+        depends_on: ['cvs_data', 'width'],
+        fn: function(data, width) {
             if (!data) return;
 
-            var context_width = this.c.width();
+            var context_width = width;
             var context_height = Math.floor(this.c.height());
             var winner_man = data.items[0];
             var i=0
