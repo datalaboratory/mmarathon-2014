@@ -234,11 +234,20 @@ path {
     padding-top: 10px;
     height: 100%;
 }
-.winner_info {
+.winner_info_man, .winner_info_woman {
     position: absolute;
-    top: 30%;
     width: 100px;
 }
+.winner_info_man span, .winner_info_woman span{
+    background: rgba(255,255,255,0.7);
+}
+.winner_info_man{
+    top: 47%;
+}
+.winner_info_woman {
+    top: 10%;
+}
+
 .big_block{
 	margin: 0 20px;
 	}
