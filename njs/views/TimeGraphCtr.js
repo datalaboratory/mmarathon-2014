@@ -88,7 +88,9 @@ provoda.View.extendTo(TimeGraphCtr, {
             .attr('x1', _this.c.width())
             .attr('y1', 0)
             .attr('y2', 0)
-            .classed('no_select_line', true)
+            .classed('no_select_line', true);
+
+        console.log("LOG:",_this.c.width(),_this.c["scrollWidth"]);
 
 		this.c.append(svg);
 	},
@@ -348,6 +350,7 @@ provoda.View.extendTo(TimeGraphCtr, {
         fn: function(width_factor, cvs_data, time) {
             if (!width_factor || !cvs_data || !time) return
             var _this = this
+        	console.log("LOG:",_this.width);
             this.select_line.attr('x2', _this.width * time)
             this.no_select_line.attr('x2', _this.width * time)
         }
