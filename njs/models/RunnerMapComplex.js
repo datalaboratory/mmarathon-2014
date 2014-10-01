@@ -148,6 +148,7 @@ provoda.HModel.extendTo(RunnerMapComplex, {
             this.updateState('geo_alt', geodata_alt42);
             var data42 = this.state('cvs_data42')
             this.app.updateState('cvs_data', data42)
+            $('.legendage_c .svgcon').css({'margin-right': '-68px'})
         }
 
     },
@@ -162,6 +163,7 @@ provoda.HModel.extendTo(RunnerMapComplex, {
             this.updateState('geo_alt', geodata_alt10);
             var data10 = this.state('cvs_data10')
             this.app.updateState('cvs_data', data10)
+            $('.legendage_c .svgcon').css({'margin-right': '-39px'})
         }
 
     }
