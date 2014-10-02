@@ -273,7 +273,7 @@ provoda.View.extendTo(RunMapCtr, {
 				return;
 			}
 			this.knodes.age_areas = {};
-            this.knodes.areas_group.selectAll('path').remove()
+            this.knodes.areas_group.selectAll('*').remove()
 
 			var array = cvs_data.runners_groups.slice().reverse();
 			var _this = this;
@@ -459,7 +459,7 @@ provoda.View.extendTo(RunMapCtr, {
             var svg = this.alt_graph
             svg = svg.attr('width', width + 2 * offset_hor).attr('height', height + 2 * offset_ver)
             svg.selectAll('*').remove()
-
+            this.knodes.altitude.selectAll('*').remove()
             var path = svg.append('path')
             var top = svg.append('path')
 
