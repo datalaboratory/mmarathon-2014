@@ -211,7 +211,7 @@
 									style.top:   {{track_top_padding +  (trackheight * 0.75)}}
 									style.left:  {{ - (trackwidth * 0.03)}}
 								"
-                             pv-class="factoid {{(distance_type==10 || !( time_value|compareTime: '00:00:00' : '3:50:00' )) && 'hidden'}}" style="width: 168px;" class="factoid hidden">
+                             pv-class="factoid {{(distance_type==10 || !( time_value|compareTime: '00:00:00' : '3:10:00' )) && 'hidden'}}" style="width: 168px;" class="factoid hidden">
                             <h5 class="factoid_h">+292 м</h5>
                             <div class="factoid_d">суммарного подъема.<br>Это&nbsp;77 этажей или <br>высота ГЗ&nbsp;МГУ<br/>со&nbsp;шпилем</div>
                         </div>
@@ -219,7 +219,7 @@
 									style.top:   {{track_top_padding +  (trackheight * 0.82)}}
 									style.left:  {{track_left_padding - (trackwidth * 0.18)}}
 								"
-                              pv-class="factoid {{(distance_type==10 || !( time_value|compareTime: '00:00:00' : '3:50:00' )) && 'hidden'}}" class="factoid hidden"
+                              pv-class="factoid {{(distance_type==10 || !( time_value|compareTime: '00:00:00' : '3:10:00' )) && 'hidden'}}" class="factoid hidden"
 
                               src="../i/msu.png" width=105 height=105 />
                         <!--вторые три-->
@@ -227,8 +227,8 @@
 									style.top:   {{distance_type==42 && (track_top_padding +  (trackheight * 0.12)) || distance_type==10 && (track_top_padding +  (trackheight * 0.12))  }}
 									style.left:  {{ - (trackwidth * 0.01)}}
 								"
-                             pv-class="factoid {{(distance_type==10 || !( time_value|compareTime: '2:25:00' : '7:00:00' )) && 'hidden'}}" class="factoid hidden"
-                             style="width: 268px;">
+                             pv-class="factoid {{(distance_type==10 || !( time_value|compareTime: '2:25:00' : '5:15:00' )) && 'hidden'}}" class="factoid hidden"
+                             style="width: 185px;">
                             <img class="factoid_img" src="../i/volonteers.png" />
                             <h5 class="factoid_h">250 волонтеров</h5>
                             <div class="factoid_d" >работало в день марафона</div>
@@ -250,13 +250,24 @@
 									style.top:   {{track_top_padding +  (trackheight * 0.75)}}
 									style.left:  {{ - (trackwidth * 0.03)}}
 								"
-                             pv-class="factoid {{(distance_type==10 || !( time_value|compareTime: '3:50:00' : '4:30:00' )) && 'hidden'}}" style="width: 168px;" class="factoid hidden">
+                             pv-class="factoid {{(distance_type==10 || !( time_value|compareTime: '3:10:00' : '4:10:00' )) && 'hidden'}}" style="width: 168px;" class="factoid hidden">
                             <img class="factoid_img" src="../i/water.png"/>
                             <div class="factoid_d">Бегуны выпили</div>
                             <h5 class="factoid_h">95 000 л воды и напитков</h5>
 
                         </div>
-                        <!--третьи два-->
+                        <!--третьи три-->
+                        <div pv-props="
+									style.top:   {{distance_type==42 && (track_top_padding +  (trackheight * 0.12)) || distance_type==10 && (track_top_padding +  (trackheight * 0.12))  }}
+									style.left:  {{ - (trackwidth * 0.01)}}
+								"
+                             pv-class="factoid {{(distance_type==10 || !( time_value|compareTime: '5:15:00' : '7:00:00' )) && 'hidden'}}" class="factoid hidden"
+                             style="width: 125px;">
+                            <img class="factoid_img" src="../i/kitchen.png"/>
+                            <div class="factoid_d" >Бегуны съели</div>
+                            <h5 class="factoid_h">6000 порций каши</h5>
+
+                        </div>
                         <div
                                 pv-props="
 								style.top:   {{track_top_padding +  (trackheight * 0.53)}}
@@ -273,7 +284,7 @@
 									style.top:   {{track_top_padding +  (trackheight * 0.75)}}
 									style.left:  {{ - (trackwidth * 0.03)}}
 								"
-                             pv-class="factoid {{(distance_type==10 || !( time_value|compareTime: '4:30:00' : '7:00:00' )) && 'hidden'}}" style="width: 110px;text-align:center;" class="factoid hidden">
+                             pv-class="factoid {{(distance_type==10 || !( time_value|compareTime: '4:10:00' : '7:00:00' )) && 'hidden'}}" style="width: 110px;text-align:center;" class="factoid hidden">
                             <img class="factoid_img" src="../i/fruits.png" />
                             <div class="factoid_d">Бегуны съели</div>
                             <h5 class="factoid_h">3500 кг фруктов</h5>
@@ -299,7 +310,7 @@
 								style.top:   {{track_top_padding +  (trackheight * 0.05)}}
 								style.left:  {{track_left_padding + (trackwidth * 0.8 )}}
 							"
-                                pv-class="factoid {{(distance_type==42 || !( time_value|compareTime: '00:00:00' : '1:30:00' )) && 'hidden'}}"
+                                pv-class="factoid {{(distance_type==42 || !( time_value|compareTime: '00:00:00' : '3:00:00' )) && 'hidden'}}"
                                 class="factoid hidden"
                                 style="width: 223px;">
                             <img class="factoid_img_left" src="../i/time.png"/>
@@ -309,36 +320,15 @@
 
                         <div pv-props="
 									style.top:   {{track_top_padding +  (trackheight * 0.65)}}
-									style.left:  {{ - (trackwidth * 0.03)}}
+									style.left:  {{ - (trackwidth * 0.04)}}
 								"
-                             pv-class="factoid {{(distance_type==42 || !( time_value|compareTime: '00:00:00' : '0:30:00' )) && 'hidden'}}" style="width: 168px;" class="factoid hidden">
-                            <h5 class="factoid_h">+52 м</h5>
-                            <div class="factoid_d">суммарного подъема.<br>Это&nbsp;почти два<br/> 9-этажных дома</div>
-                        </div>
-
-                        <!--вторые два-->
-                        <div pv-props="
-									style.top:   {{track_top_padding +  (trackheight * 0.65)}}
-									style.left:  {{ - (trackwidth * 0.03)}}
-								"
-                             pv-class="factoid {{(distance_type==42 || !( time_value|compareTime: '00:30:00' : '3:00:00' )) && 'hidden'}}" style="width: 130px;" class="factoid hidden">
-                            <img class="factoid_img" src="../i/kitchen.png"/>
-                            <div class="factoid_d" >Бегуны съели</div>
-                            <h5 class="factoid_h">6000 порций каши</h5>
-
-                        </div>
-
-                        <div
-                                pv-props="
-								style.top:   {{track_top_padding +  (trackheight * 0.05)}}
-								style.left:  {{track_left_padding + (trackwidth * 0.9 )}}
-							"
-                                pv-class="factoid {{(distance_type==42 || !( time_value|compareTime: '1:30:00' : '3:00:00' )) && 'hidden'}}"
-                                class="factoid hidden"
-                                style="width: 160px;">
+                             pv-class="factoid {{(distance_type==42 || !( time_value|compareTime: '00:00:00' : '3:00:00' )) && 'hidden'}}" style="width: 146px;" class="factoid hidden">
                             <h5 class="factoid_h">≈&thinsp;500 ккал</h5>
                             <div class="factoid_d">сжигает спортсмен за&nbsp;время 10&nbsp;км забега</div>
                         </div>
+
+
+
 
 
 						<div pv-props="
