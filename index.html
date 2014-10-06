@@ -185,7 +185,7 @@
 									style.top:   {{track_top_padding +  (trackheight * 0.12) }}
 									style.left:  {{ - (trackwidth * 0.01)}}
 								"
-								pv-class="factoid {{(distance_type==10 || !( time_value|compareTime: '0:00:00' : '2:25:00' )) && 'hidden'}}" class="factoid hidden"
+								pv-class="factoid {{(distance_type==10 || !( time_value|compareTime: '0:00:00' : '2:40:00' )) && 'hidden'}}" class="factoid hidden"
                                 style="width: 200px;">
                             <img class="factoid_img_left" src="i/ken_win.png" style="margin-bottom: 20px; margin-top: 20px; margin-right: 10px;"/>
                             <h5 class="factoid_h">2:17:23</h5>
@@ -217,10 +217,21 @@
 
                         <!--вторые три-->
                         <div pv-props="
-									style.top:   {{distance_type==42 && (track_top_padding +  (trackheight * 0.12)) || distance_type==10 && (track_top_padding +  (trackheight * 0.12))  }}
+									style.top:   {{track_top_padding +  (trackheight * 0.12) }}
 									style.left:  {{ - (trackwidth * 0.01)}}
 								"
-                             pv-class="factoid {{(distance_type==10 || !( time_value|compareTime: '2:25:00' : '5:15:00' )) && 'hidden'}}" class="factoid hidden"
+								pv-class="factoid {{(distance_type==10 || !( time_value|compareTime: '2:40:00' : '5:15:00' )) && 'hidden'}}" class="factoid hidden"
+                                style="width: 225px;">
+                            <img class="factoid_img_left" src="i/kz_win.png" style="margin-bottom: 20px; margin-top: 20px; margin-right: 10px;"/>
+                            <h5 class="factoid_h">2:40:20</h5>
+                            <div class="factoid_d" >время победительницы</br>из Казахстана,</br>Ирины Смольниковой</div>
+						</div>
+
+                        <div pv-props="
+									style.top:   {{track_top_padding +  (trackheight * 0.75)}}
+									style.left:  {{ - (trackwidth * 0.03)}}
+								"
+                             pv-class="factoid {{(distance_type==10 || !( time_value|compareTime: '3:10:00' : '5:10:00' )) && 'hidden'}}" class="factoid hidden"
                              style="width: 185px;">
                             <img class="factoid_img" src="i/volonteers.png" />
                             <h5 class="factoid_h">250 волонтёров</h5>
@@ -231,7 +242,7 @@
 								style.top:   {{track_top_padding +  (trackheight * 0.53)}}
 								style.left:  {{track_left_padding - (trackwidth * 0.23)}}
 							"
-                                pv-class="factoid {{(distance_type==10 || !( time_value|compareTime: '2:50:00' : '5:00:00' )) && 'hidden'}}"
+                                pv-class="factoid {{(distance_type==10 || !( time_value|compareTime: '2:50:00' : '7:00:00' )) && 'hidden'}}"
                                 class="factoid hidden"
                                 style="width: 235px;">
                             <img class="factoid_img_left" src="i/glass.png" style="margin-right:0px; margin-top: 10px;"/>
@@ -249,6 +260,7 @@
                             <h5 class="factoid_h">95 000 л воды и&nbsp;напитков</h5>
 
                         </div> -->
+
                         <!--третьи три-->
                         <div pv-props="
 									style.top:   {{distance_type==42 && (track_top_padding +  (trackheight * 0.12)) || distance_type==10 && (track_top_padding +  (trackheight * 0.12))  }}
@@ -277,7 +289,7 @@
 									style.top:   {{track_top_padding +  (trackheight * 0.75)}}
 									style.left:  {{ - (trackwidth * 0.03)}}
 								"
-                             pv-class="factoid {{(distance_type==10 || !( time_value|compareTime: '4:10:00' : '7:00:00' )) && 'hidden'}}" style="width: 110px;" class="factoid hidden">
+                             pv-class="factoid {{(distance_type==10 || !( time_value|compareTime: '5:10:00' : '7:00:00' )) && 'hidden'}}" style="width: 110px;" class="factoid hidden">
                             <img class="factoid_img" src="i/fruits.png" />
                             <div class="factoid_d">Бегуны съели</div>
                             <h5 class="factoid_h">3500 кг фруктов</h5>
