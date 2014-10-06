@@ -199,10 +199,10 @@
 							"
 							pv-class="factoid {{(distance_type==10 || !( time_value|compareTime: '00:00:00' : '2:50:00' )) && 'hidden'}}"
 							class="factoid hidden"
-                            style="width: 223px;">
-                            <img class="factoid_img_left" src="i/time.png" />
-							<h5 class="factoid_h">На 2 мин 13 с</h5>
-							<div class="factoid_d">улучшен рекорд трассы.</br>Рекорд 2013&nbsp;г.&nbsp;—&nbsp;2:19:36</div>
+                            style="width: 230px;">
+                            <img class="factoid_img_left" style="margin-top: -10px;" src="i/time.png" />
+							<h5 class="factoid_h">На 2 мин 13 сек</h5>
+							<div class="factoid_d">улучшен прошлогодний рекорд трассы&nbsp;—&nbsp;2:19:36</div>
 						</div>
 
                         <div pv-props="
@@ -234,12 +234,12 @@
                                 pv-class="factoid {{(distance_type==10 || !( time_value|compareTime: '2:50:00' : '5:00:00' )) && 'hidden'}}"
                                 class="factoid hidden"
                                 style="width: 235px;">
-                            <img class="factoid_img_left" src="i/glass.png" style="margin-right:0px;"/>
-                            <div class="factoid_d">На дистанции было</div>
-                            <h5 class="factoid_h">14 пунктов питания и&nbsp;освежения</h5>
+                            <img class="factoid_img_left" src="i/glass.png" style="margin-right:0px; margin-top: 10px;"/>
+                            <div class="factoid_d">Бегуны выпили</div>
+                            <h5 class="factoid_h">85&nbsp;000 л воды из 130&nbsp;000 стаканчиков</h5>
 
                         </div>
-                        <div pv-props="
+                        <!-- <div pv-props="
 									style.top:   {{track_top_padding +  (trackheight * 0.75)}}
 									style.left:  {{ - (trackwidth * 0.03)}}
 								"
@@ -248,7 +248,7 @@
                             <div class="factoid_d">Бегуны выпили</div>
                             <h5 class="factoid_h">95 000 л воды и&nbsp;напитков</h5>
 
-                        </div>
+                        </div> -->
                         <!--третьи три-->
                         <div pv-props="
 									style.top:   {{distance_type==42 && (track_top_padding +  (trackheight * 0.12)) || distance_type==10 && (track_top_padding +  (trackheight * 0.12))  }}
@@ -261,7 +261,7 @@
                             <h5 class="factoid_h">6000 порций гречневой каши</h5>
 
                         </div>
-                        <div
+<!--                         <div
                                 pv-props="
 								style.top:   {{track_top_padding +  (trackheight * 0.53)}}
 								style.left:  {{track_left_padding - (trackwidth * 0.13)}}
@@ -272,7 +272,7 @@
                             <h5 class="factoid_h">≈&thinsp;2000 ккал</h5>
                             <div class="factoid_d">сжигает марафонец за&nbsp;время&nbsp;забега</div>
 
-                        </div>
+                        </div> -->
                         <div pv-props="
 									style.top:   {{track_top_padding +  (trackheight * 0.75)}}
 									style.left:  {{ - (trackwidth * 0.03)}}
@@ -298,27 +298,27 @@
                             <div class="factoid_d" >время победителя из&nbsp;Казани, Ринаса Ахмадеева</div>
                         </div>
 
-                        <div
+<!--                         <div
                                 pv-props="
 								style.top:   {{track_top_padding +  (trackheight * 0.05)}}
 								style.left:  {{track_left_padding + (trackwidth * 0.8 )}}
 							"
                                 pv-class="factoid {{(distance_type==42 || !( time_value|compareTime: '00:00:00' : '3:00:00' )) && 'hidden'}}"
                                 class="factoid hidden"
-                                style="width: 223px;">
+                                style="width: 230px;">
                             <img class="factoid_img_left" src="i/time.png"/>
-                            <h5 class="factoid_h">На 9 мин 53 с</h5>
-                            <div class="factoid_d">улучшен рекорд трассы.</br>Рекорд 2013&nbsp;г.&nbsp;—&nbsp;0:39:16</div>
-                        </div>
+                            <h5 class="factoid_h">На 9 мин 53 сек</h5>
+                            <div class="factoid_d">улучшен прошлогодний рекорд трассы&nbsp;—&nbsp;0:39:16</div>
+                        </div> -->
 
-                        <div pv-props="
+<!--                         <div pv-props="
 									style.top:   {{track_top_padding +  (trackheight * 0.65)}}
 									style.left:  {{ - (trackwidth * 0.04)}}
 								"
                              pv-class="factoid {{(distance_type==42 || !( time_value|compareTime: '00:00:00' : '3:00:00' )) && 'hidden'}}" style="width: 146px;" class="factoid hidden">
                             <h5 class="factoid_h">≈&thinsp;500 ккал</h5>
                             <div class="factoid_d">сжигает спортсмен за&nbsp;время 10&nbsp;км забега</div>
-                        </div>
+                        </div> -->
 
 						<div pv-props="
 								style.top:   {{distance_type==42 && (track_top_padding +  (trackheight * 0.76)) || distance_type==10 && (track_top_padding +  (trackheight * 0.8))  }}
