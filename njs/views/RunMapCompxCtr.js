@@ -398,6 +398,7 @@ provoda.View.extendTo(RunMapCompxCtr, {
                     height: height_factor * mpd.bigheight,
                     top: (track_top_padding -  mpd.excesstop * height_factor)
                 });
+                return true
             }
 
 		}
