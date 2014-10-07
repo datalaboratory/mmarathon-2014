@@ -19,7 +19,7 @@ path {
     bottom: 0;
     left: 0;
     z-index: 200;
-    /*background: url(i/mm-logo1.png) 50% 120px no-repeat;*/
+    /*background: url(i/mm-logo.png) 50% 120px no-repeat;*/
     -webkit-animation:spin 2s linear infinite;
     -moz-animation:spin 2s linear infinite;
     animation:spin 2s linear infinite;
@@ -73,7 +73,8 @@ path {
     height: 5px;
 }
 .current_menu_item {
-    background: url(i/marathon-logo.png) no-repeat 3% 50%;
+    background: url(i/mm-logo.png) no-repeat 3% 50%;
+    background-size: 30;
 }
 .other_menu_item {
     background: none;
