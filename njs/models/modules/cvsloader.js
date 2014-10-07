@@ -235,8 +235,13 @@ provoda.Eventor.extendTo(Cvsloader, {
 var eventor = new Cvsloader();
 eventor.init();
 
-var data_path42 = (locale == 'rus')? 'data/data42km/data3.html':'../data/data42km_en/data3.html';
-var data_path10 = (locale == 'rus')? 'data/data10km/data3.html':'../data/data10km_en/data3.html';
+// var data_path42 = (locale == 'rus')? 'data/data42km/data3.html':'../data/data42km_en/data3.html';
+// var data_path10 = (locale == 'rus')? 'data/data10km/data3.html':'../data/data10km_en/data3.html';
+
+var data_path42 = (locale == 'rus')? 'data/data42km/data3.html':'../data/data42km/data3.html';
+var data_path10 = (locale == 'rus')? 'data/data10km/data3.html':'../data/data10km/data3.html';
+
+
 function getData(path, callback, key) {
     var frame;
     $(window).on('message', function(e) {
