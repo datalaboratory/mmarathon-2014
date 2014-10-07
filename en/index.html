@@ -231,20 +231,19 @@
 
 
                         <div  pv-props="
-                                    style.top:   {{track_top_padding +  (trackheight * 0.75)}}
-                                    style.left:  {{ - (trackwidth * 0.03)}}
-                                "
-                             pv-class="factoid {{(distance_type==10 || !( time_value|compareTime: '3:40:00' : '5:10:00' )) && 'hidden'}}" class="factoid hidden"
+                                style.top:   {{track_top_padding +  (trackheight * 0.48)}}
+                                style.left:  {{track_left_padding - (trackwidth * 0.22)}}
+                            "
+                             pv-class="factoid {{(distance_type==10 || !( time_value|compareTime: '4:25:00' : '7:25:00' )) && 'hidden'}}" class="factoid hidden"
                              style="width: 185px;">
-                            <img class="factoid_img" src="../i/volonteers.png" style="height: 66px;"/>
+                            <img class="factoid_img_left" src="../i/volonteers.png" style="height: 66px;"/>
                             <h5 class="factoid_h">250 volunteers</h5>
                             <div class="factoid_d" >helped during the&nbsp;marathon</div>
                         </div>
-                        <div
-                                pv-props="
-								style.top:   {{track_top_padding +  (trackheight * 0.53)}}
-								style.left:  {{track_left_padding - (trackwidth * 0.23)}}
-							"
+                        <div pv-props="
+                                style.top:   {{track_top_padding +  (trackheight * 0.51)}}
+                                style.left:  {{track_left_padding - (trackwidth * 0.23)}}
+                            "
                                 pv-class="factoid {{(distance_type==10 || !( time_value|compareTime: '1:30:00' : '4:25:00' )) && 'hidden'}}"
                                 class="factoid hidden"
                                 style="width: 260px;">
@@ -265,12 +264,12 @@
                         </div> -->
                         <!--третьи три-->
                         <div pv-props="
-                                style.top:   {{track_top_padding +  (trackheight * 0.53)}}
-                                style.left:  {{track_left_padding - (trackwidth * 0.25)}}
-                            "
-                             pv-class="factoid {{(distance_type==10 || !( time_value|compareTime: '4:25:00' : '7:00:00' )) && 'hidden'}}" class="factoid hidden"
-                             style="width: 240px;">
-                            <img class="factoid_img_left" style="margin-top: 8px; height: 49px;" src="../i/kitchen.png"/>
+                                    style.top:   {{track_top_padding +  (trackheight * 0.75)}}
+                                    style.left:  {{ - (trackwidth * 0.03)}}
+                                "
+                             pv-class="factoid {{(distance_type==10 || !( time_value|compareTime: '5:10:00' : '7:00:00' )) && 'hidden'}}" class="factoid hidden"
+                             style="width: 210px;">
+                            <img class="factoid_img" style="margin-top: 8px; height: 49px;" src="../i/kitchen.png"/>
                             <div class="factoid_d" >Runners ate</div>
                             <h5 class="factoid_h">6 000 servings of&nbsp;porridge</h5>
 
@@ -288,10 +287,10 @@
 
                         </div> -->
                         <div pv-props="
-									style.top:   {{track_top_padding +  (trackheight * 0.75)}}
-									style.left:  {{ - (trackwidth * 0.03)}}
-								"
-                             pv-class="factoid {{(distance_type==10 || !( time_value|compareTime: '5:10:00' : '7:00:00' )) && 'hidden'}}" style="width: 110px;" class="factoid hidden">
+                                    style.top:   {{track_top_padding +  (trackheight * 0.75)}}
+                                    style.left:  {{ - (trackwidth * 0.03)}}
+                                "
+                             pv-class="factoid {{(distance_type==10 || !( time_value|compareTime: '2:40:00' : '5:10:00' )) && 'hidden'}}" style="width: 150px;" class="factoid hidden">
                             <img class="factoid_img" style="margin-left: -20px; height: 74px;" src="../i/fruits.png" />
                             <div class="factoid_d">Runners ate</div>
                             <h5 class="factoid_h">3500 kg of&nbsp;fruits</h5>
