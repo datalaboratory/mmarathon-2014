@@ -341,11 +341,16 @@ path {
         float: left;
         width: 98px;
         margin-top: 10px;
+
+    }
+    .flag_con img {
+    	height: 20px;
     }
 
     .left_flag {
         position: absolute;
         left: 0;
+
     }
     .right_flag {
         position: absolute;
