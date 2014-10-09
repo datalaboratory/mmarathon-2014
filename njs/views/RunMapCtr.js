@@ -200,8 +200,19 @@ provoda.View.extendTo(RunMapCtr, {
 
 		this.setVisState('con_appended', true);
 
+        this.wch(this.parent_view.parent_view, 'distance_type', function(e) {
+            this.parent_view.parent_view.promiseStateUpdate('show_map', false);
+            this.parent_view.promiseStateUpdate('show_map', false);
+        });
         this.wch(this, 'runners_rate', function(e) {
             this.parent_view.parent_view.promiseStateUpdate('runners_rate', e.value);
+            $('.before_load').css({
+                position: 'absolute'
+            })
+        });
+        this.wch(this, 'draw', function(e) {
+            this.parent_view.parent_view.promiseStateUpdate('show_map', true);
+            this.parent_view.promiseStateUpdate('show_map', true);
         });
 		this.wch(this, 'trackwidth', function(e) {
 			this.parent_view.parent_view.promiseStateUpdate('trackwidth', e.value);
@@ -226,17 +237,6 @@ provoda.View.extendTo(RunMapCtr, {
 			this.root_view.promiseStateUpdate('mapheight', e.value);
 		});
 
-        this.wch(this.parent_view.parent_view, 'mapcover-hor', function(e) {
-            if (e.value) {
-                console.log(e.value)
-                this.updateState('mapcover-hor', e.value)
-            }
-        })
-        this.wch(this.parent_view.parent_view, 'mapcover-vert', function(e) {
-            if (e.value) {
-                this.parent_view.parent_view.promiseStateUpdate('mapcover-vert', e.value)
-            }
-        })
 
 	},
 	earth_radius: mh.earth_radius,
@@ -390,7 +390,7 @@ provoda.View.extendTo(RunMapCtr, {
 			var data = mh.getPoints(current_runners_data.runners_groups, this.knodes, time_value, cvs_data.start_time, this.total_distance, step);
 			mh.drawRunnersPoints(colors, this.parent_view.parent_view.gender_grads, data, current_runners_data.items, this.knodes.debug_group, time_value, cvs_data.start_time);
 
-			return {};
+			return Date.now();
 		}
 	},
 	'compx-trackbbox': {

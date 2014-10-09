@@ -32,7 +32,7 @@
 <div class="big-wrap">
 	<div id="runs_map_compx">
 
-    <div class="before_load"   pv-class="before_load {{runners_rate && trackwidth && 'hidden'}}"></div>
+    <div class="before_load"   pv-class="before_load {{runners_rate && trackwidth && show_map && 'hidden'}}"></div>
 		<div class="bmap big_block hidden_opacity" pv-class="bmap big_block {{!runners_rate && 'hidden_opacity'}}">
 			<div class="lang">
                 <div class="flag_con">
@@ -95,7 +95,7 @@
                         src="i/mapcover_42_rus.png"
                         alt=""
                         class="hidden"
-                        pv-class="{{!(runners_rate && distance_type==42) && 'hidden'}}"
+                        pv-class="{{!(runners_rate && show_map && distance_type==42) && 'hidden'}}"
                         pv-anchor="mapcover42"
 
                         >
@@ -111,7 +111,7 @@
                         src="i/mapcover_10_rus.png"
                         alt=""
                         class="hidden"
-                        pv-class="{{!(trackwidth && distance_type==10) && 'hidden'}}"
+                        pv-class="{{!(trackwidth && show_map && distance_type==10) && 'hidden'}}"
                         pv-anchor="mapcover10"
 
                         >
@@ -145,12 +145,14 @@
 							<!-- start -->
 							<div 
 								class="marker_c hidden"
-								pv-class="marker_c {{!(start_point && runners_rate) && 'hidden'}}"
+
 								pv-props="
 									style.left: {{start_point.0}}
 									style.top: {{start_point.1}}
 									
-								">
+								"
+                                pv-class="marker_c {{!(show_map && start_point && runners_rate) && 'hidden'}}"
+                                    >
 
 								<span class="marker marker_yel"></span>
 							</div>
@@ -162,12 +164,14 @@
 							<!-- finish-->
 							<div 
 								class="marker_c hidden"
-								pv-class="marker_c {{!(end_point && runners_rate) && 'hidden'}}"
+
 								pv-props="
 									style.left: {{end_point.0}}
 									style.top: {{end_point.1}}
 									
-								">
+								"
+                                pv-class="marker_c {{!(show_map && end_point && runners_rate) && 'hidden'}}"
+                                    >
 
 								<span class="marker"></span>
 							</div>
@@ -175,8 +179,8 @@
 						</div>
 
 					</div>
-					
-					<div class="factoids">
+
+					<div class="factoids" pv-class="factoids {{!show_map && 'hidden_opacity'}}">
 						<!-- Достопримечательности -->
 						<div pv-props="
 								style.top:   {{track_top_padding +  (trackheight * 0.34) }}
@@ -242,7 +246,6 @@
 						</div>
 
 						<!-- Фактоиды -->
-
                         <!--на 42км-->
                         <!--первые три-->
 						<div pv-props="
@@ -417,7 +420,7 @@
                 <div class="timeline_yellow_text" ></div>
 
             </div>
-			<div id="map-con" pv-nest="geo_map"></div>
+			<div id="map-con" pv-nest="geo_map" pv-class="{{!show_map && 'hidden_opacity'}}"></div>
 		</div>
 		<div class="controlls big_block hidden_opacity" pv-class="controlls big_block {{!runners_rate && 'hidden_opacity'}}" pv-anchor="controlls">
 			<div class="scroll_marker" pv-anchor="scroll_marker"><img src="i/scroll-marker.png" alt=""></div>
