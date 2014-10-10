@@ -145,8 +145,16 @@ provoda.View.extendTo(TimeGraphCtr, {
                         })
                     }
                 })
-                values.pos = pixel_pos - offset
-                values.time =  moment((time - 4*3600)*1000).format('HH:mm')
+
+                var convertToTimeString = function(seconds) {
+                	var h = seconds/3600 ^ 0 ;
+                	var m = (seconds-h*3600)/60 ^ 0 ;
+                	return (h<10?"0"+h:h)+":"+(m<10?"0"+m:m);
+                };
+                // почему тут был использован moment.js?
+                // values.time =  moment((time - 4*3600)*1000).format('HH:mm');
+                values.time = convertToTimeString(time);
+                values.pos = pixel_pos - offset;
                 return values;
             }
         }
