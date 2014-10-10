@@ -1,6 +1,6 @@
 body,dt,dd,p,dl,li,ul,ol,h1,h2,h3,h5,h6{
-	margin: 0;
-	padding:0;
+	margin: 0px;
+	padding:0px;
 	color:#222;
 	}
 body{
@@ -14,10 +14,10 @@ path {
 }
 .before_load{
     position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
     z-index: 200;
     /*background: url(i/mm-logo.png) 50% 120px no-repeat;*/
     -webkit-animation:spin 2s linear infinite;
@@ -74,7 +74,7 @@ path {
 }
 .current_menu_item {
     background: url(i/mm-logo.png) no-repeat 3% 50%;
-    background-size: 30;
+    background-size: 30px;
 }
 .other_menu_item {
     background: none;
@@ -133,10 +133,10 @@ path {
 }
 .mapoverlay{
 	position: absolute;
-	left:0;
-	right:0;
+	left:0px;
+	right:0px;
 	margin-left: 20px;
-    height: 0;
+    height: 0px;
 }
 .controlls{
 	height: 270px;
@@ -147,7 +147,7 @@ path {
 		margin-top: 45px;
 		height: 205px;
 		border-bottom: 1px solid #ccc;
-		border-width: 1px 0;
+		border-width: 1px 0px;
 	}
     .select_line{
         stroke: #5F5F5F;
@@ -161,7 +161,7 @@ path {
 			position: absolute;
 			margin-top: -9px;
 			z-index: 3;
-			top:0;
+			top:0px;
 			}
 	.timeline .tl_text_mark{
 		position: absolute;
@@ -180,11 +180,11 @@ path {
 
 	.timeline .last_mark .just_text_of_mark{
 		position: absolute;
-		right:0;
-		margin-left: 0;
+		right:0px;
+		margin-left: 0px;
 		}
 		.timeline .mark_bottom.last_mark .just_text_of_mark{
-			bottom:0;
+			bottom:0px;
 			
 		}
     .timeline_black_text {
@@ -223,11 +223,11 @@ path {
 }
 .start_text {
     top: 10px;
-    left: 0;
+    left: 0px;
 }
 .finish_text {
     top: 10px;
-    right: 0;
+    right: 0px;
     text-align: right;
 }
 .winner_text {
@@ -253,8 +253,8 @@ path {
 	}
 .factoids{
 		position: absolute;
-		top:0;
-		left:0;
+		top:0px;
+		left:0px;
 		/*display: none;*/
 	}
 	.factoid{
@@ -349,12 +349,12 @@ path {
 
     .left_flag {
         position: absolute;
-        left: 0;
+        left: 0px;
 
     }
     .right_flag {
         position: absolute;
-        right: 0;
+        right: 0px;
     }
     .inactive_flag_bw:hover {
         opacity: 0;
@@ -489,7 +489,7 @@ path {
 }
 .runners_header.fixed_rheader{
 	position: fixed;
-	top: 0;
+	top: 0px;
 	background: #fff;
 	
 	padding: 0 20px;
@@ -498,7 +498,7 @@ path {
 }
 .filters{
 	clear:both;
-	padding: 22px 0;
+	padding: 22px 0px;
 	}
 	.filters:after{
 		content: "";
@@ -638,7 +638,7 @@ path {
         display: block;
         content: "";
         clear: both;
-        height: 0;
+        height: 0px;
 
 	}
 	
@@ -829,7 +829,7 @@ path {
 			background-image: linear-gradient(#bbb, #ddd);
 		}*/
 		.genbuttn_group .genbuttn:first-of-type{
-			margin-left: 0;
+			margin-left: 0px;
 		}
 		.genbuttn_group .genbuttn:first-of-type,.genbuttn-left{
 			border-radius: 0.2em 0 0 0.2em;
@@ -882,11 +882,11 @@ path {
     z-index: -1;
 	}
 .marker_c .marker{
-	bottom:0;
+	bottom:0px;
 }
 .marker_c .marker_text{
 	position: absolute;
-	bottom:0;
+	bottom:0px;
 	text-shadow:0 1px 0px #fff;
 	min-width: 200px;
 }
@@ -913,10 +913,10 @@ path {
 	}
 	.graph_has_text .graph_text_block{
 		position: absolute;
-		left:0;
-		right:0;
-		top:0;
-		bottom:0;
+		left:0px;
+		right:0px;
+		top:0px;
+		bottom:0px;
 		}
 	.graph_has_text .graph_text_block .textblock{
 		position: absolute;
@@ -954,7 +954,7 @@ path {
 }
 .selector_box{
 	border: 1px solid white;
-	margin-left:-1;
+	margin-left:-1px;
 	margin-bottom: -1px;
 	position: absolute;
 }
@@ -973,10 +973,10 @@ path {
     font-weight: 100;
 	}
 	.copyright_desc img {
-		width: 60;
-		height: 43;
-		margin-left: 30;
-		margin-top: 4;
+		width: 60px;
+		height: 43px;
+		margin-left: 30px;
+		margin-top: 4px;
 }
 .altt_desc{
 	font-size: 10px;
