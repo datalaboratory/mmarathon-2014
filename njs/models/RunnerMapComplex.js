@@ -139,6 +139,9 @@ provoda.HModel.extendTo(RunnerMapComplex, {
 	},
     updateGeo42: function(e) {
         e.event.stopPropagation();
+        $('.before_load').css({
+            position: 'absolute'
+        })
         if (this.state('distance_type') == 42) {
             this.updateState('menu_opened', !this.state('menu_opened'))
         } else {
@@ -155,6 +158,9 @@ provoda.HModel.extendTo(RunnerMapComplex, {
     },
     updateGeo10: function(e) {
         e.event.stopPropagation();
+        $('.before_load').css({
+            position: 'absolute'
+        })
         if (this.state('distance_type') == 10) {
             this.updateState('menu_opened', !this.state('menu_opened'))
         } else {

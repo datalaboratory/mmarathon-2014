@@ -87,15 +87,15 @@ provoda.View.extendTo(SelRunner, {
                 var black = _this.info_text.find('.timeline_black_text').text(raw.full_name)
                 var white = _this.info_text.find('.timeline_white_text').text(raw.result_time_string)
                 var yellow = _this.info_text.find('.timeline_yellow_text').text(raw.num)
-                if (px_coords) {
-                    _this.info_text.css({
-                        left: e.offsetX + 25 + 'px',
-                        top: e.offsetY + 15 + 'px'
-                    })
-                }
+                var container_width = $('.big-wrap').width()
+                var offset = (window.innerWidth - container_width) / 2
+                _this.info_text.css({
+                    left: e.clientX - offset + 15 + 'px',
+                    top: e.clientY + 15 + 'px'
+                })
                 _this.info_text.css({
                     height: black.innerHeight() + white.innerHeight() + yellow.innerHeight() + 'px',
-                    opacity: 1, 'z-index': 1
+                    opacity: 1, 'z-index': 100
                 })
             })
 
@@ -206,9 +206,6 @@ provoda.View.extendTo(RunMapCtr, {
         });
         this.wch(this, 'runners_rate', function(e) {
             this.parent_view.parent_view.promiseStateUpdate('runners_rate', e.value);
-            $('.before_load').css({
-                position: 'absolute'
-            })
         });
         this.wch(this, 'draw', function(e) {
             this.parent_view.parent_view.promiseStateUpdate('show_map', true);
