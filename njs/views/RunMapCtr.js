@@ -87,11 +87,13 @@ provoda.View.extendTo(SelRunner, {
                 var black = _this.info_text.find('.timeline_black_text').text(raw.full_name)
                 var white = _this.info_text.find('.timeline_white_text').text(raw.result_time_string)
                 var yellow = _this.info_text.find('.timeline_yellow_text').text(raw.num)
+
                 var container_width = $('.big-wrap').width()
-                var offset = (window.innerWidth - container_width) / 2
+                var offset_hor = (window.innerWidth - container_width) / 2
+                var offset_vert = $('.mm-wrapper').height()
                 _this.info_text.css({
-                    left: e.clientX - offset + 15 + 'px',
-                    top: e.clientY + 15 + 'px'
+                    left: e.pageX - offset_hor + 15 + 'px',
+                    top: e.pageY - offset_vert + 15 + 'px'
                 })
                 _this.info_text.css({
                     height: black.innerHeight() + white.innerHeight() + yellow.innerHeight() + 'px',
