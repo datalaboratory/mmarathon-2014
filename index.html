@@ -2,9 +2,13 @@
 <head>
 	<title>Мы бежали марафон. Результаты Московского марафона 21 сентября 2014 года</title>
 	<meta charset="utf-8">
-	<meta property="og:image" content="http://moscowmarathon2014.datalaboratory.ru/i/screenshot.png"/>
+	<meta property="og:image" content="/i/screenshot.png"/>
 	<link rel="stylesheet" type="text/css" href="master.css">
 	<link rel="stylesheet" type="text/css" href="css/leaflet.css">
+	<!-- mm styles -->
+	<link href="mm.css" rel="stylesheet" type="text/css" />
+	<!-- /mm styles -->
+
 	<link rel="shortcut icon" href="/i/favicon.ico">
 	<link rel="image_src" href="i/screenshot.png" />
     <script>
@@ -27,8 +31,65 @@
   js = d.createElement(s); js.id = id;
   js.src = "//connect.facebook.net/ru_RU/sdk.js#xfbml=1&appId=1501547416745518&version=v2.0";
   fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+}(document, 'script', 'facebook-jssdk'));
+</script>
 
+<!-- mm header -->
+<div class="mm-wrapper">
+    <div class="mm-header">
+        <div class="mm-row">
+            <div class="mm-small-12-medium-6-columns">
+                <div class="mm-row">
+                    <div class="mm-small-8-medium-6-columns">
+                        <div class="mm-logo"><a href="/ru/"><img src="http://moscowmarathon.org/static/img/mm-logo1.png"></a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mm-contain-to-grid">
+        <nav class="mm-top-bar">
+            <section class="mm-top-bar-section">
+                <ul class="mm-left">
+                    <li>
+
+                        <a href="/ru/marafon/o-marafone/registraciya-uchastnikov/">
+                            <span class="mm-active">Марафон</span></a>
+                    </li>
+
+                    <li>
+
+                        <a href="/ru/multimedia/">
+                            <span class="">Мультимедиа</span></a>
+                    </li>
+
+                    <li>
+
+                        <a href="/ru/pressa/dlya-pressy/novosti/">
+                            <span class="">Пресса</span></a>
+                    </li>
+
+                    <li>
+
+                        <a href="/ru/servis/trenirovochnye-programmy/trenirovochnye-programmy/">
+                            <span class="">Сервис</span></a>
+                    </li>
+
+                    <li>
+
+                        <a href="/ru/kontakty/">
+                            <span class="">Контакты</span></a>
+                    </li>
+
+                </ul>
+
+                
+            </section>
+        </nav>
+    </div>
+</div>
+<!-- /mm header -->
 
 <div class="big-wrap">	
 	<div id="runs_map_compx">

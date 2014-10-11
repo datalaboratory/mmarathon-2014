@@ -36,12 +36,12 @@ require(['models/AppModel', 'views/AppView', 'angbo', 'provoda'], function(AppMo
 	md.init();
 	window.app = md;
 
+	$('html, body').scrollTop(170);
+
 	var proxies_space = Date.now();
 	var views_proxies = provoda.views_proxies;
 	views_proxies.addSpaceById(proxies_space, md);
 	var mpx = views_proxies.getMPX(proxies_space, md);
-
-
 
 	(function() {
 		var view = new AppView();
@@ -66,7 +66,11 @@ require(['models/AppModel', 'views/AppView', 'angbo', 'provoda'], function(AppMo
             "background-size" : "62px"
         })
     }
-    updateImgVert()
+    updateImgVert();
+
+ 	// Плавно Скрываем хеадер
+	// $('html, body').animate({ scrollTop: $(".big-wrap").offset().top }, 500);
+
 });
 
 })();
