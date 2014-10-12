@@ -154,7 +154,6 @@ BrowseMap.Model.extendTo(StartPage, {
 	},
 	search_fields: [['states','num'], ['states','full_name'], ['states','gender_pos']],
     clearFilters: function () {
-    	console.log("LOG:",this);
         this.updateState('last_filter', '');
 
         //Обнуляем поле ("Имя или номер")

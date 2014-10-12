@@ -54,7 +54,6 @@ provoda.View.extendTo(RunMapCompxCtr, {
 
 		var watchTouchPos = function(e) {
 			var pos = e.changedTouches[0].pageX - _this.con_offset.left;
-			console.log("LOG:",pos);
 			changeTime(pos, _this.con_offset);
 		};
 
@@ -68,6 +67,7 @@ provoda.View.extendTo(RunMapCompxCtr, {
 				});
 			});
 
+		//Поведение на тач-устройствах
 		//Оригинальные тач-события упакованы в x.Event. Слушаем их на "div.controlls.big_block"
         controlls.on('touchstart', function(e) {
                 e.preventDefault();
@@ -114,6 +114,7 @@ provoda.View.extendTo(RunMapCompxCtr, {
             mpd10[el] = isNaN(value10) ? 0 : value10;
 
 		});
+
 		mpd42.clipped_height = mpd42.bigheight - mpd42.excesstop - mpd42.excessbottom;
 		mpd42.clipped_width = mpd42.bigwidth - mpd42.excessleft - mpd42.excessright;
         mpd10.clipped_height = mpd10.bigheight - mpd10.excesstop - mpd10.excessbottom;
