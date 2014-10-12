@@ -154,7 +154,13 @@ BrowseMap.Model.extendTo(StartPage, {
 	},
 	search_fields: [['states','num'], ['states','full_name'], ['states','gender_pos']],
     clearFilters: function () {
-        this.updateState('last_filter', '')
+    	console.log("LOG:",this);
+        this.updateState('last_filter', '');
+
+        //Обнуляем поле ("Имя или номер")
+        this.updateState('query', "");
+        $(".firunr_search").prop("value","");
+
         this.setFilterBy('gender', false);
         this.setFilterBy('ages', false);
         this.setFilterBy('team', false);
